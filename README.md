@@ -1,5 +1,10 @@
+- 👋 Hi! I’m Sola. 
+- 👀 I’m interested in product design, automation and machine learning especially deep learning and ensemble algorithms
+- 🌱 I’m currently learning how to build cross platform software with Flutter and Kotlin MultiPlatform
+- 💞️ I’m looking to collaborate on consumer-focused machine learning or digital product design projects
+- 📫 How to reach me: hello@solaolawuyi.com 
 
-## License
-<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />
-
-Template by Afnizar Nur Ghifari, Built upon by Sola Olawuyi
+<!---
+solaszn/solaszn is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+You can click the Preview link to take a look at your changes.
+--->

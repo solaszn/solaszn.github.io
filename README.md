@@ -1,8 +1,8 @@
-- 👋 Hi! I’m Sola. 
-- 👀 I’m interested in product design, automation and machine learning especially deep learning and ensemble algorithms
-- 🌱 I’m currently learning how to build cross platform software with Flutter and Kotlin MultiPlatform
-- 💞️ I’m looking to collaborate on consumer-focused machine learning or digital product design projects
-- 📫 How to reach me: hello@solaolawuyi.com 
+- 👋 Hi! I'm Feyisola ("Sola" is fine)
+- 👀 I design and develop digital experiences
+- 🌱 I'm interested in building design systems for great products
+- 💞️ Sounds exciting? Reach out and let's create magic together
+- 📫 Reach me on: olawuyisola20[at]gmail.com or solaszn.github.io
 
 <!---
 solaszn/solaszn is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.

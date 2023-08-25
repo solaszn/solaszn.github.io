@@ -1,6 +1,7 @@
 html, body {
     font-family: 'Libre Franklin', sans-serif;
-    color: #242424;
+    color: #ffffff;
+    background-color: #121212;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -32,7 +33,7 @@ html, body {
 .bio > h4 {
     font-size: 18px;
     font-weight: 600;
-    color: #121212;
+    color: #ffffff;
 }
 
 .bio {
@@ -42,8 +43,8 @@ html, body {
 
 .main-btn > a {
     padding: 8px 16px;
-    color: #FFF;
-    background: #121212;
+    color: #121212;
+    background: #fff;
     border-radius: 6px;  
 }
 
@@ -60,7 +61,7 @@ html, body {
 }
 
 .footer {
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid #ffffff20;
     position: absolute;
     bottom: 0%;
     padding-top: 16px;

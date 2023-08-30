@@ -1,27 +1,243 @@
 html, body {
     font-family: 'Libre Franklin', sans-serif;
-    color: #242424;
+    /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    color: #222;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     font-size: 15px;
 }
 
+/* BODY */
 .main {
+    width: 80vw;
+    max-width: 1600px;
+    margin: 40px 0px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-content: space-around;
-    margin: 80px auto;
-    padding: 20px;
-    gap: 32px;
+    gap: 20px;
+}
+
+
+/* NAVIGATION */
+.nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.nav-menu-dropdown {
+    height: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+
+/* BIO TEXT */
+.bio > p {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 150%;
+}
+
+
+/* MY WORK */
+.catalog {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3vw;
+}
+
+.project-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border-radius: 6px;
+    background: #F4F4F4;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    overflow: hidden;
+}
+
+.project-card:hover > img {
+    transform: scale(1.1);
+}
+
+.project-card > img {
+    transition: all .35s;
+}
+
+.project-card > .info {
+    display: block;
+    margin: 32px auto;
+    width: 88%;
+    z-index: 1;
+}
+
+.project-card > img {
+    width: 50%;
+    min-width: 264px;
+    background-size: cover;
+    border-radius: 6px;
+}
+
+.primary-btn {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    border: 1px solid #222;
+    width: fit-content;
+}
+
+.primary-btn:hover {
+    background-color: #222;
+    color: #fff;
+    transition: 0.35s;
+    opacity: 1;
+
+}
+
+.primary-btn:hover > svg * {
+    stroke: #fff;
+    transition: 0.35s;
+}
+
+.secondary-btn {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    border: 1px solid #fff;
+    width: fit-content;
+}
+
+.secondary-btn:hover {
+    background-color: #fff;
+    color: #222;
+    transition: 0.35s;
+    opacity: 1;
+
+}
+
+.secondary-btn:hover > svg * {
+    stroke: #222;
+    transition: 0.35s;
+}
+
+
+/* FOOTER */
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0px;
+}
+
+.inactive {
+    opacity: 0.4;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb > a {
+    padding: 4px 0px;
+}
+
+.breadcrumb > a:hover {
+    opacity: 0.8;
+    border-bottom: 1.5px solid #222;
+    transition: 0.35s;
+}
+
+.language-switcher {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.language-switcher > a {
+    padding: 4px 0px;
+    border-bottom: 1.5px solid #22222200;
+}
+
+.language-switcher > a:hover {
+    opacity: 0.8;
+    transition: 0.35s;
+    border-bottom: 1.5px solid #222222;
+}
+
+
+/* UTILITIES */
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0px;
+}
+
+p {
+    line-height: 150%;
+}
+
+h6 {
+    padding: 0px;
+    margin: 0px;
 }
 
 a {
     color: inherit;
     text-decoration: none;
     font-weight: 400;
+    padding: 4px 0px;
+}
+
+.card-link {
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    width: 100%;
+}
+
+.subtitle {
+    font-size: 13px;
+    font-style: italic;
+    opacity: 0.5;
+    font-weight: 400;
+}
+
+#citisquare {
+    background: #F4F9FF;
+}
+
+#accredit {
+    background: #ECFBEE;
+}
+
+#vanstack {
+    background: #0F0F0F;
+    color: #FFF;
+}
+
+#improdds {
+    background: #FCF4EE;
 }
 
 a:hover {
     opacity: 0.8;
+    transition: 0.35s;
+    border-bottom: 1.5px solid #222222;
 }

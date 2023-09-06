@@ -1,7 +1,7 @@
 html,
 body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-family: 'Libre Franklin', sans-serif;
-    /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
     color: #222;
     margin: 0;
     display: flex;
@@ -89,7 +89,7 @@ body {
     display: block;
     margin: 32px auto;
     width: 88%;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .project-card>img {
@@ -277,26 +277,29 @@ a {
     .dropdown {
         position: fixed;
         top: 0%;
-        width: 94vw;
+        /* width: 94vw; */
+        right: 0;
+        /* width: 500px; */
         height: 100vh;
         display: flex;
         justify-content: flex-end;
-        z-index: 2;
+        z-index: 12;
         overflow: hidden;
     }
 
     .nav-menu > .default-nav {
         display: none;
     }
+    
 
     .toggler {
         /* ALWAYS KEEPING THE TOGGLER OR THE CHECKBOX ON TOP OF EVERYTHING :  */
         position: absolute;
         top: 3.5%;
-        left: 70vw;
-        z-index: 1;
-        height: 80px;
-        width: 80px;
+        right: 30px;
+        height: 40px;
+        z-index: 13;
+        width: 40px;
         cursor: pointer;
         opacity: 0;
     }
@@ -304,13 +307,15 @@ a {
     .hamburger {
         position: relative;
         top: 3.5%;
-        left: -4%;
+        right: 30px;
         height: 40px;
         width: 40px;
         padding: 0.6rem;
         background-color: #FFF;
         border-radius: 4px;
         transition: 0.35s;
+        z-index: 10;
+        cursor: pointer;
     
         /* FOR DISPLAYING EVERY ELEMENT IN THE CENTER : */
     
@@ -318,15 +323,32 @@ a {
         align-items: center;
         justify-content: center;
     }
+
+    .hamburger__nav {
+        height: 100px;
+        width: 100px;
+        /* display: flex; */
+        
+    }
+
+
+
+    .toggler__label {
+        position: relative;
+        z-index: 100;
+        /* opacity: 1; */
+        /* width: 50px;
+        height: 50px; */
+    }
     
     /* CREATING THE MIDDLE LINE OF THE HAMBURGER : */
     
-    .hamburger > div {
+    .hamburger__input > div {
         position: relative;
         top: 0;
         left: 0;
         background: black;
-        height: 3.80px;
+        height: 3px;
         width: 60%;
         transition: all 0.4s ease;
     }
@@ -334,8 +356,8 @@ a {
     /* CREATING THE TOP AND BOTTOM LINES : 
       TOP AT -10PX ABOVE THE MIDDLE ONE AND BOTTOM ONE IS 10PX BELOW THE MIDDLE: */
     
-    .hamburger>div::before,
-    .hamburger>div::after {
+    .hamburger__input>div::before,
+    .hamburger__input>div::after {
         content: '';
         position: absolute;
         top: -10px;
@@ -345,7 +367,7 @@ a {
         transition: all 0.4s ease;
     }
     
-    .hamburger>div::after {
+    .hamburger__input>div::after {
         top: 10px;
     }
     
@@ -372,11 +394,13 @@ a {
     
     .menu {
         position: absolute;
-        left: 130%;
+        right: 0px;
         top: 0%;
-        z-index: -1;
-        background: #fafafa;
-        width: 0%;
+        z-index: 1;
+        background: #fbecec;
+        /* padding-left: 200px;
+        padding-right: 200px; */
+        /* width: 500px; */
         height: 100%;
         box-shadow: none;
     
@@ -389,8 +413,8 @@ a {
     
     .toggler:checked~.menu {
         position: absolute;
-        left: 50%;
-        width: 80%;
+        right: 500px;
+        /* width: 80%; */
     }
 
     .toggler:checked ~ .hamburger {
@@ -402,15 +426,21 @@ a {
     
     /* STYLING THE LIST :  */
     
+    .menu>div {
+        width: 500px;
+
+    }
+
     .menu>div>ul {
-        position: fixed;
+        position: absolute;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        width: 40%;
-        top: 120px;
+        /* align-items: flex-end; */
+        top: 160px;
+        right: 0px;
+        z-index: 50;
         gap: 48px;
-        padding-left: 10px;
+        /* padding-right: 10px; */
     
         /* HIDDEN INITIALLY  :  */
         visibility: hidden;
@@ -441,4 +471,138 @@ a {
 /* Next up
 - blur or darken body content when dropdown is in view
 - click outside ".menu" to close
-- a tags outside dropdown should work */
+- a tags outside dropdown should work 
+- fixed menu buutton should have border/shadow when scrolling */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.navigation__checkbox {
+    display: none; }
+  
+  .navigation__button {
+    /* background-color: #ffffff; */
+    height: 2rem;
+    width: 2rem;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    /* border-radius: 50%; */
+    z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer; }
+  
+  .navigation__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 4.3rem;
+    right: 4.25rem;
+    background-image: radial-gradient(#3a506b, #1c2541);
+    z-index: 1000;
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); }
+  
+  .navigation__nav {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    width: 50vw !important;
+    background-color: #121212;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+  
+  .navigation__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+    width: 100%; }
+  
+  .navigation__item {
+    margin: 2rem; }
+  
+  .navigation__link:link, .navigation__link:visited {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 1rem 2rem;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-transform: uppercase;
+    /* background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #ffffff 50%); */
+    /* background-size: 224%; */
+    transition: all .4s; }
+  
+  .navigation__link:hover, .navigation__link:active {
+    /* background-position: 100%; */
+    color: #FFFFFF;
+    /* transform: translateX(1rem);  */
+}
+  
+  .navigation__checkbox:checked ~ .navigation__background {
+    transform: scale(80); }
+  
+  .navigation__checkbox:checked ~ .navigation__nav {
+    opacity: 1;
+    visibility: visible;
+    width: 100%; }
+  
+  .navigation__icon {
+    position: relative;
+    margin-top: 1.2rem; }
+    .navigation__icon, .navigation__icon::before, .navigation__icon::after {
+      width: 1.2rem;
+      height: 2px;
+      background-color: #666666;
+      display: inline-block; }
+    .navigation__icon::before, .navigation__icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all .2s; }
+    .navigation__icon::before {
+      top: -.4rem; }
+    .navigation__icon::after {
+      top: .4rem; }
+  
+  .navigation__button:hover .navigation__icon::before {
+    top: -.5rem; }
+  
+  .navigation__button:hover .navigation__icon::after {
+    top: .5rem; }
+  
+  .navigation__checkbox:checked + .navigation__button .navigation__icon {
+    background-color: transparent; 
+
+}
+  
+  .navigation__checkbox:checked + .navigation__button .navigation__icon::before {
+    top: 0;
+    transform: rotate(135deg); }
+  
+  .navigation__checkbox:checked + .navigation__button .navigation__icon::after {
+    top: 0;
+    transform: rotate(-135deg); }

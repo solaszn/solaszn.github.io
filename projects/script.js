@@ -1,3 +1,13 @@
+
+// CLOSE MENU ON CLICK OUTSIDE
+$(document).ready(function() {
+	$(".container").click(function() {
+		$("#nav-toggle").prop("checked", false);
+	});
+});
+
+
+// IMG - GIF
 (function($) {
 
   // Get the .gif images from the "data-alt".

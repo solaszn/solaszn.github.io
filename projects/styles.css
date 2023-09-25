@@ -506,7 +506,7 @@ body {
 
 /* GIF PLAYER */
 .figure {
-    margin: 0px auto;
+    margin: 0px;
     float: left;
     position: relative;
     cursor: pointer;

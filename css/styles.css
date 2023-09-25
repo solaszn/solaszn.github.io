@@ -222,6 +222,17 @@ a {
     padding: 4px 0px;
 }
 
+.link {
+    color: #005EEC;
+    border-bottom: 1.5px solid #005EEC22;
+    transition: .35s;
+}
+
+.link:hover {
+    opacity: 0.8;
+    border-bottom: 1.5px solid #005EEC;
+}
+
 .card-link {
     position: absolute;
     top: 0%;

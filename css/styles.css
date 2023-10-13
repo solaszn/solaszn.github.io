@@ -432,7 +432,7 @@ a {
     }
 }
 
-@media screen and (min-height: 660px) {
+@media screen and (min-height: 720px) {
     #bottom {
         position: absolute;
         bottom: 0px;

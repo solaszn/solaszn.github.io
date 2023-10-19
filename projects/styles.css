@@ -604,6 +604,32 @@ a {
     transition: .35s;
 }
 
+.primary-btn {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #222;
+    width: fit-content;
+    transition: 0.35s;
+}
+
+.primary-btn:hover {
+    opacity: 0.7;
+
+}
+
+.primary-btn>svg * {
+    transition: 0.35s;
+}
+
+
+.primary-btn:hover>svg * {
+    stroke: #fff;
+}
+
 .header {
     font-size: 32px;
     font-weight: 300;
@@ -636,6 +662,10 @@ a {
 
 .gap-6 {
     gap: 40px;
+}
+
+.pad-y {
+    padding: 24px 0px;
 }
 
 .nav-menu>.default-nav>a:hover {

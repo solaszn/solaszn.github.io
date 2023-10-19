@@ -530,7 +530,7 @@ body {
     padding: 5px;
     border-radius: 3px;
     color: #656D78;
-    background-color: rgba(170, 178, 189, 0.1);
+    background-color: #f2f2f2bb;
     text-transform: uppercase;
     transition: .35s;
 }

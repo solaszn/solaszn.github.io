@@ -2,7 +2,7 @@
     --body-font: 'Inter', sans-serif;
     --header-font: 'Libre Franklin', sans-serif;
     --white: #ffffff;
-    --text-grey: #777;
+    --text-grey: #555;
 }
 
 html,
@@ -36,6 +36,10 @@ body {
     display: flex;
     justify-content: space-between;
     overflow: hidden;
+
+    .inactive {
+        text-decoration: line-through;
+    }
 }
 
 .logo {
@@ -69,7 +73,7 @@ body {
     gap: 24px;
 
     .text {
-        color: #777;
+        color: var(--text-grey);
     }
 }
 
@@ -83,6 +87,11 @@ body {
         margin-left: 6px;
         opacity: 50%;
     }
+}
+
+.intro-copy {
+    max-width: 960px;
+    line-height: 200%;
 }
 
 
@@ -319,12 +328,13 @@ i {
 
 .heading {
     font-weight: 300;
+    opacity: 0.6;
 }
 
 .text-block {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
 }
 
 .flex {
@@ -347,6 +357,11 @@ i {
     display: flex;
     flex-direction: column;
     gap: 40px;
+
+    .text {
+        color: var(--text-grey);
+        line-height: 180%;
+    }
 }
 
 .profile {
@@ -369,6 +384,10 @@ i {
     width: 80%;
 }
 
+.stack {
+    align-items: start;
+}
+
 .connect {
     display: flex;
     flex-wrap: wrap;
@@ -384,10 +403,11 @@ i {
 }
 
 .subtitle-2 {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: bold;
     text-transform: uppercase;
-    opacity: 0.5;
-    font-weight: 400;
+    letter-spacing: -2%;
+    margin-bottom: 12px;
 }
 
 #bottom {
@@ -469,15 +489,15 @@ i {
         width: 100%;
     }
 
+    .grid-auto {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
     .catalog {
         grid-template-columns: auto;
         gap: 40px;
-    }
-
-    .stack {
-        flex-direction: column;
-        align-items: start;
-        gap: 0px;
     }
 }
 

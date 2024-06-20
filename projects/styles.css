@@ -1,8 +1,14 @@
+:root {
+    --body-font: 'Inter', sans-serif;
+    --header-font: 'Libre Franklin', sans-serif;
+    --white: #ffffff;
+    --black: #0a0a0a;
+    --text-grey: #555;
+}
+
 html,
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-family: 'Libre Franklin', sans-serif;
-    color: #222;
+    font-family: var(--body-font);
     margin: 0;
     display: flex;
     justify-content: center;
@@ -29,8 +35,12 @@ body {
 }
 
 .logo {
-    font-size: 22px;
-    font-weight: 600;
+    font-family: var(--header-font);
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .nav-menu .default-nav {
@@ -54,13 +64,19 @@ body {
     display: flex;
     flex-direction: column;
     gap: 60px;
+    color: var(--text-grey);
 }
 
 .title-section {
+    font-family: var(--header-font);
     display: flex;
     width: 60%;
     flex-direction: column;
     gap: 20px;
+
+    h3 {
+        color: var(--black);
+    }
 }
 
 .tags {
@@ -72,8 +88,8 @@ body {
 .tags>div {
     padding: 4px 10px;
     line-height: 180%;
-    background: #F2F2F2;
-    color: #666;
+    background: #f5f5f5;
+    color: var(--text-grey);
     border-radius: 4px;
 }
 
@@ -92,6 +108,11 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+
+    .header {
+        font-family: var(--header-font);
+        color: black;
+    }
 }
 
 .text-block {
@@ -192,8 +213,27 @@ body {
 .see-more {
     display: flex;
     flex-direction: column;
-    width: 60%;
     gap: 20px;
+}
+
+.project-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.project-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--black);
+
+    p {
+        font-size: 14px;
+        font-weight: bold;
+    }
 }
 
 .flex {
@@ -206,7 +246,7 @@ body {
 }
 
 .project-link-card {
-    min-width: 200px;
+    max-width: 320px;
 }
 
 .project-link-card:hover .flex {
@@ -266,8 +306,7 @@ body {
         width: 88vw;
     }
 
-    .title-section,
-    .see-more {
+    .title-section {
         width: 80%;
     }
 
@@ -312,8 +351,12 @@ body {
         gap: 32px;
     }
 
-    .see-more>.project-links {
-        gap: 24px;
+    .project-link-card > p {
+        display: none;
+    }
+
+    .project-title > p {
+        font-weight: 600;
     }
 
     .highlight-block {
@@ -596,12 +639,22 @@ h6 {
     margin: 0px;
 }
 
+i {
+    font-size: 20px;
+    color: var(--black);
+}
+
 a {
     color: inherit;
     text-decoration: none;
     font-weight: 400;
     padding: 4px 0px;
     transition: .35s;
+}
+
+.aligned-right {
+    justify-content: end;
+    text-align: right;
 }
 
 .primary-btn {
@@ -646,7 +699,7 @@ a {
 
 .subtitle {
     font-size: 14px;
-    opacity: 0.5;
+    opacity: 0.7;
     font-weight: 400;
     text-transform: uppercase;
 }
@@ -666,6 +719,10 @@ a {
 
 .pad-y {
     padding: 24px 0px;
+}
+
+.justify-between{
+    justify-content: space-between;
 }
 
 .nav-menu>.default-nav>a:hover {

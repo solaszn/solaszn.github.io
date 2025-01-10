@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+  --black: #0A0A0A;
+  --offwhite: #ECECEC;
+}
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--black);
+  color: white;
+  cursor: url("/custom-cursor.ico"), default;
+}
+
+main, header, footer {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+::selection {
+  background: var(--offwhite);
+  color: black;
+}
+
+svg, path {
+  stroke-width: 1.5;
+}
+
+/* Custom Animation Transition Class
+  Use along with .smooth or .slow for preferred duration */
+.transition-any {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Overriding classes */
+.smooth {
+  transition-duration: 500ms;
+}
+
+.slow {
+  transition-duration: 1000ms;
+}

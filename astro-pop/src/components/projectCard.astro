@@ -1,0 +1,39 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+import Image from "astro/components/Image.astro";
+
+interface Props extends HTMLAttributes<"a"> {
+  name: string;
+  accentBg?: string;
+  href: string;
+  tags: string[];
+  description: string;
+  images: string[];
+}
+
+const { name, href, class: className, tags, description, images, ...props } = Astro.props;
+console.log("You called this component")
+---
+
+<a href={href} class:list={[className, `group text-black px-6 pt-5 pb-6`]} {...props}>
+<div class="flex gap-3">
+    {images.map((image) => <div class="h-1 w-full rounded bg-neutral-800/15 flex" />)}
+  </div>
+  <div class="highlight-panel flex justify-center h-[360px]">
+    <Image width="180" height="180" src={images[0]} class="object-contain" loading="eager" decoding="async" alt=`Logo anatomy for ${name}`>
+  </div>
+  <div class="flex w-full relative h-[80px]">
+    <div class="w-[calc(100%-40px)] absolute bottom-0 flex flex-col justify-start max-h-[60px] overflow-hidden group-hover:max-h-[160px] delay-200 transition-any smooth space-y-2">
+      <div class="uppercase font-semibold">{name}</div>
+      <div class="flex gap-2">
+        {tags.map((tag) => <div class="bg-black/5 text-sm font-medium text-neutral-600 rounded px-2 py-1 capitalize">{tag}</div>)}
+      </div>
+      <div class="text-sm opacity-80">{description}</div>
+    </div>
+
+    <div class="w-8 h-8 flex justify-center items-center absolute bottom-0 right-0">
+      <Icon name="arrow-right" class="w-5 h-5" />
+    </div>
+  </div>
+</a>

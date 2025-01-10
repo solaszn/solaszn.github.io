@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/defaultLayout.astro";
+import { projects } from "../../../site.ts";
+import Image from "astro/components/Image.astro";
+
+const project = projects.accredit
+---
+
+<Layout>
+  <main class="!px-0">
+    <div class="cover-image bg-green-50 flex items-center justify-center h-[280px]" transition:name=`Accredit Image`>
+      <Image width="180" height="180" src={project.images[0]} class="object-contain h-2/3" loading="eager" decoding="async" alt=`Logo anatomy for Accredit` transition:persist />
+    </div>
+  </main>
+</Layout>

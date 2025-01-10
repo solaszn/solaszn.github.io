@@ -1,0 +1,24 @@
+---
+import { Icon } from "astro-icon/components"
+import { siteConfig } from "../../site";
+
+const contactLink = "p-2.5 hover:bg-neutral-800 hover:text-offwhite transition-any"
+const resourceLink = "text-white"
+---
+
+<footer class="mt-16 pb-12">
+  <div class="grid md:grid-cols-2 justify-between">
+    <div class="font-medium max-w-[480px]">
+      <div class="flex gap-4">
+        <a href="https://x.com/solaszn" class={contactLink} aria-label="Feyisola Olawuyi on Twitter/X"><Icon name="twitter-x" class="w-5 h-5"/></a>
+        <a href="https://github.com/solaszn" class={contactLink} aria-label="Feyisola Olawuyi on Github"><Icon name="github" class="w-5 h-5"/></a>
+        <a href="https://linkedin.com/in/solaszn" class={contactLink} aria-label="Feyisola Olawuyi on Linkedin"><Icon name="linkedin" class="w-5 h-5"/></a>
+        <a href="https://substack.com/@solaszn" class={contactLink} aria-label="Feyisola Olawuyi's Notes"><Icon name="substack" class="w-5 h-5"/></a>
+      </div>
+
+      <div class="mt-5 mb-2.5">&copy; {new Date().getFullYear()}  •  {siteConfig.author}</div>
+
+      <div class="text-white/60">Designed and built by yours truly ✌️. Built with <a href="https://astro.build" class=`${resourceLink}`>Astro</a>, <a href="https://tailwindcss.com/" class=`${resourceLink}`>Tailwind CSS</a>, deployed on <span class={resourceLink}>Github</span>. Typeface is <a href="https://tokotype.github.io/plusjakarta-sans/" class=`${resourceLink}`>Plus Jakarta Sans</a> by Tokotype</div>
+    </div>
+  </div>
+</footer>

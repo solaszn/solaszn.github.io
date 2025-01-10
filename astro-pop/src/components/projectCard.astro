@@ -10,10 +10,10 @@ interface Props extends HTMLAttributes<"a"> {
   tags: string[];
   description: string;
   images: string[];
+  isAboveFold?: boolean;
 }
 
-const { name, href, class: className, tags, description, images, ...props } = Astro.props;
-console.log("You called this component")
+const { name, href, class: className, tags, description, images, isAboveFold = false, ...props } = Astro.props;
 ---
 
 <a href={href} class:list={[className, `group text-black px-6 pt-5 pb-6`]} {...props}>
@@ -21,7 +21,7 @@ console.log("You called this component")
     {images.map((image) => <div class="h-1 w-full rounded bg-neutral-800/15 flex" />)}
   </div>
   <div class="highlight-panel flex justify-center h-[360px]">
-    <Image width="180" height="180" src={images[0]} class="object-contain" loading="eager" decoding="async" alt=`Logo anatomy for ${name}`>
+    <Image width="180" height="180" src={images[0]} class="object-contain w-6/12" loading={isAboveFold ? "eager" : "lazy"} decoding="async" alt=`Logo anatomy for ${name}` transition:persist>
   </div>
   <div class="flex w-full relative h-[80px]">
     <div class="w-[calc(100%-40px)] absolute bottom-0 flex flex-col justify-start max-h-[60px] overflow-hidden group-hover:max-h-[160px] delay-200 transition-any smooth space-y-2">

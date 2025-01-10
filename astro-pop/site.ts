@@ -6,7 +6,7 @@ export const siteConfig = {
   domain: "solaszn.github.io",
   title: "Feyisola Olawuyi's Portfolio",
   description: "A product designer who builds his ideas.",
-  image: "/opengraph-image-2.png",
+  image: "/opengraph-image.png",
   favicon: "/favicon.svg",
   manifest: "manifest.json"
 }
@@ -35,7 +35,7 @@ export const projects = {
     accentBg: "bg-violet-50",
     tags: ["AI Agents", "B2B"],
     description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
-    images: ["/atrium/logo.png", "", ""],
+    images: ["/atrium/logo.webp", "", ""],
   },
   accredit: {
     name: "Accredit",
@@ -43,7 +43,7 @@ export const projects = {
     accentBg: "bg-green-50",
     tags: ["Finance", "Mobile App"],
     description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
-    images: ["/accredit/logo.png", "", ""],
+    images: ["/accredit/logo.webp", "", ""],
   },
   citisquare: {
     name: "Citisquare",
@@ -51,6 +51,6 @@ export const projects = {
     accentBg: "bg-blue-50",
     tags: ["E-Commerce", "Booking"],
     description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
-    images: ["/citisquare/logo.png", "", ""],
+    images: ["/citisquare/logo.webp", "", ""],
   },
 }

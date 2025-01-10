@@ -1,0 +1,22 @@
+---
+import '../styles/app.css';
+import "@fontsource/plus-jakarta-sans"
+import BaseLayout from "../components/layout/baseLayout.astro";
+import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
+import { ClientRouter } from 'astro:transitions';
+import { siteConfig } from "../../site.ts";
+
+---
+<!doctype html>
+<html lang="en"></html>
+<head>
+  <BaseLayout title={siteConfig.title} description={siteConfig.description} image={siteConfig.image} />
+  <ClientRouter/>
+</head>
+
+<body class="">
+  <Header />
+  <slot/>
+  <Footer/>
+</body>

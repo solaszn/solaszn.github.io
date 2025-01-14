@@ -1,0 +1,18 @@
+---
+interface props {
+  title: string;
+  targetId: string;
+  width?: number;
+}
+const { title, targetId, width=0 } = Astro.props
+---
+
+<div class="flex gap-3 items-center">
+  <a href={`#${targetId}`} class="flex gap-3 items-center">
+    <div class=`h-[2px] min-w-3 ${width === 0 ? 'bg-neutral-500' : 'bg-white'}`/>
+    <div class="relative">
+      <div class=`absolute bottom-1/2 transform translate-y-1/2 h-[2px] bg-white` style={`width: ${width*100}% ;`}/>
+      <div class={`font-semibold ${width === 0 && 'text-neutral-400 hover:text-offwhite transition-any'}`}>{title}</div>
+    </div>
+  </a>
+</div>

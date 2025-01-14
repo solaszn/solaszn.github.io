@@ -8,8 +8,8 @@ const linksCase = "flex items-center py-2 px-4 md:bg-black/50 md:backdrop-blur";
 
 <div class="fixed z-[100] top-4 w-full">
   <header class="w-full mx-auto">
-    <nav class="flex w-full items-center md:justify-between overflow-hidden bg-black/60 md:bg-transparent backdrop-blur md:backdrop-blur-none transition-any smooth">
-      <a href={"/"} aria-label="Go to Home page" class=`home-logo relative ${linksCase} group gap-1.5`>
+    <nav class="flex w-full items-center md:justify-between overflow-hidden bg-black/50 md:bg-transparent backdrop-blur md:backdrop-blur-none">
+      <a href={"/"} aria-label="Go to Home page" class=`home-logo relative ${linksCase} group gap-1.5` transition:persist>
         <div class="rounded-full w-5 p-1 mt-0.5 group-hover:rotate-180 transition-any delay-200 slow">
           <img src="/asterisk.svg" height="20" width="20" alt="" class="w-4 h-4" />
         </div>
@@ -18,10 +18,9 @@ const linksCase = "flex items-center py-2 px-4 md:bg-black/50 md:backdrop-blur";
       <div class="md:hidden w-1 h-7 border-l border-white/40"></div>
       <div class={linksCase}>
         <div class="flex gap-10 items-center overflow-hidden">
-          <!-- <HeaderLink href="/">Home</HeaderLink> -->
-          <HeaderLink href="/about">About</HeaderLink>
-          <HeaderLink href="/contact">Contact</HeaderLink>
-          <HeaderLink href="/notes">Writing</HeaderLink>
+          <HeaderLink href="/about" data="About"/>
+          <HeaderLink href="/contact" data="Contact"/>
+          <HeaderLink href="/notes" data="Journal"/>
           <div class="toggle-theme">
             <Icon name="sun" class="w-5 h-5 text-white" />
           </div>

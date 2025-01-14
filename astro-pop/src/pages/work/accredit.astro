@@ -1,15 +1,65 @@
 ---
 import Layout from "../../layouts/defaultLayout.astro";
-import { projects } from "../../../site.ts";
+import SectionLink from "../../components/sectionLink.astro";
+import ChatButton from "../../components/chatButton.astro";
+import AnimatedButton from "../../components/animateButton.astro";
 import Image from "astro/components/Image.astro";
+import { accredit } from "../../content/works/accredit";
+import { Heading, Text, Divider } from "../../components/contentKit.tsx";
 
-const project = projects.accredit
+export let width: number;
+width = 0.0;
+
+const { name, images, sections } = accredit as any;
 ---
 
 <Layout>
   <main class="!px-0">
     <div class="cover-image bg-green-50 flex items-center justify-center h-[280px]" transition:name=`Accredit Image`>
-      <Image width="180" height="180" src={project.images[0]} class="object-contain h-2/3" loading="eager" decoding="async" alt=`Logo anatomy for Accredit` transition:persist />
+      <Image width="180" height="180" src={images[0]} class="object-contain h-2/3" loading="eager" decoding="async" alt=`Logo anatomy for Accredit` transition:persist />
     </div>
+
+    <div class="px-10 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
+      <!-- Content Anchor && Quick Scroll -->
+      <div class="hidden sm:block sm:col-span-2 lg:col-span-3 space-y-5 sticky top-[80px] max-h-screen overflow-y-auto">
+        <div class="uppercase text-2xl font-semibold">{name}</div>
+        <div class="flex flex-col gap-4 py-4">
+          {sections.map((section: any) => (
+            <SectionLink title={section.header} targetId={section.id} width={width} />
+          ))}
+        </div>
+        <div class="">This looks like what you need?</div>
+        <ChatButton />
+      </div>
+
+      <!-- Content -->
+      <div class="content sm:col-span-6 lg:col-span-9">
+        {sections.map((section: any, index: number) => (
+          <div id={section.id} class={`space-y-2 ${index>0 && 'pt-6'}`}>
+            {section.content.map((item: any, index: number) => {
+              switch (item.type) {
+                case 'heading':
+                  return <Heading>{item.data}</Heading>;
+                case 'text':
+                  return <Text>{item.data}</Text>;
+                case 'image':
+                  return (
+                    <>
+                      <Image width="1280" height="720" src={item.data[0].src} alt={item.data[0].alt} class="pt-6" loading={item.data[0]?.loading && "eager"}/>
+                      <div class="pt-2 pb-6 text-[13px] font-medium opacity-70 uppercase w-full text-center">{item.data[0].alt}</div>
+                    </>
+                  );
+                case 'divider':
+                  return <Divider />;
+                default:
+                  return null;
+              }
+            })}
+          </div>
+        ))}
+        <div class="h-[500px] w-full"></div>
+      </div>
+    </div>
+    
   </main>
 </Layout>

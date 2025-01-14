@@ -1,14 +1,10 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import AnimateButton from './animateButton.astro';
 
-type Props = HTMLAttributes<'a'>;
-
-const { href, class: className, ...props } = Astro.props;
+const { data, href, class: className, ...props } = Astro.props;
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
-<a href={href} class:list={[className, {'font-semibold' : isActive, 'opacity-85 hover:opacity-100' : !isActive }, 'transition-any']} {...props}>
-	<slot />
-</a>
+<AnimateButton data={data} href={href} direction="bottom" aria-label={`Link to ${data} Page`} class:list={[className, {'opacity-60 cursor-not-allowed' : isActive, 'hover:opacity-85' : !isActive }, 'font-medium tracking-tight transition-any']} {...props}/>

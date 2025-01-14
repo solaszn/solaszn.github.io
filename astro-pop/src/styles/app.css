@@ -11,6 +11,7 @@ html, body {
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
   background: var(--black);
   color: white;
   cursor: url("/custom-cursor.ico"), default;

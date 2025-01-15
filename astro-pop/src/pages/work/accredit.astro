@@ -15,8 +15,8 @@ const { name, images, sections } = accredit as any;
 
 <Layout>
   <main class="!px-0">
-    <div class="cover-image bg-green-50 flex items-center justify-center h-[280px]" transition:name=`Accredit Image`>
-      <Image width="180" height="180" src={images[0]} class="object-contain h-2/3" loading="eager" decoding="async" alt=`Logo anatomy for Accredit` transition:persist />
+    <div class="cover-image w-full overflow-hidden max-h-[280px]" transition:name=`Accredit Image`>
+      <Image width="180" height="180" src={images[0]} class="object-cover object-center w-full max-h-[320px] h-full" loading="eager" decoding="async" alt=`Logo anatomy for Accredit` transition:persist />
     </div>
 
     <div class="px-10 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">

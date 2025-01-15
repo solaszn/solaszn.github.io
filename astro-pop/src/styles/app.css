@@ -15,6 +15,7 @@ html, body {
   background: var(--black);
   color: white;
   cursor: url("/custom-cursor.ico"), default;
+  @apply antialiased;
 }
 
 main, header, footer {

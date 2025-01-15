@@ -3,25 +3,25 @@ import Headerlink from "./headerlink.astro";
 import HeaderLink from "./headerlink.astro";
 import { Icon } from "astro-icon/components";
 
-const linksCase = "flex items-center py-2 px-4 md:bg-black/50 md:backdrop-blur";
+const linksCase = "relative flex items-center h-11 px-3 md:bg-black/50 md:backdrop-blur rounded";
 ---
 
 <div class="fixed z-[100] top-4 w-full">
   <header class="w-full mx-auto">
-    <nav class="flex w-full items-center md:justify-between overflow-hidden bg-black/50 md:bg-transparent backdrop-blur md:backdrop-blur-none">
+    <nav class="flex w-full items-center md:justify-between overflow-hidden rounded bg-black/50 md:bg-transparent backdrop-blur md:backdrop-blur-none">
       <a href={"/"} aria-label="Go to Home page" class=`home-logo relative ${linksCase} group gap-1.5` transition:persist>
         <div class="rounded-full w-5 p-1 mt-0.5 group-hover:rotate-180 transition-any delay-200 slow">
-          <img src="/asterisk.svg" height="20" width="20" alt="" class="w-4 h-4" />
+          <img src="/asterisk.svg" height="24" width="24" alt="" class="w-4 h-4" />
         </div>
         <div class="hidden md:block font-semibold text-lg">feyisola</div>
       </a>
-      <div class="md:hidden w-1 h-7 border-l border-white/40"></div>
-      <div class={linksCase}>
+      <div class="md:hidden w-1 h-5 border-l border-white/40"></div>
+      <div class={`w-full md:w-fit pl-5 ${linksCase}`}>
         <div class="flex gap-10 items-center overflow-hidden">
           <HeaderLink href="/about" data="About"/>
           <HeaderLink href="/contact" data="Contact"/>
-          <HeaderLink href="/notes" data="Journal"/>
-          <div class="toggle-theme">
+          <HeaderLink href="/notes" data="Writing"/>
+          <div class="toggle-theme p-2 mr-2 md:mr-0 absolute right-0 md:relative">
             <Icon name="sun" class="w-5 h-5 text-white" />
           </div>
         </div>

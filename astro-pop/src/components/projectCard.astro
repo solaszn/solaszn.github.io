@@ -14,26 +14,145 @@ interface Props extends HTMLAttributes<"a"> {
 }
 
 const { name, href, class: className, tags, description, images, isAboveFold = false, ...props } = Astro.props;
+
 ---
 
-<a href={href} class:list={[className, `group text-black px-6 pt-5 pb-6`]} {...props}>
-  <div class="flex gap-3">
-    {images.map((image) => <div class="h-1 w-full rounded bg-neutral-800/15 flex" />)}
-  </div>
-  <div class="highlight-panel flex justify-center h-[360px]">
-    <Image width="180" height="180" src={images[0]} class="object-contain w-7/12" loading={isAboveFold ? "eager" : "lazy"} decoding="async" alt=`Logo anatomy for ${name}` transition:persist>
-  </div>
-  <div class="flex w-full relative h-[80px]">
-    <div class="w-[calc(100%-40px)] absolute bottom-0 flex flex-col justify-start max-h-[60px] overflow-hidden group-hover:max-h-[160px] delay-200 transition-any smooth space-y-2">
-      <div class="uppercase font-semibold">{name}</div>
-      <div class="flex gap-2">
-        {tags.map((tag) => <div class="bg-black/5 text-sm font-medium text-neutral-600 rounded px-2 py-1 capitalize">{tag}</div>)}
+<a
+  href={href}
+  class:list={[className, "group relative flex flex-col justify-between min-h-[520px] text-black w-full"]}
+  {...props}
+>
+  <!-- Progress Bar -->
+  <div class="progress-bar flex gap-3 px-6 pt-6 z-10">
+    {images.map((_, index) => (
+      <div
+        class="h-[5px] w-full rounded-full bg-neutral-600/15 overflow-hidden relative"
+      >
+        <div class="animated-bar absolute h-full rounded-full w-0 bg-neutral-600 transition-any duration-[5s] ease-linear"></div>
       </div>
-      <div class="text-sm opacity-80">{description}</div>
-    </div>
+    ))}
+  </div>
 
-    <div class="w-8 h-8 flex justify-center items-center absolute bottom-0 right-0">
-      <Icon name="arrow-right" class="w-5 h-5" />
+  <!-- Image Panel -->
+  <div class="image-panel absolute h-full w-full overflow-hidden">
+    {images.map((image, index) => (
+      <Image
+        width="180"
+        height="180"
+        src={`${image}`}
+        class:list={[
+          "object-cover object-center h-full w-full absolute transition-transform duration-500 ease-in-out",
+          index === 0 ? "translate-x-0" : "translate-x-full",
+        ]}
+        loading={isAboveFold ? "eager" : "lazy"}
+        decoding="async"
+        alt={`${name} ${image}`}
+        data-index={index}
+      />
+    ))}
+  </div>
+
+  <!-- Card Content -->
+  <div class="relative px-6 pb-6">
+    <div class="flex w-full relative h-[80px]">
+      <div class="w-[calc(100%-40px)] absolute bottom-0 flex flex-col justify-start max-h-[60px] overflow-hidden group-hover:max-h-[160px] delay-300 transition-any space-y-2">
+        <div class="uppercase font-semibold">{name}</div>
+        <div class="flex gap-2">
+          {tags.map((tag) => (
+            <div
+              class="bg-black/5 text-sm font-medium text-neutral-600 rounded px-2 py-1 capitalize"
+            >
+              {tag}
+            </div>
+          ))}
+        </div>
+        <div class="text-sm opacity-80">{description}</div>
+      </div>
+      <div class="w-8 h-8 flex justify-center items-center absolute bottom-0 right-0">
+        <Icon name="arrow-right" class="w-5 h-5" />
+      </div>
     </div>
   </div>
 </a>
+
+<script>
+  function initializeCardAnimations() {
+    const cards = document.querySelectorAll(".group");
+
+    cards.forEach((card) => {
+      // Clone with proper typing
+      const clone = card.cloneNode(true) as HTMLElement;
+      card.parentNode?.replaceChild(clone, card);
+
+      // Type assertions for querySelectorAll
+      const images = (clone as Element).querySelectorAll(".image-panel img") as NodeListOf<HTMLImageElement>;
+      const progressBars = (clone as Element).querySelectorAll(".animated-bar") as NodeListOf<HTMLDivElement>;
+
+      let currentIndex = 0;
+      let interval: string | number | NodeJS.Timeout | undefined;
+
+      function resetProgressBars() {
+        progressBars.forEach((bar) => {
+          bar.style.transition = "none";
+          bar.style.width = "0";
+        });
+      }
+
+      function startAnimation() {
+        console.log("Animation Started");
+        resetProgressBars();
+
+        progressBars[currentIndex].style.transition = "width 4s linear";
+        progressBars[currentIndex].style.width = "100%";
+
+        images.forEach((img, index) => {
+          img.style.transform =
+            index === currentIndex
+              ? "translateX(0)"
+              : index < currentIndex
+              ? "translateX(-100%)"
+              : "translateX(100%)";
+        });
+
+        interval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+
+          progressBars.forEach((bar) => {
+            bar.style.transition = "none";
+            bar.style.width = "0";
+          });
+
+          progressBars[currentIndex].style.transition = "width 4s linear";
+          progressBars[currentIndex].style.width = "100%";
+
+          images.forEach((img, index) => {
+            img.style.transform =
+              index === currentIndex
+                ? "translateX(0)"
+                : index < currentIndex
+                ? "translateX(-100%)"
+                : "translateX(100%)";
+          });
+        }, 4000);
+      }
+
+      function stopAnimation() {
+        clearInterval(interval);
+        resetProgressBars();
+        images.forEach((img, index) => {
+          img.style.transform = index === 0 ? "translateX(0)" : "translateX(100%)";
+        });
+        currentIndex = 0;
+      }
+
+      clone.addEventListener("mouseenter", startAnimation);
+      clone.addEventListener("mouseleave", stopAnimation);
+    });
+  }
+
+  // Initialize on first load
+  document.addEventListener("DOMContentLoaded", initializeCardAnimations);
+
+  // Initialize on subsequent navigation
+  document.addEventListener("astro:after-swap", initializeCardAnimations);
+</script>

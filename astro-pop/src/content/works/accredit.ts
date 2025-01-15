@@ -2,10 +2,9 @@ export const accredit = {
   // Metadata
   name: "Accredit",
   href: "/work/accredit",
-  accentBg: "bg-green-50",
   tags: ["Finance", "Mobile App"],
   description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
-  images: ["/accredit/logo.webp", "", ""],
+  images: ["/accredit/cover.webp", "/accredit/mockup-1.webp", "/accredit/mockup-2.webp"],
 
   // case study content
   sections: [
@@ -22,10 +21,6 @@ export const accredit = {
           data: "Loans are as old as banks. They are risky but come in handy a lot of the time. They help support the average business during bad months and help individuals to overcome dire situations. In today’s world, quick instant loans are the go-to as more people turn to digital solutions for their financial needs and with Accredit, we are taking a new approach to elevate the consumer lending experience.",
         },
         {
-          type: "image",
-          data: [{ src: "/accredit/f-7.webp", alt: "Leading showcase", loading: "eager" }],
-        },
-        {
           type: "text",
           data: "I led the design of the brand identity and the first version of the application to be launched on mobile platforms.",
         },
@@ -36,6 +31,10 @@ export const accredit = {
             { label: "DURATION", value: "6 weeks" },
             { label: "WHAT I DID", value: ["Branding", "Product Strategy", "Mobile Application Design", "Usability Testing"] },
           ],
+        },
+        {
+          type: "image",
+          data: [{ src: "/accredit/f-7.webp", alt: "Leading showcase", loading: "eager" }],
         },
         { type: "divider" },
       ],

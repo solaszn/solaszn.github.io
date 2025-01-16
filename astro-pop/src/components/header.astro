@@ -5,6 +5,10 @@ import { Icon } from "astro-icon/components";
 
 const linksCase = "relative flex items-center h-11 dark:md:bg-black/50 md:bg-white/25 md:backdrop-blur rounded";
 const pageLinks = ""
+
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+const subpath = pathname.match(/[^\/]+/g);
+// const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
 <div class="fixed z-[100] top-4 w-full">

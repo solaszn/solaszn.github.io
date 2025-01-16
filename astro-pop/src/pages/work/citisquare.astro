@@ -3,19 +3,19 @@
 import SectionLink from "../../components/sectionLink.astro";
 import ChatButton from "../../components/chatButton.astro";
 import Image from "astro/components/Image.astro";
-import { accredit } from "../../content/works/accredit";
+import { citisquare } from "../../content/works/citisquare";
 import ProjectLayout from "../../layouts/projectLayout.astro";
 import ProjectTemplate from "../../components/projectTemplate.astro";
 
 export let width: number;
 width = 0.0;
 
-const { name, description, images, sections } = accredit as any;
+const { name, description, images, sections } = citisquare as any;
 ---
 
 <ProjectLayout title={`${name} | Feyisola Olawuyi`} description={description}>
   <main class="!px-0">
-    <div class="cover-image w-full overflow-hidden pt-16 md:pt-0 h-[300px] md:h-full md:max-h-[280px] bg-green-50" transition:name=`Accredit Image`>
+    <div class="cover-image w-full overflow-hidden pt-16 md:pt-0 h-[300px] md:h-full md:max-h-[280px] bg-blue-50" transition:name=`Citisquare Image`>
       <Image width="180" height="180" src={images[0]} class="object-cover object-center w-full md:max-h-[320px] h-full" loading="eager" decoding="async" alt=`Logo anatomy for Accredit` transition:persist />
     </div>
 

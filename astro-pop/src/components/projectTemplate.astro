@@ -1,0 +1,34 @@
+---
+import { Heading, Text, Divider } from "./contentKit";
+import Image from "astro/components/Image.astro";
+
+interface Props {
+  sections: [];
+}
+
+const { sections } = Astro.props
+---
+
+{sections.map((section: any, index: number) => (
+  <div id={section.id} class={`space-y-2 ${index>0 && 'pt-6'}`}>
+    {section.content.map((item: any, index: number) => {
+      switch (item.type) {
+        case 'heading':
+          return <Heading>{item.data}</Heading>;
+        case 'text':
+          return <Text>{item.data}</Text>;
+        case 'image':
+          return (
+            <>
+              <Image width="1280" height="720" src={item.data[0].src} alt={item.data[0].alt} class="pt-6" loading={item.data[0]?.loading && "eager"}/>
+              <div class="pt-2 pb-6 text-[13px] font-medium opacity-70 uppercase w-full text-center">{item.data[0].alt}</div>
+            </>
+          );
+        case 'divider':
+          return <Divider />;
+        default:
+          return null;
+      }
+    })}
+  </div>
+))}

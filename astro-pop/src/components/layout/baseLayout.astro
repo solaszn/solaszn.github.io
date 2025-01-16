@@ -1,5 +1,6 @@
 ---
 import "@fontsource/plus-jakarta-sans"
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -9,12 +10,13 @@ interface Props {
 
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/favicon.svg" } = Astro.props;
+const { title, description, image = "/opengraph-image.png" } = Astro.props;
 ---
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Feyisola Olawuyi" />
     <title>{title}</title>
@@ -40,3 +42,13 @@ const { title, description, image = "/favicon.svg" } = Astro.props;
 
     <meta name="astro-view-transitions-enabled" content="true" />
     <meta name="astro-view-transitions-fallback" content="animate" />
+
+    <script is:inline>
+      const theme = localStorage.getItem('theme') ?? 'dark';
+      if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+    <ClientRouter/>

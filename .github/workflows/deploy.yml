@@ -1,0 +1,50 @@
+name: Deploy Website to GitHub Pages
+
+on:
+  # Trigger the workflow on push or merge to the `main` branch
+  push:
+    branches: [main]
+  # Enable manual triggering via the GitHub Actions interface
+  workflow_dispatch:
+
+permissions:
+  contents: read  # Allow the workflow to clone your repository
+  pages: write    # Allow writing to GitHub Pages
+  id-token: write # Required for authentication
+
+jobs:
+  build:
+    name: Build Astro Project
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout your repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      # Install dependencies and build your site
+      - name: Install, build, and upload Site
+        uses: withastro/action@v2
+        # with:
+          # path: . # Adjust if your Astro project is in a subfolder
+          # node-version: 20 # Specify your Node.js version
+          # package-manager: pnpm@latest # Adjust based on your project's package manager
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

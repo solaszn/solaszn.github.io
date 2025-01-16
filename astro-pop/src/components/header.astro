@@ -1,31 +1,32 @@
 ---
-import Headerlink from "./headerlink.astro";
 import HeaderLink from "./headerlink.astro";
+import ThemeToggle from "./themeToggle.astro";
 import { Icon } from "astro-icon/components";
 
-const linksCase = "relative flex items-center h-11 px-3 md:bg-black/50 md:backdrop-blur rounded";
+const linksCase = "relative flex items-center h-11 dark:md:bg-black/50 md:bg-white/25 md:backdrop-blur rounded";
+const pageLinks = ""
 ---
 
 <div class="fixed z-[100] top-4 w-full">
   <header class="w-full mx-auto">
-    <nav class="flex w-full items-center md:justify-between overflow-hidden rounded bg-black/50 md:bg-transparent backdrop-blur md:backdrop-blur-none">
-      <a href={"/"} aria-label="Go to Home page" class=`home-logo relative ${linksCase} group gap-1.5` transition:persist>
+    <nav class="flex w-full items-center px-2 gap-2 md:justify-between overflow-hidden rounded dark:bg-black/50 bg-white/25 md:!bg-transparent backdrop-blur md:backdrop-blur-none">
+      <a href={"/"} aria-label="Go to Home page" class=`home-logo relative ${linksCase} md:px-2 group gap-1.5` transition:persist>
         <div class="rounded-full w-5 p-1 mt-0.5 group-hover:rotate-180 transition-any delay-200 slow">
-          <img src="/asterisk.svg" height="24" width="24" alt="" class="w-4 h-4" />
+          <Icon name="asterisk" class="w-3.5 h-3.5 mb-[1px]" />
         </div>
         <div class="hidden md:block font-semibold text-lg">feyisola</div>
       </a>
-      <div class="md:hidden w-1 h-5 border-l border-white/40"></div>
-      <div class={`w-full md:w-fit pl-5 ${linksCase}`}>
-        <div class="flex gap-10 items-center overflow-hidden">
-          <HeaderLink href="/about" data="About"/>
-          <HeaderLink href="/contact" data="Contact"/>
-          <HeaderLink href="/notes" data="Writing"/>
-          <div class="toggle-theme p-2 mr-2 md:mr-0 absolute right-0 md:relative">
-            <Icon name="sun" class="w-5 h-5 text-white" />
+      <div class="md:hidden w-1 h-5 ml-1 border-l border-black/20 dark:border-white/40"></div>
+      <div class={`w-full md:w-fit md:px-2 ${linksCase}`}>
+        <div class="flex gap-3 md:gap-6 items-center overflow-hidden">
+          <HeaderLink href="/about" data="About" class:list={pageLinks}/>
+          <HeaderLink href="/contact" data="Contact" class:list={pageLinks}/>
+          <HeaderLink href="/posts" data="Writing" class:list={pageLinks}/>
+          <div class="toggle-theme absolute right-0 md:relative pr-2 md:pr-0">
+            <ThemeToggle/>
           </div>
         </div>
-      </div>
+      </div> 
     </nav>
   </header>
 </div>

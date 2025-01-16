@@ -13,6 +13,14 @@ import { siteConfig } from "../../site.ts";
 <head>
   <BaseLayout title={siteConfig.title} description={siteConfig.description} image={siteConfig.image} />
   <ClientRouter/>
+  <script is:inline>
+    const theme = localStorage.getItem('theme') ?? 'dark';
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
 
 <body class="">

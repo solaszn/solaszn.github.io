@@ -1,9 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
 
 :root {
-  --black: #0A0A0A;
-  --offwhite: #ECECEC;
+  --background: #FFFFFF;
+  --text: #0A0A0A;
+  --selectiontext: #FFFFFF;
+  --accent: #262626;
 }
+
+:root.dark {
+  /* Dark mode variables */
+  --background: #0A0A0A;
+  --text: #FFFFFF;
+  --selectiontext: #0A0A0A;
+  --accent: #ECECEC;
+  
+}
+
+html {
+  color-scheme: light;
+  scroll-padding-top: 100px;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  transition: background-color 0.3s ease;
+}
+
 html, body {
   margin: 0;
   width: 100vw;
@@ -12,8 +37,8 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
-  background: var(--black);
-  color: white;
+  background: var(--background);
+  color: var(--text);
   cursor: url("/custom-cursor.ico"), default;
   @apply antialiased;
 }
@@ -24,9 +49,15 @@ main, header, footer {
   padding: 0 40px;
 }
 
+@media (max-width: 640px) {
+  main, header, footer {
+    padding: 0 20px;
+  }
+}
+
 ::selection {
-  background: var(--offwhite);
-  color: black;
+  background: var(--accent);
+  color: var(--selectiontext);
 }
 
 svg, path {

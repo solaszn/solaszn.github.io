@@ -23,5 +23,5 @@ export const Picture: React.FC<ImageProps> = ({ data, className, ...props }) => 
 };
 
 export const Divider: React.FC = () => {
-  return <div className="pt-6 border-b border-neutral-700" />;
+  return <div className="pt-6 border-b border-neutral-200 dark:border-neutral-700" />;
 };

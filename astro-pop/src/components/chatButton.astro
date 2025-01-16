@@ -2,15 +2,15 @@
 // chatButton.astro
 import { Icon } from "astro-icon/components";
 
-const meetButtons = "hover:bg-neutral-700";
+const meetButtons = "hover:bg-offwhite dark:hover:bg-neutral-700";
 ---
 
 <div class="dropdown">
-  <button class="dropdown-btn flex items-center gap-2 font-medium bg-white text-black p-2 rounded">
+  <button class="dropdown-btn flex items-center gap-2 font-medium bg-neutral-800 dark:bg-white text-white dark:text-black p-2 rounded">
     <div>Let's talk</div>
     <Icon name="chevron-down" class="icon w-4 h-4 transition-any" />
   </button>
-  <div class="dropdown-content font-medium bg-neutral-800 border border-white/10">
+  <div class="dropdown-content font-medium bg-neutral-100 dark:bg-neutral-800 border border-black/5 dark:border-white/10">
     <a aria-label="Quick call with Feyisola" href="https://cal.com/solaszn/quick-call?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2`>Brief call (15m)</a>
     <a aria-label="Deep dive call with Feyisola" href="https://cal.com/solaszn/secret?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2`>Deep dive (45m)</a>
   </div>
@@ -51,24 +51,51 @@ const meetButtons = "hover:bg-neutral-700";
 </style>
 
 <script>
-  const dropdowns = document.querySelectorAll(".dropdown");
+  function initializeDropdowns() {
+    const dropdowns = document.querySelectorAll(".dropdown");
 
-  dropdowns.forEach((dropdown) => {
-    const btn = dropdown.querySelector(".dropdown-btn");
-    const btnIcon = dropdown.querySelector(".icon");
-    const content = dropdown.querySelector(".dropdown-content");
+    dropdowns.forEach((dropdown) => {
+      // Clone the dropdown to remove existing listeners
+      const clone = dropdown.cloneNode(true) as HTMLElement;
+      dropdown.parentNode?.replaceChild(clone, dropdown);
 
-    btn?.addEventListener("click", () => {
-      content?.classList.toggle("show");
-      btnIcon?.classList.toggle("rotate-180");
+      const btn = clone.querySelector(".dropdown-btn");
+      const btnIcon = clone.querySelector(".icon");
+      const content = clone.querySelector(".dropdown-content");
+
+      btn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        content?.classList.toggle("show");
+        btnIcon?.classList.toggle("rotate-180");
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", (event) => {
+        if (!clone.contains(event.target as Node)) {
+          content?.classList.remove("show");
+          btnIcon?.classList.remove("rotate-180");
+        }
+      });
     });
 
-    // Close dropdown when clicking outside
-    document.addEventListener("click", (event) => {
+    // Clean up old document click listeners
+    document.removeEventListener("click", closeDropdowns);
+  }
+
+  function closeDropdowns(event: MouseEvent) {
+    const dropdowns = document.querySelectorAll(".dropdown-content");
+    dropdowns.forEach((dropdown) => {
       if (!dropdown.contains(event.target as Node)) {
-        content?.classList.remove("show");
-        btnIcon?.classList.remove("rotate-180");
+        dropdown.classList.remove("show");
+        const icon = dropdown.parentElement?.querySelector(".icon");
+        icon?.classList.remove("rotate-180");
       }
     });
-  });
+  }
+
+  // Initialize on first load
+  document.addEventListener("DOMContentLoaded", initializeDropdowns);
+
+  // Initialize on subsequent navigation
+  document.addEventListener("astro:after-swap", initializeDropdowns);
 </script>

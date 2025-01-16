@@ -23,10 +23,10 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
   {...props}
 >
   <!-- Progress Bar -->
-  <div class="progress-bar flex gap-3 px-6 pt-6 z-10">
+  <div class="progress-bar flex gap-3 px-6 pt-5 z-10">
     {images.map((_, index) => (
       <div
-        class="h-[5px] w-full rounded-full bg-neutral-600/15 overflow-hidden relative"
+        class="h-[5px] w-full rounded-full bg-neutral-600/20 overflow-hidden relative"
       >
         <div class="animated-bar absolute h-full rounded-full w-0 bg-neutral-600 transition-any duration-[5s] ease-linear"></div>
       </div>

@@ -32,7 +32,6 @@ export const projects = {
   reframe: {
     name: "Atrium",
     href: "/work/reframe",
-    accentBg: "bg-violet-50",
     tags: ["AI Agents", "B2B"],
     description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
     images: ["/atrium/cover.webp", "/atrium/mockup-1.webp", "/atrium/mockup-2.webp"],
@@ -40,7 +39,6 @@ export const projects = {
   accredit: {
     name: "Accredit",
     href: "/work/accredit",
-    accentBg: "bg-green-50",
     tags: ["Finance", "Mobile App"],
     description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
     images: ["/accredit/cover.webp", "/accredit/mockup-1.webp", "/accredit/mockup-2.webp"],
@@ -48,7 +46,6 @@ export const projects = {
   citisquare: {
     name: "Citisquare",
     href: "/work/citisquare",
-    accentBg: "bg-blue-50",
     tags: ["E-Commerce", "Booking"],
     description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
     images: ["/citisquare/cover.webp", "/citisquare/mockup-1.webp", "/citisquare/mockup-2.webp"],

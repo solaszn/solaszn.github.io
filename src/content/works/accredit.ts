@@ -74,7 +74,7 @@ export const accredit = {
         {
           type: "stat-grid",
           data: [
-            { label: "calls", value: "4" },
+            { label: "phone calls", value: "4" },
             { label: "in-person interview", value: "1" },
             { label: "survey responses", value: "12" },
             { label: "online resources", value: "20+" },

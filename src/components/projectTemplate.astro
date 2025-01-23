@@ -1,5 +1,5 @@
 ---
-import { Heading, Text, Divider } from "./contentKit";
+import { Heading, Text, Quote, Divider, InfoGrid, StatGrid } from "./contentKit";
 import Image from "astro/components/Image.astro";
 
 interface Props {
@@ -17,6 +17,12 @@ const { sections } = Astro.props
           return <Heading>{item.data}</Heading>;
         case 'text':
           return <Text>{item.data}</Text>;
+        case 'info-grid':
+           return <InfoGrid data={item.data}/>
+        case 'quote':
+          return <Quote>{item.data}</Quote>
+        case 'stat-grid':
+          return <StatGrid data={item.data}/>
         case 'image':
           return (
             <>

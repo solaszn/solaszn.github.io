@@ -49,21 +49,8 @@ import { Icon } from "astro-icon/components";
 <style>
   button[data-theme-toggle] {
     position: relative;
-    /* overflow: hidden; */
     box-sizing: content-box;
-    /* border: 1px solid red; */
-    /* width: 24px; */
-    /* height: 24px; */
   }
-
-  /* :global(body:not(.dark) .moon) {
-    transform: rotate(60deg);
-    transform-origin: 50% 200%;
-  }
-
-  :global(.dark .sun) {
-    transform: rotate(-60deg);
-  } */
 
   .sun, .moon {
     position: absolute;
@@ -71,6 +58,4 @@ import { Icon } from "astro-icon/components";
     height: 18px;
     @apply transition-transform duration-500 ease-in-out;
   }
-
-  
 </style>

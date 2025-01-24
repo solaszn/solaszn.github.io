@@ -12,63 +12,119 @@ export const reframe = {
       id: "overview",
       header: "Overview",
       content: [
-        {
-          type: "heading",
-          data: "Overview",
-        },
+        { type: "heading", data: "Overview" },
         {
           type: "text",
-          data: "Loans are as old as banks. They are risky but come in handy a lot of the time. They help support the average business during bad months and help individuals to overcome dire situations. In today’s world, quick instant loans are the go-to as more people turn to digital solutions for their financial needs and with Accredit, we are taking a new approach to elevate the consumer lending experience.",
+          data: "Six months into my time at Reframe, we decided to pursue a new product direction. Most users were leveraging the product for market research, so we pivoted to build a solution powered by agentic search and entity recognition systems. My role involved iterating on the product to better serve customer needs and building stronger brand connections to attract partners and improve loyalty.",
         },
         {
           type: "info-grid",
           data: [
-            { label: "ROLE", value: "Design Lead" },
-            { label: "DURATION", value: "6 weeks" },
-            { label: "WHAT I DID", value: ["Branding", "Product Strategy", "Mobile Application Design", "Usability Testing"] },
+            { label: "ROLE", value: "Founding Design Engineer (Employee #5)" },
+            { label: "DURATION", value: "Full time (11 tech years)" },
+            { label: "What I Did", value: ["User Experience Design", "Usability Testing", "Frontend Implementation", "Branding"] },
           ],
         },
+        {
+          type: "image",
+          data: [{ src: "/reframe/dev-page.webp", alt: "Developer Landing Page" }],
+        },
+        { type: "heading", data: "The Background" },
+        {
+          type: "text",
+          data: "Reframe started as a suite of AI-powered tools helping teams like Empowerly and JLL streamline data research and enrichment workflows with agentic AI and increase productivity.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/data-frame.webp", alt: "Data Frame And Entity Recognition" }],
+        },
+        {
+          type: "text",
+          data: "We also built a product similar to Notion Forms and Atlassian forms, to sync data to a dataframe and then run automated agentic workflows to enrich that data.",
+        },
+        {
+          type: "video",
+          data: [{ src: "/reframe/data-frame.webp", alt: "Reframe AI Forms - Video" }],
+        },
         { type: "divider" },
       ],
     },
     {
-      id: "evaluation-and-research",
-      header: "Evaluation and Research",
+      id: "research",
+      header: "Research",
       content: [
+        { type: "heading", data: "The Problem" },
+        {
+          type: "text",
+          data: "However, deeper research revealed that most teams used Reframe to gather intelligence on people and companies. It became clear that new users struggled to see value without assistance, and research workflows were not fully optimized.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/data-frame.webp", alt: "Data Frame Example" }],
+        },
         {
           type: "heading",
-          data: "The challenge",
+          data: "Problem Statements",
         },
         {
           type: "text",
-          data: "There has been a significant shift in the ease of getting loans thanks to private lenders however this of course came with its problems. Several loan apps use unethical practices, impose exorbitant interest rates and are not self-serviceable.",
+          data: "\"How can we make it easier for teams to waste less time and resources researching leads and focus their energy on selling?\"",
+        },
+        {
+          type: "text",
+          data: "\"How can we enable teams to research hundreds of data points on people and companies seamlessly?\"",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/audience.webp", alt: "Target Audience Segmentation" }],
         },
         { type: "divider" },
       ],
     },
     {
-      id: "design-and-iteration",
-      header: "Design and Iteration",
+      id: "design-to-code",
+      header: "Design to Code",
       content: [
-        { type: "heading", data: "Planning" },
+        { type: "heading", data: "Ideation and Prototyping" },
         {
           type: "text",
-          data: "Moving forward, I outlined the end-to-end structure of the product by organizing pages, features, and functionalities logically in a workflow. This ensures newbies like Jamal will be able to navigate the app seamlessly and without confusion. The result of this process was a view of the application that was not only holistic but also meticulous in detail.",
+          data: "Based on common use cases, I explored multiple solutions, such as streamlined workflows and better data visualization. Prototypes included prompt boxes, landing pages, and enhanced onboarding flows.",
         },
-        { type: "divider" },
-      ],
-    },
-    {
-      id: "final-solution",
-      header: "Final Solution",
-      content: [
         {
           type: "heading",
-          data: "Solution",
+          data: "Development Workflow",
         },
         {
           type: "text",
-          data: "The design process embraces a human-centered approach, this means intensive research, conducting usability testing and iterating on feedback to ensure a pleasant experience every time users come on the app. This all contributed to a product with a user-friendly interface, strong visual appeal, and seamless functionality that resonates with borrowers.",
+          data: "Starting from designs, I implemented components using Tailwind, React, and internal design tokens. Accessibility benchmarks were prioritized, ensuring seamless collaboration across design and engineering.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/design-dev-workflow.webp", alt: "Design to Development Workflow" }],
+        },
+        { type: "divider" },
+      ],
+    },
+    {
+      id: "v2-release",
+      header: "Reframe V2 Release",
+      content: [
+        { type: "heading", data: "Expanding the Ecosystem" },
+        {
+          type: "text",
+          data: "With insights from users, we built Reframe V2, a platform offering an AI agent ecosystem tailored to enterprise needs. This included tools for developers to create, deploy, and monetize AI agents, providing new revenue streams.",
+        },
+        {
+          type: "heading",
+          data: "Navigation Enhancements",
+        },
+        {
+          type: "text",
+          data: "The updated platform introduced seamless two-level navigation for better user experience, making it easier for users to explore and deploy agents.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/v2-nav.webp", alt: "V2 Navigation" }],
         },
         { type: "divider" },
       ],
@@ -77,13 +133,10 @@ export const reframe = {
       id: "learnings",
       header: "Learnings",
       content: [
-        {
-          type: "heading",
-          data: "Key Takeaways",
-        },
+        { type: "heading", data: "Key Takeaways" },
         {
           type: "text",
-          data: "This project came with its challenges but thorough research and testing informed the design process and ensured a product that meets the users needs. The branding and design system establishes trust and recognition. Together with the user experience and focus on error handling, Accredit is set on a path for sustainable growth in the market.",
+          data: "This project reinforced the importance of user research and iterative design. While we successfully delivered a robust solution, areas like documentation needed more attention. Balancing rapid delivery with thorough planning remains a critical lesson.",
         },
       ],
     },

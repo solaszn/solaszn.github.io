@@ -4,14 +4,14 @@ interface props {
   targetId: string;
   width?: number;
 }
-const { title, targetId, width=0 } = Astro.props
+const { title, targetId, width } = Astro.props
 ---
 
 <div class="flex gap-3 items-center">
   <a href={`#${targetId}`} class="flex gap-3 items-center">
     <div class=`h-[2px] min-w-3 ${width === 0 ? 'bg-neutral-400 dark:bg-neutral-500' : 'bg-black dark:bg-white'}`/>
     <div class="relative">
-      <div class=`absolute bottom-1/2 transform translate-y-1/2 h-[2px] bg-black dark:bg-white` style={`width: ${width*100}% ;`}/>
+      <div class=`progress-bar absolute bottom-1/2 transform translate-y-1/2 h-[2px] bg-black dark:bg-white`/>
       <div class={`font-semibold ${width === 0 && 'text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-offwhite transition-any'}`}>{title}</div>
     </div>
   </a>

@@ -1,6 +1,6 @@
 ---
 
-import SectionLink from "../../components/sectionLink.astro";
+import SectionLink from "../../components/sectionLink";
 import ChatButton from "../../components/chatButton.astro";
 import Image from "astro/components/Image.astro";
 import { reframe } from "../../content/works/reframe";
@@ -25,7 +25,7 @@ const { name, description, images, sections } = reframe as any;
         <div class="uppercase text-2xl font-semibold">{name}</div>
         <div class="flex flex-col gap-4 py-4">
           {sections.map((section: any) => (
-            <SectionLink title={section.header} targetId={section.id} width={width} />
+            <SectionLink title={section.header} targetId={section.id} progress={width} />
           ))}
         </div>
         <div class="">This looks like what you need?</div>

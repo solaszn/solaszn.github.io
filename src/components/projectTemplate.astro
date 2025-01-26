@@ -1,34 +1,81 @@
 ---
-import { Heading, Text, Divider } from "./contentKit";
+import { Heading, Text, Quote, Divider, InfoGrid, StatGrid } from "./contentKit";
 import Image from "astro/components/Image.astro";
+import SectionLayout from "./sectionLayout.astro";
+import ChatButton from "./chatButton.astro";
+import BackToTop from "./backToTop.astro";
 
 interface Props {
+  name: string;
+  images: string[];
+  accent?: string;
   sections: [];
 }
 
-const { sections } = Astro.props
+const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
 ---
 
-{sections.map((section: any, index: number) => (
-  <div id={section.id} class={`space-y-2 ${index>0 && 'pt-6'}`}>
-    {section.content.map((item: any, index: number) => {
-      switch (item.type) {
-        case 'heading':
-          return <Heading>{item.data}</Heading>;
-        case 'text':
-          return <Text>{item.data}</Text>;
-        case 'image':
-          return (
-            <>
-              <Image width="1280" height="720" src={item.data[0].src} alt={item.data[0].alt} class="pt-6" loading={item.data[0]?.loading && "eager"}/>
-              <div class="pt-2 pb-6 text-[13px] font-medium opacity-70 uppercase w-full text-center">{item.data[0].alt}</div>
-            </>
-          );
-        case 'divider':
-          return <Divider />;
-        default:
-          return null;
-      }
-    })}
+<main class="!px-0">
+  <div class=`cover-image w-full overflow-hidden pt-16 md:pt-0 h-[300px] md:h-full md:max-h-[280px] ${accent}` transition:name=`${name} Image`>
+    <Image
+      width="180"
+      height="180"
+      src={images[0]}
+      class="object-cover object-center w-full md:max-h-[320px] h-full"
+      loading="eager"
+      decoding="async"
+      alt=`Logo anatomy for ${name}`
+      transition:persist
+    />
   </div>
-))}
+
+  <div class="px-6 sm:px-10 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
+
+    <!-- Content Anchor && Quick Scroll -->
+    <div class="hidden sm:block sm:col-span-2 lg:col-span-3 space-y-5 sticky top-[80px] max-h-screen overflow-y-auto">
+      <div class="uppercase text-2xl font-semibold">{name}</div>
+      <SectionLayout sections={sections} />
+      <div class="">This looks like what you need?</div>
+      <ChatButton />
+    </div>
+
+    <!-- Content -->
+    <div class="content sm:col-span-6 lg:col-span-9">
+      <!-- <div class="mid-point fixed top-1/2 left-0 w-full h-[2px] bg-red-500 transform -translate-y-1/2"/> -->
+      {
+        sections.map((section: any, index: number) => (
+          <div id={section.id} class={`space-y-2 ${index > 0 && "pt-6"}`}>
+            {section.content.map((item: any, index: number) => {
+              switch (item.type) {
+                case "heading":
+                  return <Heading>{item.data}</Heading>;
+                case "text":
+                  return <Text>{item.data}</Text>;
+                case "info-grid":
+                  return <InfoGrid data={item.data} />;
+                case "quote":
+                  return <Quote>{item.data}</Quote>;
+                case "stat-grid":
+                  return <StatGrid data={item.data} />;
+                case "image":
+                  return (
+                    <>
+                      <Image width="1280" height="720" src={item.data[0].src} alt={item.data[0].alt} class="pt-6" loading={item.data[0]?.loading && "eager"} />
+                      <div class="pt-2 pb-6 text-[13px] font-medium opacity-70 uppercase w-full text-center">{item.data[0].alt}</div>
+                    </>
+                  );
+                case "divider":
+                  return <Divider />;
+                default:
+                  return null;
+              }
+            })}
+          </div>
+        ))
+      }
+
+      <div class="h-[500px] w-full"></div>
+    </div>
+  </div>
+  <BackToTop />
+</main>

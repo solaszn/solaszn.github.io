@@ -27,27 +27,3 @@ export const referrals = {
     referral: "",
   }
 }
-
-export const projects = {
-  reframe: {
-    name: "Atrium",
-    href: "/work/reframe",
-    tags: ["AI Agents", "B2B"],
-    description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
-    images: ["/reframe/cover.webp", "/reframe/mockup-1.webp", "/reframe/mockup-2.webp"],
-  },
-  accredit: {
-    name: "Accredit",
-    href: "/work/accredit",
-    tags: ["Finance", "Mobile App"],
-    description: "Designing the brand and product experience of a mobile loan and credit application",
-    images: ["/accredit/cover.webp", "/accredit/mockup-1.webp", "/accredit/mockup-2.webp"],
-  },
-  citisquare: {
-    name: "Citisquare",
-    href: "/work/citisquare",
-    tags: ["E-Commerce", "Booking"],
-    description: "Maximizing usability for a personalized, scalable and intuitive e-commerce experience",
-    images: ["/citisquare/cover.webp", "/citisquare/mockup-1.webp", "/citisquare/mockup-2.webp"],
-  },
-}

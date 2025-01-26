@@ -1,8 +1,11 @@
 ---
+import { referrals } from "../../site";
+import { reframe } from "../content/works/reframe";
+import { accredit } from "../content/works/accredit";
+import { citisquare } from "../content/works/citisquare";
+import Card from "../components/projectCard.astro";
 import Layout from "../layouts/defaultLayout.astro";
 import ChatButton from "../components/chatButton.astro";
-import Card from "../components/projectCard.astro";
-import { referrals, projects } from "../../site.ts";
 ---
 
 <Layout>
@@ -34,33 +37,33 @@ import { referrals, projects } from "../../site.ts";
       <!-- Case Studies -->
       <Card
         class="sm:col-span-4 bg-violet-50"
-        name={projects.reframe.name}
-        href={projects.reframe.href}
-        tags={projects.reframe.tags}
-        description={projects.reframe.description}
-        images={projects.reframe.images}
+        name={reframe.name}
+        href={reframe.href}
+        tags={reframe.tags}
+        description={reframe.description}
+        images={reframe.images}
         isAboveFold={true}
         transition:name=`Reframe Image`
       />
       <Card
         class="sm:col-span-4 bg-green-50"
-        name={projects.accredit.name}
-        href={projects.accredit.href}
-        tags={projects.accredit.tags}
-        description={projects.accredit.description}
-        images={projects.accredit.images}
+        name={accredit.name}
+        href={accredit.href}
+        tags={accredit.tags}
+        description={accredit.description}
+        images={accredit.images}
         isAboveFold={true}
-        transition:name=`${projects.accredit.name} Image`
+        transition:name=`${accredit.name} Image`
       />
       <Card
         class="sm:col-span-4 bg-blue-50"
-        name={projects.citisquare.name}
-        href={projects.citisquare.href}
-        tags={projects.citisquare.tags}
-        description={projects.citisquare.description}
-        images={projects.citisquare.images}
+        name={citisquare.name}
+        href={citisquare.href}
+        tags={citisquare.tags}
+        description={citisquare.description}
+        images={citisquare.images}
         isAboveFold={true}
-        transition:name=`${projects.citisquare.name} Image`
+        transition:name=`${citisquare.name} Image`
       />
     </div>
   </main>

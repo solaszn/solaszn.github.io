@@ -1,0 +1,77 @@
+---
+import SectionLink from './sectionLink.astro';
+
+interface Section {
+  header: string;
+  id: string;
+  content: any;
+}
+
+interface Props {
+  sections: Section[];
+}
+
+const { sections } = Astro.props;
+
+// Dynamic state will be managed on the client-side using plain JavaScript.
+---
+
+<div class="flex flex-col gap-4 py-4" id="section-links-container" data-sections={`${JSON.stringify(Astro.props.sections)}`}>
+  {sections.map((section) => (
+    <SectionLink
+      key={section.id}
+      title={section.header}
+      targetId={section.id}
+      width={0} // Initial width is set to 0; updated dynamically
+    />
+  ))}
+</div>
+
+<script>
+
+  function updateSectionWidths () {
+    const container = document.getElementById("section-links-container");
+    if (!container) return;
+    const sections = JSON.parse(container.dataset.sections || "[]");
+    const sectionWidths = Array(sections.length).fill(0);
+    const midPoint = window.innerHeight / 2;
+
+    sections.forEach((section: { width: number; }) => {
+      if (typeof section.width !== "number") {
+        section.width = 0;  // Initialize with 0 if undefined or incorrectly set
+      }
+    });
+    
+    sections.forEach((section: {header: string; id: string; content: any}, index: number) => {
+      const sectionEl = document.getElementById(section.id);
+      if (!sectionEl) return;
+
+      const { top, height } = sectionEl.getBoundingClientRect();
+      const progress = Math.min(Math.max((midPoint - top) / height, 0), 1);
+      const formattedProgress = parseFloat(progress.toFixed(2));
+      sectionWidths[index] = Math.max(0, Math.min(1, formattedProgress));
+
+      // Dynamically update the width for each SectionLink
+      const linkEl = container.querySelectorAll("a")[index];
+      // console.log("👀 Width",sectionWidths)
+      if (linkEl) {
+        const progressBar = linkEl.querySelector("div > div"); // Locate the progress bar inside the link
+        if (progressBar) {
+          (progressBar as HTMLElement).style.width = `${formattedProgress * 100}%`;
+        }
+      }
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", updateSectionWidths);
+
+  window.addEventListener("scroll", updateSectionWidths);
+
+  window.addEventListener("beforeunload", () => {
+    window.removeEventListener("scroll", updateSectionWidths);
+  });
+
+  // Optional: Use astro:after-swap if necessary for SPA navigation
+  document.addEventListener("astro:after-swap", updateSectionWidths);
+  
+</script>

@@ -1,6 +1,6 @@
 export const reframe = {
   // Metadata
-  name: "Reframe",
+  name: "Atrium",
   href: "/work/reframe",
   tags: ["Finance", "Mobile App"],
   description: "Building infrastructure that powers the new age of AI agents for enterprise customers",

@@ -1,8 +1,4 @@
 ---
-
-import SectionLink from "../../components/sectionLink";
-import ChatButton from "../../components/chatButton.astro";
-import Image from "astro/components/Image.astro";
 import { citisquare } from "../../content/works/citisquare";
 import ProjectLayout from "../../layouts/projectLayout.astro";
 import ProjectTemplate from "../../components/projectTemplate.astro";
@@ -13,5 +9,5 @@ const accent = "bg-blue-50"
 ---
 
 <ProjectLayout title={`${name} | Feyisola Olawuyi`} description={description}>
-  <ProjectTemplate name={name} images={images} sections={sections}/>
+  <ProjectTemplate name={name} accent={accent} images={images} sections={sections}/>
 </Layout>

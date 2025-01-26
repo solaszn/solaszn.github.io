@@ -1,0 +1,49 @@
+---
+import { Icon } from "astro-icon/components"
+---
+
+<div>
+  <button id="back-to-top-button" class="hidden fixed bottom-8 right-8 rounded shadow-lg bg-neutral-800 dark:bg-neutral-200 text-white dark:text-black px-3 py-2" aria-label="Back to top">
+    <div class="flex gap-1.5 items-center text-sm font-semibold"><Icon name="chevron-up" class="stroke-2"/>Back to Top </div>
+  </button>
+</div>
+
+<script>
+  let backToTopButton: HTMLButtonElement | null = null;
+
+  const isPageScrollable = () => {
+    return document.documentElement.scrollHeight > document.documentElement.clientHeight;
+  };
+
+  const scrollThreshold = document.documentElement.clientHeight * 1.2;
+
+  const handleScroll = () => {
+    if (!backToTopButton) return;
+    if (!isPageScrollable()) return;
+
+    if (document.documentElement.scrollTop > scrollThreshold) {
+      backToTopButton.classList.remove("hidden");
+    } else {
+      backToTopButton.classList.add("hidden");
+    }
+  };
+
+  const scrollToTop = () => {
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const initializeBackToTop = () => {
+    backToTopButton = document.getElementById("back-to-top-button") as HTMLButtonElement | null;
+    if (backToTopButton) {
+      document.addEventListener("scroll", handleScroll);
+      backToTopButton.addEventListener("click", scrollToTop);
+    }
+  };
+
+  // Initialize on page load and after page swap
+  document.addEventListener("DOMContentLoaded", initializeBackToTop);
+  document.addEventListener("astro:after-swap", initializeBackToTop);
+</script>

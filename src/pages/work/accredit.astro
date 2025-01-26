@@ -1,16 +1,12 @@
 ---
-
-import ChatButton from "../../components/chatButton.astro";
-import Image from "astro/components/Image.astro";
 import { accredit } from "../../content/works/accredit";
 import ProjectLayout from "../../layouts/projectLayout.astro";
 import ProjectTemplate from "../../components/projectTemplate.astro";
-import SectionLayout from "../../components/sectionLayout.astro";
 
 const { name, description, images, sections } = accredit as any;
 const accent = "bg-green-50"
 ---
 
 <ProjectLayout title={`${name} | Feyisola Olawuyi`} description={description}>
-  <ProjectTemplate name={name} images={images} sections={sections}/>
+  <ProjectTemplate name={name} accent={accent} images={images} sections={sections}/>
 </Layout>

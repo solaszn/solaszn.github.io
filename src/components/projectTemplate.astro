@@ -3,6 +3,7 @@ import { Heading, Text, Quote, Divider, InfoGrid, StatGrid } from "./contentKit"
 import Image from "astro/components/Image.astro";
 import SectionLayout from "./sectionLayout.astro";
 import ChatButton from "./chatButton.astro";
+import BackToTop from "./backToTop.astro";
 
 interface Props {
   name: string;
@@ -76,4 +77,5 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
       <div class="h-[500px] w-full"></div>
     </div>
   </div>
+  <BackToTop />
 </main>

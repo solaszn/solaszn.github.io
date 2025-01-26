@@ -1,6 +1,6 @@
 export const citisquare = {
   // Metadata
-  name: "citisquare",
+  name: "Citisquare",
   href: "/work/citisquare",
   tags: ["E-Commerce", "Booking"],
   description: "Maximizing usability for a personalized, scalable and intuitive e-commerce experience",

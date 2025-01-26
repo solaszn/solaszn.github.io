@@ -1,6 +1,5 @@
 ---
 
-import SectionLink from "../../components/sectionLink";
 import ChatButton from "../../components/chatButton.astro";
 import Image from "astro/components/Image.astro";
 import { accredit } from "../../content/works/accredit";
@@ -8,34 +7,10 @@ import ProjectLayout from "../../layouts/projectLayout.astro";
 import ProjectTemplate from "../../components/projectTemplate.astro";
 import SectionLayout from "../../components/sectionLayout.astro";
 
-export let width: number;
-width = 0.0; // should be replaced by sectionWidth
-
 const { name, description, images, sections } = accredit as any;
+const accent = "bg-green-50"
 ---
 
 <ProjectLayout title={`${name} | Feyisola Olawuyi`} description={description}>
-  <main class="!px-0">
-    <div class="cover-image w-full overflow-hidden pt-16 md:pt-0 h-[300px] md:h-full md:max-h-[280px] bg-green-50" transition:name=`Accredit Image`>
-      <Image width="180" height="180" src={images[0]} class="object-cover object-center w-full md:max-h-[320px] h-full" loading="eager" decoding="async" alt=`Logo anatomy for Accredit` transition:persist />
-    </div>
-
-    <div class="px-6 sm:px-10 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
-      <!-- Content Anchor && Quick Scroll -->
-      <div class="hidden sm:block sm:col-span-2 lg:col-span-3 space-y-5 sticky top-[80px] max-h-screen overflow-y-auto">
-        <div class="uppercase text-2xl font-semibold">{name}</div>
-        <SectionLayout sections={sections} />
-        <div class="">This looks like what you need?</div>
-        <ChatButton />
-      </div>
-
-      <!-- Content -->
-      <div class="content sm:col-span-6 lg:col-span-9">
-        <!-- <div class="mid-point fixed top-1/2 left-0 w-full h-[2px] bg-red-500 transform -translate-y-1/2"/> -->
-        <ProjectTemplate sections={sections}/>
-        <div class="h-[500px] w-full"></div>
-      </div>
-    </div>
-    
-  </main>
+  <ProjectTemplate name={name} images={images} sections={sections}/>
 </Layout>

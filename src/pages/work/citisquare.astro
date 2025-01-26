@@ -7,37 +7,11 @@ import { citisquare } from "../../content/works/citisquare";
 import ProjectLayout from "../../layouts/projectLayout.astro";
 import ProjectTemplate from "../../components/projectTemplate.astro";
 
-export let width: number;
-width = 0.0;
 
 const { name, description, images, sections } = citisquare as any;
+const accent = "bg-blue-50"
 ---
 
 <ProjectLayout title={`${name} | Feyisola Olawuyi`} description={description}>
-  <main class="!px-0">
-    <div class="cover-image w-full overflow-hidden pt-16 md:pt-0 h-[300px] md:h-full md:max-h-[280px] bg-blue-50" transition:name=`Citisquare Image`>
-      <Image width="180" height="180" src={images[0]} class="object-cover object-center w-full md:max-h-[320px] h-full" loading="eager" decoding="async" alt=`Logo anatomy for Accredit` transition:persist />
-    </div>
-
-    <div class="px-6 sm:px-10 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
-      <!-- Content Anchor && Quick Scroll -->
-      <div class="hidden sm:block sm:col-span-2 lg:col-span-3 space-y-5 sticky top-[80px] max-h-screen overflow-y-auto">
-        <div class="uppercase text-2xl font-semibold">{name}</div>
-        <div class="flex flex-col gap-4 py-4">
-          {sections.map((section: any) => (
-            <SectionLink title={section.header} targetId={section.id} progress={width} />
-          ))}
-        </div>
-        <div class="">This looks like what you need?</div>
-        <ChatButton />
-      </div>
-
-      <!-- Content -->
-      <div class="content sm:col-span-6 lg:col-span-9">
-        <ProjectTemplate sections={sections}/>
-        <div class="h-[500px] w-full"></div>
-      </div>
-    </div>
-    
-  </main>
+  <ProjectTemplate name={name} images={images} sections={sections}/>
 </Layout>

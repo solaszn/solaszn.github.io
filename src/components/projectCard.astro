@@ -14,42 +14,36 @@ interface Props extends HTMLAttributes<"a"> {
 }
 
 const { name, href, class: className, tags, description, images, isAboveFold = false, ...props } = Astro.props;
-
 ---
 
-<a
-  href={href}
-  class:list={[className, "group relative flex flex-col justify-between min-h-[520px] text-black w-full"]}
-  {...props}
->
+<a href={href} class:list={[className, "group relative flex flex-col justify-between min-h-[520px] text-black w-full scroll-snap-center"]} {...props}>
   <!-- Progress Bar -->
   <div class="progress-bar flex gap-3 px-6 pt-5 z-10">
-    {images.map((_, index) => (
-      <div
-        class="h-[5px] w-full rounded-full bg-neutral-600/20 overflow-hidden relative"
-      >
-        <div class="animated-bar absolute h-full rounded-full w-0 bg-neutral-600 transition-any duration-[5s] ease-linear"></div>
-      </div>
-    ))}
+    {
+      images.map((_, index) => (
+        <div class="h-[5px] w-full rounded-full bg-neutral-600/20 overflow-hidden relative">
+          <div class="animated-bar absolute h-full rounded-full w-0 bg-neutral-600 transition-any duration-[5s] ease-linear" />
+        </div>
+      ))
+    }
   </div>
 
   <!-- Image Panel -->
   <div class="image-panel absolute h-full w-full overflow-hidden">
-    {images.map((image, index) => (
-      <Image
-        width="180"
-        height="180"
-        src={`${image}`}
-        class:list={[
-          "object-cover object-center h-full w-full absolute transition-transform duration-500 ease-in-out",
-          index === 0 ? "translate-x-0" : "translate-x-full",
-        ]}
-        loading={isAboveFold ? "eager" : "lazy"}
-        decoding="async"
-        alt={`${name} ${image}`}
-        data-index={index}
-      />
-    ))}
+    {
+      images.map((image, index) => (
+        <Image
+          width="180"
+          height="180"
+          src={`${image}`}
+          class:list={["object-cover object-center h-full w-full absolute transition-transform duration-500 ease-in-out", index === 0 ? "translate-x-0" : "translate-x-full"]}
+          loading={isAboveFold ? "eager" : "lazy"}
+          decoding="async"
+          alt={`${name} ${image}`}
+          data-index={index}
+        />
+      ))
+    }
   </div>
 
   <!-- Card Content -->
@@ -58,13 +52,7 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
       <div class="w-[calc(100%-40px)] absolute bottom-0 flex flex-col justify-start max-h-[60px] overflow-hidden group-hover:max-h-[160px] delay-300 transition-any space-y-2">
         <div class="uppercase font-semibold">{name}</div>
         <div class="flex gap-2">
-          {tags.map((tag) => (
-            <div
-              class="bg-black/5 text-sm font-medium text-neutral-600 rounded px-2 py-1 capitalize"
-            >
-              {tag}
-            </div>
-          ))}
+          {tags.map((tag) => <div class="bg-black/5 text-sm font-medium text-neutral-600 rounded px-2 py-1 capitalize">{tag}</div>)}
         </div>
         <div class="text-sm opacity-80">{description}</div>
       </div>
@@ -78,76 +66,146 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
 <script>
   function initializeCardAnimations() {
     const cards = document.querySelectorAll(".group");
+    const mediaQuery = window.matchMedia("(max-width: 639px)");
 
-    cards.forEach((card) => {
-      // Clone with proper typing
-      const clone = card.cloneNode(true) as HTMLElement;
-      card.parentNode?.replaceChild(clone, card);
-
-      // Type assertions for querySelectorAll
-      const images = (clone as Element).querySelectorAll(".image-panel img") as NodeListOf<HTMLImageElement>;
-      const progressBars = (clone as Element).querySelectorAll(".animated-bar") as NodeListOf<HTMLDivElement>;
-
+    if (mediaQuery.matches) {
+      // Mobile-specific behavior
+      let observer;
       let currentIndex = 0;
-      let interval: string | number | NodeJS.Timeout | undefined;
+      let currentAnimatingCard: { animationInterval: any } | any = null;
+      console.log("On Mobile!!");
 
-      function resetProgressBars() {
-        progressBars.forEach((bar) => {
-          bar.style.transition = "none";
-          bar.style.width = "0";
+      function resetAnimations(card: any) {
+        const progressBars = card.querySelectorAll(".animated-bar");
+        const images = card.querySelectorAll(".image-panel img");
+        progressBars.forEach((bar: { style: { width: string; transition: string } }, index: number) => ((bar.style.width = index === 0 ? "0" : "0"), (bar.style.transition = "none")));
+        images.forEach((img: { style: { transform: string } }, index: number) => {
+          img.style.transform = index === 0 ? "translateX(0)" : "translateX(100%)"; // Reset all images
+        });
+        card.dataset.currentIndex = 0;
+      }
+
+      function startAnimations(card: any) {
+        const images = card.querySelectorAll(".image-panel img");
+        const progressBars = card.querySelectorAll(".animated-bar");
+
+        let currentIndex = parseInt(card.dataset.currentIndex || "0", 10);
+
+        function animate() {
+          console.log("👀 Index (currentIndex: ", currentIndex)
+          resetAnimations(card);
+          progressBars[currentIndex].style.transition = "width 4s linear";
+          progressBars[currentIndex].style.width = "100%";
+
+          images.forEach((img: { style: { transform: string } }, index: number) => {
+            img.style.transform = index === currentIndex ? "translateX(0)" : index < currentIndex ? "translateX(-100%)" : "translateX(100%)";
+          });
+
+          currentIndex = (currentIndex + 1) % images.length;
+          card.dataset.currentIndex = currentIndex
+        }
+
+        animate();
+        return setInterval(animate, 4000);
+      }
+
+      function handleIntersection(entries: any[]) {
+        entries.forEach((entry: { isIntersecting: any; target: any }) => {
+          if (entry.isIntersecting) {
+            if (currentAnimatingCard && currentAnimatingCard !== entry.target) {
+              clearInterval(currentAnimatingCard.animationInterval);
+              resetAnimations(currentAnimatingCard);
+            }
+
+            currentAnimatingCard = entry.target;
+            resetAnimations(entry.target)
+            currentAnimatingCard.animationInterval = startAnimations(entry.target);
+          } else if (entry.target === currentAnimatingCard) {
+            clearInterval(currentAnimatingCard.animationInterval);
+            resetAnimations(currentAnimatingCard);
+            currentAnimatingCard = null;
+          }
         });
       }
 
-      function startAnimation() {
-        console.log("Animation Started");
-        resetProgressBars();
+      observer = new IntersectionObserver(handleIntersection, {
+        root: null,
+        threshold: 0.8, // Trigger when 80% of the card is visible
+      });
 
-        progressBars[currentIndex].style.transition = "width 4s linear";
-        progressBars[currentIndex].style.width = "100%";
+      cards.forEach((card) => {
+        observer.observe(card);
+      });
 
-        images.forEach((img, index) => {
-          img.style.transform =
-            index === currentIndex
-              ? "translateX(0)"
-              : index < currentIndex
-              ? "translateX(-100%)"
-              : "translateX(100%)";
-        });
+      // Cleanup observer on navigation
+      document.addEventListener("astro:before-swap", () => {
+        observer.disconnect();
+        if (currentAnimatingCard) {
+          clearInterval(currentAnimatingCard.animationInterval);
+        }
+      });
+    } else {
+      console.log("On Large Screen!!");
+      cards.forEach((card) => {
+        // Clone with proper typing
+        const clone = card.cloneNode(true) as HTMLElement;
+        card.parentNode?.replaceChild(clone, card);
 
-        interval = setInterval(() => {
-          currentIndex = (currentIndex + 1) % images.length;
+        // Type assertions for querySelectorAll
+        const images = (clone as Element).querySelectorAll(".image-panel img") as NodeListOf<HTMLImageElement>;
+        const progressBars = (clone as Element).querySelectorAll(".animated-bar") as NodeListOf<HTMLDivElement>;
 
+        let currentIndex = 0;
+        let interval: string | number | NodeJS.Timeout | undefined;
+
+        function resetProgressBars() {
           progressBars.forEach((bar) => {
             bar.style.transition = "none";
             bar.style.width = "0";
           });
+        }
+
+        function startAnimation() {
+          console.log("Animation Started");
+          resetProgressBars();
 
           progressBars[currentIndex].style.transition = "width 4s linear";
           progressBars[currentIndex].style.width = "100%";
 
           images.forEach((img, index) => {
-            img.style.transform =
-              index === currentIndex
-                ? "translateX(0)"
-                : index < currentIndex
-                ? "translateX(-100%)"
-                : "translateX(100%)";
+            img.style.transform = index === currentIndex ? "translateX(0)" : index < currentIndex ? "translateX(-100%)" : "translateX(100%)";
           });
-        }, 4000);
-      }
 
-      function stopAnimation() {
-        clearInterval(interval);
-        resetProgressBars();
-        images.forEach((img, index) => {
-          img.style.transform = index === 0 ? "translateX(0)" : "translateX(100%)";
-        });
-        currentIndex = 0;
-      }
+          interval = setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
 
-      clone.addEventListener("mouseenter", startAnimation);
-      clone.addEventListener("mouseleave", stopAnimation);
-    });
+            progressBars.forEach((bar) => {
+              bar.style.transition = "none";
+              bar.style.width = "0";
+            });
+
+            progressBars[currentIndex].style.transition = "width 4s linear";
+            progressBars[currentIndex].style.width = "100%";
+
+            images.forEach((img, index) => {
+              img.style.transform = index === currentIndex ? "translateX(0)" : index < currentIndex ? "translateX(-100%)" : "translateX(100%)";
+            });
+          }, 4000);
+        }
+
+        function stopAnimation() {
+          clearInterval(interval);
+          resetProgressBars();
+          images.forEach((img, index) => {
+            img.style.transform = index === 0 ? "translateX(0)" : "translateX(100%)";
+          });
+          currentIndex = 0;
+        }
+
+        clone.addEventListener("mouseenter", startAnimation);
+        clone.addEventListener("mouseleave", stopAnimation);
+      });
+    }
   }
 
   // Initialize on first load
@@ -156,3 +214,9 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
   // Initialize on subsequent navigation
   document.addEventListener("astro:after-swap", initializeCardAnimations);
 </script>
+
+<style>
+  .scroll-snap-center {
+    scroll-snap-align: center;
+  }
+</style>

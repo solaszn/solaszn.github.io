@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components"
 import { siteConfig } from "../../site";
 
 const contactLink = "p-2.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-any"
-const resourceLink = "text-black dark:text-white font-medium"
+const resourceLink = "text-black dark:text-white font-semibold"
 ---
 
 <footer class="mt-16 pb-12">
@@ -18,7 +18,7 @@ const resourceLink = "text-black dark:text-white font-medium"
 
       <div class="mt-5 mb-2.5">&copy; {new Date().getFullYear()}  •  {siteConfig.author}</div>
 
-      <div class="text-black/60 dark:text-white/60">Designed and built by yours truly ✌️. Built with <a href="https://astro.build" class=`${resourceLink}`>Astro</a>, <a href="https://tailwindcss.com/" class=`${resourceLink}`>Tailwind CSS</a>, deployed on <span class={resourceLink}>Github</span>. Typeface is <a href="https://tokotype.github.io/plusjakarta-sans/" class=`${resourceLink}`>Plus Jakarta Sans</a> by Tokotype</div>
+      <div class="font-normal text-black/80 dark:text-white/80">Designed and built by yours truly ✌️. Built with <a href="https://astro.build" class=`${resourceLink}`>Astro</a>, <a href="https://tailwindcss.com/" class=`${resourceLink}`>Tailwind CSS</a>, deployed on <span class={resourceLink}>Github</span>. Typeface is <a href="https://tokotype.github.io/plusjakarta-sans/" class=`${resourceLink}`>Plus Jakarta Sans</a> by Tokotype</div>
     </div>
   </div>
 </footer>

@@ -6,11 +6,11 @@ const meetButtons = "hover:bg-offwhite dark:hover:bg-neutral-700";
 ---
 
 <div class="dropdown">
-  <button class="dropdown-btn flex items-center gap-2 font-medium bg-neutral-800 dark:bg-white text-white dark:text-black p-2 rounded">
+  <button class="dropdown-btn flex justify-center items-center gap-4 lg:gap-2 font-medium bg-neutral-800 dark:bg-white text-white dark:text-black px-4 py-2 lg:p-2 rounded transition-any smooth">
     <div>Let's talk</div>
     <Icon name="chevron-down" class="icon w-4 h-4 transition-any" />
   </button>
-  <div class="dropdown-content font-medium bg-neutral-100 dark:bg-neutral-800 border border-black/5 dark:border-white/10">
+  <div class="dropdown-content font-medium bg-neutral-100 dark:bg-neutral-800 border border-black/5 dark:border-white/10 shadow-lg">
     <a aria-label="Quick call with Feyisola" href="https://cal.com/solaszn/quick-call?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2`>Brief call (15m)</a>
     <a aria-label="Deep dive call with Feyisola" href="https://cal.com/solaszn/secret?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2`>Deep dive (45m)</a>
   </div>

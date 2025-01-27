@@ -2,7 +2,7 @@ export const citisquare = {
   // Metadata
   name: "Citisquare",
   href: "/work/citisquare",
-  tags: ["E-Commerce", "Booking"],
+  tags: ["Real Estate", "Marketplace"],
   description: "Maximizing usability for a personalized, scalable and intuitive e-commerce experience",
   images: ["/citisquare/cover.webp", "/citisquare/mockup-1.webp", "/citisquare/mockup-2.webp"],
 

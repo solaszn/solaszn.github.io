@@ -10,7 +10,7 @@ import ChatButton from "../components/chatButton.astro";
 
 <Layout>
   <main class="pt-28">
-    <div class="grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
+    <div class="grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth" style="scroll-snap-type: y mandatory;">
       <!-- Testimonials & CTA -->
       <div class="lg:col-span-6 hidden lg:block mt-3">
         <div class="flex gap-5 mb-10 w-11/12">
@@ -24,7 +24,7 @@ import ChatButton from "../components/chatButton.astro";
       </div>
 
       <!-- Intro -->
-      <div class="col-span-full md:col-span-6 mb-6">
+      <div class="col-span-full md:col-span-6 lg:mb-6">
         <div class="w-full">
           <div class="text-[26px] md:text-[32px] font-semibold leading-relaxed">Hey, I'm Feyisola. <br /> A product designer who builds his ideas</div>
           <div class="mt-5 opacity-90">
@@ -33,6 +33,11 @@ import ChatButton from "../components/chatButton.astro";
           </div>
         </div>
       </div>
+
+      <!-- Chat button on smaller screens -->
+       <div class="col-span-full lg:hidden mb-6">
+          <ChatButton />
+       </div>
 
       <!-- Case Studies -->
       <Card
@@ -43,7 +48,7 @@ import ChatButton from "../components/chatButton.astro";
         description={reframe.description}
         images={reframe.images}
         isAboveFold={true}
-        transition:name=`Reframe Image`
+        transition:name=`${reframe.name} Image`
       />
       <Card
         class="sm:col-span-4 bg-green-50"

@@ -24,7 +24,7 @@ import ChatButton from "../components/chatButton.astro";
       </div>
 
       <!-- Intro -->
-      <div class="col-span-full md:col-span-6 mb-6">
+      <div class="col-span-full md:col-span-6 lg:mb-6">
         <div class="w-full">
           <div class="text-[26px] md:text-[32px] font-semibold leading-relaxed">Hey, I'm Feyisola. <br /> A product designer who builds his ideas</div>
           <div class="mt-5 opacity-90">
@@ -33,6 +33,11 @@ import ChatButton from "../components/chatButton.astro";
           </div>
         </div>
       </div>
+
+      <!-- Chat button on smaller screens -->
+       <div class="col-span-full lg:hidden mb-6">
+          <ChatButton />
+       </div>
 
       <!-- Case Studies -->
       <Card

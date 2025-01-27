@@ -2,7 +2,7 @@ export const reframe = {
   // Metadata
   name: "Atrium",
   href: "/work/reframe",
-  tags: ["Finance", "Mobile App"],
+  tags: ["AI Agents", "B2B"],
   description: "Building infrastructure that powers the new age of AI agents for enterprise customers",
   images: ["/reframe/cover.webp", "/reframe/mockup-1.webp", "/reframe/mockup-2.webp"],
 

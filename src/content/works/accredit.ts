@@ -108,20 +108,10 @@ export const accredit = {
               label: "Repayments",
               value: "Many people cited confusion over repayment options and displeasure with aggressive tactics used by some lenders.",
             },
-          ],
-        },
-        {
-          type: "card",
-          data: [
             {
-              label: "User Experience",
+              label: "Cumbersone Sign up",
               value: "Borrowers have no clue why their loan application was not approved, slow signup process with cumbersome requirements.",
             },
-          ],
-        },
-        {
-          type: "card",
-          data: [
             {
               label: "High Interest Rates",
               value: "Borrowers are troubled by exorbitant interest rates of major lenders, often leading to debt traps and financial stress.",
@@ -142,24 +132,20 @@ export const accredit = {
         { type: "heading", data: "Possible solutions?" },
         {
           type: "card",
-          data: [{
-            label: "- Repayments",
-            value: "Borrowers have options to repay loans even when offline. The app should be self-serviceable to help users recover from loan default or disapproval.",
-          }],
-        },
-        {
-          type: "card",
-          data: [{
-            label: "- User Experience",
-            value: "Ingenious branding and a product with clear communication, accessible design and ease of use optimized with iterations.",
-          }],
-        },
-        {
-          type: "card",
-          data: [{
-            label: "- Credit System",
-            value: "A credit-oriented approach to loan disbursement and privileges encouraging users to build financial trustworthiness.",
-          }],
+          data: [
+            {
+              label: "New Payment Options",
+              value: "Borrowers have more options to repay loans even when offline. The app should be self-serviceable to help users recover from loan default or disapproval.",
+            },
+            {
+              label: "User Experience",
+              value: "Ingenious branding and a product with clear communication, accessible design and ease of use optimized with iterations.",
+            },
+            {
+              label: "Credit System",
+              value: "A credit-oriented approach to loan disbursement and privileges encouraging users to build financial trustworthiness.",
+            },
+          ],
         },
         { type: "divider" },
       ],
@@ -245,6 +231,62 @@ export const accredit = {
             alt: "KYC Flow",
           }],
         },
+
+        // Loan Types
+        {
+          type: "heading",
+          data: "Loan Types",
+        },
+        {
+          type: "text",
+          data: "With three distinct loan types—payday, personal, and business— users have greater control over their borrowing choices. Each loan type was designed to offer clarity on its purpose, terms, and associated risks, enabling users to make informed decisions aligned with their specific needs.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/accredit/f-8.webp", alt: "Multiple Loan Offerings" }],
+        },
+
+        // Credit
+        {
+          type: "heading",
+          data: "Grow with Credit",
+        },
+        {
+          type: "text",
+          data: "Users can boost their credit scores and unlock enhanced borrowing capabilities by fulfilling their debt repayments, fostering financial trust and rewarding responsible financial behaviour. This aligns with our mission to promote transparent and ethical lending practices.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/accredit/f-11.webp", alt: "Credit & Reward System" }],
+        },
+
+        // Repayments
+        {
+          type: "heading",
+          data: "Repayments",
+        },
+        {
+          type: "text",
+          data: "Reminders across multiple channels, including SMS, email, and in-app notifications increase the likelihood of timely repayments. Furthermore, diverse repayment methods such as USSD, bank transfers, and card auto-debit, cater to the user's individual preferences and ease the repayment process.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/accredit/f-12.webp", alt: "Repayment Flow" }],
+        },
+
+        // Error Handling
+        {
+          type: "heading",
+          data: "Handling Errors",
+        },
+        {
+          type: "text",
+          data: "Beyond designing for ideal scenarios, it is equally important to factor in what happens when something goes wrong. In the absence of an internet connection, by including a method for offline repayment, users are certain they can fulfill their loan obligations anywhere, anytime. This transforms them into confident borrowers who view our platform as a trustworthy and supportive financial partner.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/accredit/f-13.webp", alt: "Late Repayments" }],
+        },
         { type: "divider" },
       ],
     },
@@ -252,6 +294,22 @@ export const accredit = {
       id: "learnings",
       header: "Learnings",
       content: [
+        {
+          type: "heading",
+          data: "Going forward",
+        },
+        {
+          type: "text",
+          data: "As the product evolves following go-to-market and user needs get more and more complex, a few possible next steps to consider are:",
+        },
+        {
+          type: "list",
+          data: [
+            { label: "Credit Report", value: "Increase borrowing power of users across other platforms on request to access, in line with the Credit Reporting Act 2017." },
+            { label: "Customer Internal Dashboard", value: "Implement back-office loan management system to replace rigid white label software in use currently." },
+            { label: "Collaborations", value: " Explore partnerships with financial institutions to offer diverse financial products to users such as BNPL and savings accounts." },
+          ]
+        },
         {
           type: "heading",
           data: "Key Takeaways",

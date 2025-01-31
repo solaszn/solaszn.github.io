@@ -4,31 +4,22 @@ import ChatButton from "../components/chatButton.astro";
 ---
 
 <Layout>
-  <main class="pt-24">
-    <div class="content">
-      <div class="profile">
-          <img src="assets/avatar.png" alt="">
-          <div>
-              <h3>Feyisola Olawuyi</h3>
-              <div>@solaszn</div>
-          </div>
-      </div>
+  <main class="pt-28 pb-32">
+    <div class="grid lg:grid-cols-9">
+        <div class="lg:col-span-4">
+            <div class="flex h-[360px]  bg-[#AEAEAE]/15 justify-center items-center">
+                <span class="opacity-50 no select-none">Video goes here..</span>
+            </div>
+        </div>
 
-      <div class="info bio-2">
-          <div class="subtitle-2">Contact me</div>
-          <div class="text">
-              <p>Want to discuss a project or opportunity? Book a meeting <a href="https://cal.com/solaszn"
-                      target="_blank" class="link">here.</a></p>
-              <p>Looking to connect with amazing people and open to random conversations on <span
-                      class="highlight">[fill the blanks]</span>. Reach me on..</p>
-              <p class="connect">
-                  <a class="link" href="mailto:olawuyisola20@gmail.com">Email</a>
-                  <a class="link" target="_blank" href="https://linkedin.com/in/solaszn">Linkedin</a>
-                  <a class="link" target="_blank" href="https://t.me/solaszn">Telegram</a>
-              </p>
-              <p class="italics">Danke.</p>
-          </div>
-      </div>
-  </div>
+        <div class="lg:col-start-6 lg:col-span-4 space-y-5 opacity-85 font-medium leading-relaxed">
+            <div class="opacity-100 text-2xl pb-4">...</div>
+            <div>Have a project? Book a meeting</div>
+            <div>I’m interested in connecting with amazing people. If my work interests you, there’s a 93% chance you’re one of them. Feel free to book a call, if you have a topic in mind or not; open to random conversations as well.</div>
+            <div>Reach me on email olawuyisola20 [at] gmail</div>
+            <div>Danke!</div>
+            <ChatButton/>
+        </div>
+    </div>
   </main>
 </Layout>

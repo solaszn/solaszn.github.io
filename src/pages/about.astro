@@ -17,11 +17,11 @@ const artists = ["/artists/bigob.webp", "/artists/jacobbanks.webp", "/artists/te
           <div class="activity-card bg-[#2EC94F] sm:col-span-3">
             <div class="p-4 flex flex-col h-full justify-between">
               <div class="lowercase !text-black font-semibold">listening to</div>
-              <div class="bg-black/10 w-8/12 rounded-lg h-10"></div>
+              <div class="loader w-8/12 rounded-lg h-10"></div>
               <div class="flex -space-x-3 lg:hover:space-x-0.5">
                 {
                   artists.map((artist, index) => (
-                    <Image width="40" height="40" src={artist} alt={`${artist.toUpperCase}`} loading="eager" class:list={["shrink-0 rounded-full border-2 size-10", index === 0 ? "border-white" : "border-black"]} style={`z-index: ${50-index*10}`} />
+                    <Image width="40" height="40" src={artist} alt={`${artist.toUpperCase}`} loading="eager" class:list={["shrink-0 rounded-full border-2 size-10 transition-any smooth", index === 0 ? "border-white" : "border-black"]} style={`z-index: ${50-index*10}`} />
                   ))
                 }
               </div>
@@ -71,7 +71,7 @@ const artists = ["/artists/bigob.webp", "/artists/jacobbanks.webp", "/artists/te
           like furniture or buildings. (PS: I wanted to be an architect)
         </div>
         <div>Have something in common? <a class="underline opacity-100" href="/contact">Let’s talk</a></div>
-        <!-- <MusicProfile /> -->
+        <MusicProfile />
       </div>
     </div>
   </main>

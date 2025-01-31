@@ -5,7 +5,13 @@ import MusicProfile from "../components/musicProfile.astro";
 import { Icon } from "astro-icon/components";
 import Image from "astro/components/Image.astro";
 
-const artists = ["/artists/bigob.webp", "/artists/jacobbanks.webp", "/artists/tems.webp", "/artists/blkodyssy.webp", "/artists/masego.webp"];
+const artists = [
+  { name: "Obongjayar", image: "/artists/bigob.webp"},
+  { name: "Jacob Banks", image: "artists/jacobbanks.webp"},
+  { name: "Tems", image: "/artists/tems.webp"},
+  { name: "BLK ODYSSY", image: "/artists/blkodyssy.webp"},
+  { name: "Masego", image: "/artists/masego.webp"},
+]
 ---
 
 <Layout>
@@ -15,16 +21,9 @@ const artists = ["/artists/bigob.webp", "/artists/jacobbanks.webp", "/artists/te
         <div class="font-bold mb-8">At the moment, I'm ..</div>
         <div class="grid sm:grid-cols-7 gap-8">
           <div class="activity-card bg-[#2EC94F] sm:col-span-3">
-            <div class="p-4 flex flex-col h-full justify-between">
+            <div class="relative p-4">
               <div class="lowercase !text-black font-semibold">listening to</div>
-              <div class="loader w-8/12 rounded-lg h-10"></div>
-              <div class="flex -space-x-3 lg:hover:space-x-0.5">
-                {
-                  artists.map((artist, index) => (
-                    <Image width="40" height="40" src={artist} alt={`${artist.toUpperCase}`} loading="eager" class:list={["shrink-0 rounded-full border-2 size-10 transition-any smooth", index === 0 ? "border-white" : "border-black"]} style={`z-index: ${50-index*10}`} />
-                  ))
-                }
-              </div>
+              <MusicProfile />
             </div>
           </div>
 
@@ -62,22 +61,17 @@ const artists = ["/artists/bigob.webp", "/artists/jacobbanks.webp", "/artists/te
             <a target="_blank" href="https://drive.google.com/file/d/1i6HI6u8eUSnKqpk5Go6FNOWhBe5TN7zJ/view">3-min video</a>
           </span> where I go over my background.
         </div>
-        <div>
-          Currently, I do cool stuff at ****.  However in the future, I would like to retire to a hilltop lined with trees, a clear view when watching the sunset - first I have to afford it.
-        </div>
+        <div>Currently, I do cool stuff at ****.  However in the future, I would like to retire to a hilltop lined with trees, a clear view when watching the sunset - first I have to afford it.</div>
         <div>
           In my free time, you can find me reading fiction, exercising or watching <span><Icon name="youtube" class="text-red-600 inline-block w-6 h-6 pb-0.5" /></span> The Office YouTube channel. Fun
           fact, I <span class="underline opacity-100"><a target="_blank" href="https://x.com/solaszn/status/1531102663303217154?s=20">trained my left-handwriting</a></span> and sometimes I sketch stuff
           like furniture or buildings. (PS: I wanted to be an architect)
         </div>
         <div>Have something in common? <a class="underline opacity-100" href="/contact">Let’s talk</a></div>
-        <MusicProfile />
       </div>
     </div>
   </main>
 </Layout>
-
-
 
 <style>
   .activity-card {

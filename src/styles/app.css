@@ -92,3 +92,32 @@ svg, path {
     background-size: 500% 0;
   }
 }
+
+.sound-bar {
+  @apply w-[3px] bg-black rounded;
+}
+@keyframes lineWave1 {
+  0% {
+    height: 2px;
+  }
+  100% {
+    height: 14px;
+  }
+}
+
+@keyframes lineWave2 {
+  0% {
+    height: 4px;
+  }
+  100% {
+    height: 18px;
+  }
+}
+
+.lineWave1 {
+  animation: lineWave1 infinite alternate;
+}
+
+.lineWave2 {
+  animation: lineWave2 infinite alternate;
+}

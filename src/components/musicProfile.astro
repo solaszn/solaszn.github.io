@@ -1,96 +1,110 @@
 ---
 import Image from "astro/components/Image.astro";
 
-// import { fetch } from "node-fetch";
-
-// Fetch the profile page
-const response = await fetch("https://volt.fm/solaszn?time_frame=short");
-const html = await response.text();
-
-// Parse the HTML to extract the "Now Playing" and "Top Artists" data
-const nowPlaying = extractNowPlaying(html);
-const topArtists = extractTopArtists(html);
-
-// Helper function to extract the "Now Playing" data
-function extractNowPlaying(html: string) {
-  const nowPlayingRegex = /<div class="theme-bg-primary[^>]*>[\s\S]*?<div class="group\/track-player-overlay[^>]*style="background-image:url\(([^)]+)\)[\s\S]*?<a href="([^"]+)"[^>]*>([^<]+)<\/a>[\s\S]*?<a href="([^"]+)"[^>]*>([^<]+)<\/a>/;
-  const match = html.match(nowPlayingRegex);
-
-  if (match) {
-    return {
-      song: match[3].trim(),
-      songLink: match[2].trim(),
-      artist: match[5].trim(),
-      artistLink: match[4].trim(),
-      coverArt: match[1].trim(),
-    };
-  }
-  return null;
-}
-
-// Helper function to extract the "Top Artists" data
-function extractTopArtists(html: string) {
-  const topArtistsRegex = /<a href="\/artist\/[^"]+"[^>]*>[\s\S]*?<img src="([^"]+)"[^>]*>[\s\S]*?<span class="external-text">([^<]+)<\/span>/g;
-  const matches = [...html.matchAll(topArtistsRegex)];
-
-  return matches.slice(0, 10).map((match) => ({
-    name: match[2].trim(),
-    image: match[1].trim(),
-  }));
-}
+let nowPlaying = null;
+let topArtists = [
+  { name: "Obongjayar", image: "/artists/bigob.webp" },
+  { name: "Jacob Banks", image: "/artists/jacobbanks.webp" },
+  { name: "Tems", image: "/artists/tems.webp" },
+  { name: "BLK ODYSSY", image: "/artists/blkodyssy.webp" },
+  { name: "Masego", image: "/artists/masego.webp" },
+];
 ---
 
-<div>
-  <h1>Now Playing</h1>
-  {
-    nowPlaying ? (
-      <div id="now-playing">
-        <Image src={nowPlaying.coverArt} alt="Cover Art" width="100" height="100" />
-        <p>
-          <strong>Song:</strong> <a href={`https://volt.fm${nowPlaying.songLink}`}>{nowPlaying.song}</a>
-          <br />
-          <strong>Artist:</strong> <a href={`https://volt.fm${nowPlaying.artistLink}`}>{nowPlaying.artist}</a>
-        </p>
-      </div>
-    ) : (
-      <p>No song is currently playing.</p>
-    )
-  }
+<div class="pt-5">
+  <!-- Now Playing Section -->
+  <div id="sound-wave"></div>
+  <div id="now-playing" class="grid grid-cols-[48px_1fr] gap-4 items-center mb-6">
+    <div class="loader size-12 rounded"></div>
+    <div>
+      <p class="loader h-4 w-40 mb-2"></p>
+      <p class="loader h-4 w-32"></p>
+    </div>
+  </div>
 
-  <h1>Top Artists</h1>
-  <ul>
+  <!-- Top Artists Section -->
+  <div id="top-artists" class="flex flex-nowrap overflow-hidden -space-x-3 lg:hover:space-x-0.5">
     {
       topArtists.map((artist, index) => (
-        <li>
-          <Image src={artist.image} alt={artist.name} width="50" height="50" />
-          <span>{artist.name}</span>
-        </li>
+        <Image
+          width="40"
+          height="40"
+          src={artist.image}
+          alt={`${artist.name.toUpperCase}`}
+          loading="eager"
+          class:list={["shrink-0 rounded-full border-2 size-10 transition-any smooth", index === 0 ? "border-white" : "border-black"]}
+          style={`z-index: ${50 - index * 10}`}
+        />
       ))
     }
-  </ul>
+  </div>
 </div>
 
 <script>
-  // Refresh the "Now Playing" section every 10 minutes
-  setInterval(async () => {
-    const response = await fetch("https://volt.fm/solaszn?time_frame=short");
-    const data = await response.json();
+  const apiEndpoint = "/api/music-profile";
+  async function fetchMusicProfile() {
+    try {
+      const response = await fetch(`${apiEndpoint}`);
+      if (!response.ok) {
+        console.error("Failed to fetch music profile data.");
+        return;
+      }
 
-    const nowPlayingDiv = document.getElementById("now-playing");
-    // console.log ("Now Playing: ", data.nowPlaying)
+      const { nowPlaying: nowPlayingData, topArtists: topArtistsData } = await response.json();
 
-    if (data.nowPlaying && nowPlayingDiv) {
-      nowPlayingDiv.innerHTML = `
-            <div>
-              <img src="${data.nowPlaying.coverArt}" alt="Cover Art" width="100" height="100" />
-              <p>
-                <strong>Song:</strong> <a href="${data.nowPlaying.songLink}">${data.nowPlaying.song}</a><br />
-                <strong>Artist:</strong> <a href="${data.nowPlaying.artistLink}">${data.nowPlaying.artist}</a>
-              </p>
-            </div>
-          `;
-    } else if (nowPlayingDiv) {
-      nowPlayingDiv.innerHTML = "<p>No song is currently playing.</p>";
+      // Update Now Playing
+      const nowPlayingElement = document.getElementById("now-playing");
+      const soundWaveElement = document.getElementById("sound-wave");
+      if (nowPlayingData && nowPlayingElement) {
+        nowPlayingElement.innerHTML = `
+          <div class="size-12 rounded overflow-hidden">
+            <Image src="${nowPlayingData.coverArt}" width="48" height="48" alt="Cover Art" class="w-full h-full object-cover" />
+          </div>
+          <div class="text-sm !text-black w-full overflow-hidden">
+            <p class="font-semibold truncate"><a href="https://volt.fm${nowPlayingData.songLink}" target="_blank">${nowPlayingData.song}</a></p>
+            <p><a href="https://volt.fm${nowPlayingData.artistLink}" target="_blank">${nowPlayingData.artist}</a></p>
+          </div>
+        `;
+
+        if (soundWaveElement) {
+          soundWaveElement.innerHTML = `
+            <div class="absolute top-0 right-0 h-8 m-4 flex items-center justify-end gap-[2px]">
+              <div class="sound-bar lineWave1" style="animation-duration: 0.4s"></div>
+              <div class="sound-bar lineWave2" style="animation-duration: 0.5s"></div>
+              <div class="sound-bar lineWave1" style="animation-duration: 0.6s"></div>
+              <div class="sound-bar lineWave2" style="animation-duration: 0.7s"></div>
+              <div class="sound-bar lineWave1" style="animation-duration: 0.8s"></div>
+              <div class="sound-bar lineWave2" style="animation-duration: 0.9s"></div>
+            </div>`;
+        }
+      } else if (nowPlayingElement) {
+        nowPlayingElement.innerHTML = `<p class="text-sm flex items-center font-medium text-nowrap h-12 !text-black w-full">No song is currently playing.</p>`;
+      }
+
+      // Update Top Artists
+      const topArtistsElement = document.getElementById("top-artists");
+      if (topArtistsData && topArtistsElement) {
+        topArtistsElement.innerHTML = topArtistsData
+          .slice(0, 6)
+          .map(
+            (artist: any, index: number) => `
+              <div class="flex -space-x-3 lg:hover:space-x-0.5 transition-any">
+                  <Image width="40" height="40" loading="lazy" src="${artist.image}" alt="${artist.name}" class="shrink-0 rounded-full border-2 size-10 transition-all ${index === 0 ? "border-white" : "border-black"}" style="z-index: ${50 - index * 10}" />
+              </div>
+            `
+          )
+          .join("");
+      } else if (topArtistsElement) {
+        topArtistsElement.innerHTML = "<p>No top artists found.</p>";
+      }
+    } catch (error) {
+      console.error("Error fetching music profile:", error);
     }
-  }, 600000); // 10 minutes
+  }
+
+  window.addEventListener("load", () => {
+    setTimeout(fetchMusicProfile, 300);
+  });
+  window.addEventListener("astro:after-swap", fetchMusicProfile);
+  document.addEventListener("astro:after-swap", fetchMusicProfile);
 </script>

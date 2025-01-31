@@ -79,3 +79,45 @@ svg, path {
 .slow {
   transition-duration: 1000ms;
 }
+
+.loader {
+  background: linear-gradient(to right, #0A0A0A00 20%, #0A0A0A20 40%, #0A0A0A00 60%), #0A0A0A26;
+  background-size: 100% 500px;
+  background-repeat: repeat-y;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-size: 500% 0;
+  }
+}
+
+.sound-bar {
+  @apply w-[3px] bg-black rounded;
+}
+@keyframes lineWave1 {
+  0% {
+    height: 2px;
+  }
+  100% {
+    height: 14px;
+  }
+}
+
+@keyframes lineWave2 {
+  0% {
+    height: 4px;
+  }
+  100% {
+    height: 18px;
+  }
+}
+
+.lineWave1 {
+  animation: lineWave1 infinite alternate;
+}
+
+.lineWave2 {
+  animation: lineWave2 infinite alternate;
+}

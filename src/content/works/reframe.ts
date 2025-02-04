@@ -68,7 +68,7 @@ export const reframe = {
         },
         {
           type: "quote",
-          data: "\"How can we make it easier and seamless for teams to quickly research hundreds of data points on people and companies without leaving our platform?\"",
+          data: "\"How can we make it easier and seamless for teams to quickly research hundreds of data points on people and companies in a few clicks?\"",
         },
         {
           type: "heading",
@@ -88,7 +88,7 @@ export const reframe = {
         },
         {
           type: "text",
-          data: "Analyzing the competitive landscape, we identified several companies offering similar data solutions. Instead of competing directly, we focused on differentiation by creating a suite of tools designed for data-heavy teams.",
+          data: "Analyzing the competitive landscape, we identified several companies offering similar data solutions. Instead of competing directly, we focused on differentiating our product by offering best-in-class innovative features designed for data-heavy teams.",
         },
         {
           type: "image",
@@ -100,7 +100,7 @@ export const reframe = {
         },
         {
           type: "text",
-          data: "To ensure we stayed true to the customers painpoints throughout the process, we used real-world scenarios and test cases as guiding anchors. This frmework helped sharpen and influence our decision making, putting users front and center by design. This also helped shape the product by catering to the evolving needs of active customers while also considering potential teams we could pitch to.",
+          data: "In an effort to stay true to the customers painpoints throughout the process, we used real-world scenarios and test cases as guiding anchors. This frmework helped sharpen and influence our decision making, putting users front and center by design. This also helped shape the product by catering to the evolving needs of active customers while also considering potential teams we could pitch to.",
         },
         {
           type: "image",
@@ -110,25 +110,82 @@ export const reframe = {
       ],
     },
     {
-      id: "design-to-code",
+      id: "Design to Code",
       header: "Design to Code",
       content: [
-        { type: "heading", data: "Ideation and Prototyping" },
+        { type: "heading", data: "Ideating v1" },
         {
           type: "text",
-          data: "Based on common use cases, I explored multiple solutions, such as streamlined workflows and better data visualization. Prototypes included prompt boxes, landing pages, and enhanced onboarding flows.",
-        },
-        {
-          type: "heading",
-          data: "Development Workflow",
-        },
-        {
-          type: "text",
-          data: "Starting from designs, I implemented components using Tailwind, React, and internal design tokens. Accessibility benchmarks were prioritized, ensuring seamless collaboration across design and engineering.",
+          data: "With a clear vision of what we wanted to build, we focused on aligning the product interactions and identifying areas for improvement. This meant redesigning most components and pages from scratch. To move quickly, we started from the basics. I used sketches as low stakes prototype to explore layout ideas of the onboarding and core app module.",
         },
         {
           type: "image",
-          data: [{ src: "/reframe/design-dev-workflow.webp", alt: "Design to Development Workflow" }],
+          data: [{ src: "/reframe/f-3.webp", alt: "Layout Ideations - Onboarding" }],
+        },
+        {
+          type: "heading",
+          data: "Applying Atomic Design Principles",
+        },
+        {
+          type: "text",
+          data: "Our internal design system, Jenga (Unnamed), aligned with existing components in the codebase for efficiency. Using atomic design as a mental model, we broke down pages into a collection of smaller, reusable components. A system of functioning parts working together. This helped us structure everything from foundational styles like color and typography to complex UI elements like the prompt box.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/f-n.webp", alt: "Components collage view" }],
+        },
+        {
+          type: "heading",
+          data: "Iteration: Prompt Box",
+        },
+        {
+          type: "text",
+          data: "The prompt box is where users interact with AI agents, so we aimed to make it as intuitive as possible. As a relatively new concept in interaction design, we learned through trial and error. The initial version featured minimal elements, including a panel for quick suggestions. Over time, we refined it by adding an attach button, markdown formatting and a visibility selector to improve usability.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/f-n.webp", alt: "Prompt Box Iterations" }],
+        },
+        {
+          type: "heading",
+          data: "Usability Testing",
+        },
+        {
+          type: "text",
+          data: "With Maze, we conducted usability testing sessions over a two-week period, uncovering insights, identified pain points and which improvements to prioritize - quick wins or potential gems.",
+        },
+        {
+          type: "stat-grid",
+          data: [
+            { label: "total participants", value: "12" },
+            { label: "success rate", value: "74%" },
+            { label: "avg duration", value: "12s" },
+            { label: "misclick rate", value: "32.7%" },
+          ]
+        },
+        {
+          type: "heading",
+          data: "Balancing customer and business goals",
+        },
+        {
+          type: "text",
+          data: "As seen in the video below, users were allowed to interact with the prompt box and understand how best to engineer prompts. But initially, users had to sign up before seeing any prompt results, creating friction. To address this, I redesigned the landing page to include predefined “try out” prompts that displayed results without requiring sign-up. This approach allowed users to experience the product before committing, leading to higher conversions at no extra cost to the business.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/f-n.webp", alt: "Landing Page Demo" }],
+        },
+        {
+          type: "heading",
+          data: "Canvas → Frontend",
+        },
+        {
+          type: "text",
+          data: "As design engineer, my role involved translating designs into functional code. I would share high-fidelity prototypes for feedback, then move on to implement updates using React, Next.js, Tailwind, GraphQL, and SCSS. With our robust library of utility and animation classes, I could efficiently write JSX code and create pull requests. For each PR, there would be automated checks of performance, acessibility, dark mode, and QA benchmarks then it would be reviewed by two teammates before merging into staging for internal testing and demo calls.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/f-n.webp", alt: "Design Engineering Workflow" }],
         },
         { type: "divider" },
       ],

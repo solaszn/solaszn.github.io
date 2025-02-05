@@ -35,16 +35,12 @@ export const reframe = {
           data: "For our main product Reframe AI, we had already developed and launched a product suite that helped top teams at Empowerly and JLL streamline data research with agentic AI workflows. We integrated AI agents into dataframes within a spreadsheet-like interface, allowing customers to automate data enrichment and qualification. \"A spreadsheet that fills itself\" - a competitors tagline",
         },
         {
-          type: "image",
-          data: [{ src: "/reframe/f-2.webp", alt: "Data Frame And Entity Recognition" }],
+          type: "video",
+          data: [{ src: "/reframe/f-6.mp4", poster: "/reframe/f-6.webp", alt: "Reframe AI Forms - Video" }],
         },
         {
           type: "text",
           data: "Beyond this, we also built a system that let clients sync their data realtime into a dataframe and run automated workflows to refine it. Reframe AI Forms, seamlessly integrated with customer stack and existing tools, feeding form submissions directly into dataframes to trigger advanced workflows. Collectively, we managed to take this feature from prototype to production in just three weeks; faster than teams at Notion Forms and Asana Forms.",
-        },
-        {
-          type: "video",
-          data: [{ img_src: "/reframe/data-frame.webp", alt: "Reframe AI Forms - Video" }],
         },
         { type: "divider" },
       ],
@@ -60,7 +56,7 @@ export const reframe = {
         },
         {
           type: "image",
-          data: [{ src: "/reframe/js.webp", alt: "How people used the product" }],
+          data: [{ src: "/reframe/f-8.webp", alt: "hkja" }],
         },
         {
           type: "text",
@@ -78,10 +74,11 @@ export const reframe = {
           type: "text",
           data: "To ensure we were going in the right direction, we identified and segmented key customer factions based on how they engaged with the product. This helped us pinpoint opportunities, competitive gaps, and areas for quick wins. We prioritized users whose problems closely aligned with our solution, ensuring that the product’s value would be immediately clear - the Aha! moment; upon using it.",
         },
-        {
-          type: "image",
-          data: [{ src: "/reframe/audience.webp", alt: "Target Audience Segmentation" }],
-        },
+        // List of user types
+        // {
+        //   type: "image",
+        //   data: [{ src: "/reframe/audience.webp", alt: "Target Audience Segmentation" }],
+        // },
         {
           type: "heading",
           data: "Market Research - Competitors?",
@@ -102,10 +99,10 @@ export const reframe = {
           type: "text",
           data: "In an effort to stay true to the customers painpoints throughout the process, we used real-world scenarios and test cases as guiding anchors. This frmework helped sharpen and influence our decision making, putting users front and center by design. This also helped shape the product by catering to the evolving needs of active customers while also considering potential teams we could pitch to.",
         },
-        {
-          type: "image",
-          data: [{ src: "/reframe/scenarios.webp", alt: "User examples" }],
-        },
+        // {
+        //   type: "image",
+        //   data: [{ src: "/reframe/scenarios.webp", alt: "User examples" }],
+        // },
         { type: "divider" },
       ],
     },
@@ -173,7 +170,7 @@ export const reframe = {
         },
         {
           type: "video",
-          data: [{ vid_src: "/reframe/f-5.mp4", img_src: "/reframe/f-5.webp", alt: "Landing Page v1 Demo" }],
+          data: [{ src: "/reframe/f-5.mp4", poster: "/reframe/f-5.webp", alt: "Landing Page v1 Demo" }],
         },
         {
           type: "heading",
@@ -198,6 +195,10 @@ export const reframe = {
         {
           type: "text",
           data: "With insights from users, we built Reframe V2, a platform offering an AI agent ecosystem tailored to enterprise needs. This included tools for developers to create, deploy, and monetize AI agents, providing new revenue streams.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/reframe/f-7.webp", alt: "bbx" }],
         },
         {
           type: "heading",

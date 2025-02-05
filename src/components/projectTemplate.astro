@@ -81,8 +81,8 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
                     <div class="pb-8">
                       <video
                         width="1280"
-                        poster={item.data[0].img_src}
-                        src={item.data[0].vid_src}
+                        poster={item.data[0].poster}
+                        src={item.data[0].src}
                         title={item.data[0].alt}
                         controls
                         loop

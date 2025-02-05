@@ -30,7 +30,6 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
   </div>
 
   <div class="px-6 sm:px-10 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
-
     <!-- Content Anchor && Quick Scroll -->
     <div class="hidden sm:block sm:col-span-2 lg:col-span-3 space-y-5 sticky top-[80px] max-h-screen overflow-y-auto">
       <div class="uppercase text-2xl font-semibold">{name}</div>
@@ -58,7 +57,7 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
                 case "stat-grid":
                   return <StatGrid data={item.data} />;
                 case "card":
-                  return <Card data={item.data}/>;
+                  return <Card data={item.data} />;
                 case "image":
                   return (
                     <div class="pb-8">
@@ -69,16 +68,32 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
                 case "image-split":
                   return (
                     <div class="pb-2 flex flex-col sm:flex-row gap-8">
-                      {item.data.map((image:any) => (
+                      {item.data.map((image: any) => (
                         <div class="">
                           <Image width="630" height="720" src={image.src} alt={image.alt} class="bg-[#AEAEAE]/15" loading={image.loading && "eager"} />
                           <div class="pt-2 pb-6 text-[13px] font-medium opacity-70 uppercase w-full text-center">{image.alt}</div>
                         </div>
                       ))}
                     </div>
-                  )
+                  );
+                case "video":
+                  return (
+                    <div class="pb-8">
+                      <video
+                        width="1280"
+                        poster={item.data[0].poster}
+                        src={item.data[0].src}
+                        title={item.data[0].alt}
+                        controls
+                        loop
+                        muted
+                        playsinline
+                        class="autoplay-video"
+                      />
+                    </div>
+                  );
                 case "list":
-                  return <List data={item.data}/>;
+                  return <List data={item.data} />;
                 case "divider":
                   return <Divider />;
                 default:
@@ -94,3 +109,32 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
   </div>
   <BackToTop />
 </main>
+
+
+<script>
+  function autoPlayVideo() {
+    const videos = document.querySelectorAll(".autoplay-video");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (entry.target instanceof HTMLVideoElement) {
+              entry.target.play();
+            }
+          } else {
+            if (entry.target instanceof HTMLVideoElement) {
+              entry.target.pause();
+            }
+          }
+        });
+      },
+      { threshold: 0.5 } // Adjust threshold as needed
+    );
+
+    videos.forEach((video) => observer.observe(video));
+  };
+
+  document.addEventListener("DOMContentLoaded", autoPlayVideo);
+  document.addEventListener("astro:after-swap", autoPlayVideo);
+</script>

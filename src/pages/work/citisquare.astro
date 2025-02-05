@@ -6,8 +6,74 @@ import ProjectTemplate from "../../components/projectTemplate.astro";
 
 const { name, description, images, sections } = citisquare as any;
 const accent = "bg-blue-50"
+
+// Get the password from environment variables
+const pagePassword = import.meta.env.WORK_SECRET_KEY;
+
+// Check if the password is correct
+const isPasswordCorrect =
+  Astro.request.headers.get('x-password') === pagePassword ||
+  Astro.request.headers.get('cookie')?.includes('pagePassword=' + pagePassword);
 ---
 
 <ProjectLayout title={`${name} | Feyisola Olawuyi`} description={description}>
-  <ProjectTemplate name={name} accent={accent} images={images} sections={sections}/>
-</Layout>
+  {isPasswordCorrect ? (
+    <ProjectTemplate name={name} accent={accent} images={images} sections={sections} />
+  ) : (
+    <div class="flex flex-col w-full h-[calc(100vh-300px)] items-center gap-y-8 justify-start pt-80">
+      <p class="">Access denied. Please provide the correct password.</p>
+      <form id="passwordForm" method="POST" class="" action={Astro.url.pathname}>
+        <label for="password">Enter Password:</label>
+        <input type="password" id="password" name="password" class="border" required />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  )}
+</ProjectLayout>
+
+<script>
+  // Handle form submission
+  document.getElementById('passwordForm')?.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
+    const passwordValue = passwordInput?.value;
+
+    // Fetch the page content with the password as a header
+    const response = await fetch(window.location.pathname, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-password': passwordValue, // Send the password as a custom header
+      },
+    });
+
+    if (response.ok) {
+      // If the password is correct, store it in sessionStorage and reload the page
+      sessionStorage.setItem('pagePassword', passwordValue);
+      window.location.reload(); // Reload the page to render the protected content
+      document.cookie = `pagePassword=${passwordInput}; path=/; max-age=3600`; // Expires in 1 hour
+    } else {
+      alert('Incorrect password. Please try again.');
+    }
+  });
+
+  // Check if the password is already stored in sessionStorage
+  const storedPassword = sessionStorage.getItem('pagePassword');
+  if (storedPassword) {
+    // Automatically send the stored password to unlock the content
+    fetch(window.location.pathname, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-password': storedPassword,
+      },
+    }).then((response) => {
+      if (!response.ok) {
+        // If the stored password is incorrect, clear it and show the form
+        sessionStorage.removeItem('pagePassword');
+        window.location.reload();
+      }
+    });
+  }
+</script>

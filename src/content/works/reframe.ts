@@ -75,6 +75,14 @@ export const reframe = {
           data: "To ensure we were going in the right direction, we identified and segmented key customer factions based on how they engaged with the product. This helped us pinpoint opportunities, competitive gaps, and areas for quick wins. We prioritized users whose problems closely aligned with our solution, ensuring that the product’s value would be immediately clear - the Aha! moment; upon using it.",
         },
         // List of user types
+        {
+          type: "list",
+          data: [
+            { label: "Sales Teams", value: "Need to improve efficiency of sales pipeline and qualifying leads" },
+            { label: "Founders & Investors", value: "To improve decision making and get rich data on prospective partners or hires" },
+            { label: "Researchers & Analysts", value: "To carry out days worth of research and data enrichment in less than a minute" },
+          ]
+        },
         // {
         //   type: "image",
         //   data: [{ src: "/reframe/audience.webp", alt: "Target Audience Segmentation" }],
@@ -87,10 +95,10 @@ export const reframe = {
           type: "text",
           data: "Analyzing the competitive landscape, we identified several companies offering similar data solutions. Instead of competing directly, we focused on differentiating our product by offering best-in-class innovative features designed for data-heavy teams.",
         },
-        {
-          type: "image",
-          data: [{ src: "/reframe/competitors.webp", alt: "Competitors" }],
-        },
+        // {
+        //   type: "image",
+        //   data: [{ src: "/reframe/competitors.webp", alt: "Competitors" }],
+        // },
         {
           type: "heading",
           data: "Integrating User Scenarios",
@@ -141,7 +149,7 @@ export const reframe = {
         },
         {
           type: "image",
-          data: [{ src: "/reframe/f-n.webp", alt: "Prompt Box Iterations" }],
+          data: [{ src: "/reframe/f-11.webp", alt: "Prompt Box Iterations" }],
         },
         {
           type: "heading",
@@ -188,8 +196,8 @@ export const reframe = {
       ],
     },
     {
-      id: "v2-release",
-      header: "Reframe V2 Release",
+      id: "Feature Releases",
+      header: "Feature Releases",
       content: [
         { type: "heading", data: "Expanding the Ecosystem" },
         {
@@ -210,7 +218,11 @@ export const reframe = {
         },
         {
           type: "image",
-          data: [{ src: "/reframe/v2-nav.webp", alt: "V2 Navigation" }],
+          data: [{ src: "/reframe/f-9.webp", alt: "V2 Navigation" }],
+        },
+        {
+          type: "text",
+          data: "The updated platform introduced seamless two-level navigation for better user experience, making it easier for users to explore and deploy agents.",
         },
         { type: "divider" },
       ],
@@ -219,6 +231,10 @@ export const reframe = {
       id: "learnings",
       header: "Learnings",
       content: [
+        {
+          type: "image",
+          data: [{ src: "/reframe/f-10.webp", alt: "V2 Navigation" }],
+        },
         { type: "heading", data: "Key Takeaways" },
         {
           type: "text",

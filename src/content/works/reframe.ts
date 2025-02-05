@@ -20,7 +20,7 @@ export const reframe = {
         {
           type: "info-grid",
           data: [
-            { label: "ROLE", value: "Founding Design Engineer (Employee #5)" },
+            { label: "ROLE", value: `Design Engineer  ${"<br/>"} (Employee #5)` },
             { label: "DURATION", value: "Full time (11 tech years)" },
             { label: "What I Did", value: ["User Experience Design", "Usability Testing", "Frontend Implementation", "Branding"] },
           ],
@@ -44,7 +44,7 @@ export const reframe = {
         },
         {
           type: "video",
-          data: [{ src: "/reframe/data-frame.webp", alt: "Reframe AI Forms - Video" }],
+          data: [{ img_src: "/reframe/data-frame.webp", alt: "Reframe AI Forms - Video" }],
         },
         { type: "divider" },
       ],
@@ -132,7 +132,7 @@ export const reframe = {
         },
         {
           type: "image",
-          data: [{ src: "/reframe/f-n.webp", alt: "Components collage view" }],
+          data: [{ src: "/reframe/f-4.webp", alt: "Design System Components" }],
         },
         {
           type: "heading",
@@ -172,8 +172,8 @@ export const reframe = {
           data: "As seen in the video below, users were allowed to interact with the prompt box and understand how best to engineer prompts. But initially, users had to sign up before seeing any prompt results, creating friction. To address this, I redesigned the landing page to include predefined “try out” prompts that displayed results without requiring sign-up. This approach allowed users to experience the product before committing, leading to higher conversions at no extra cost to the business.",
         },
         {
-          type: "image",
-          data: [{ src: "/reframe/f-n.webp", alt: "Landing Page Demo" }],
+          type: "video",
+          data: [{ vid_src: "/reframe/f-5.mp4", img_src: "/reframe/f-5.webp", alt: "Landing Page v1 Demo" }],
         },
         {
           type: "heading",
@@ -183,10 +183,10 @@ export const reframe = {
           type: "text",
           data: "As design engineer, my role involved translating designs into functional code. I would share high-fidelity prototypes for feedback, then move on to implement updates using React, Next.js, Tailwind, GraphQL, and SCSS. With our robust library of utility and animation classes, I could efficiently write JSX code and create pull requests. For each PR, there would be automated checks of performance, acessibility, dark mode, and QA benchmarks then it would be reviewed by two teammates before merging into staging for internal testing and demo calls.",
         },
-        {
-          type: "image",
-          data: [{ src: "/reframe/f-n.webp", alt: "Design Engineering Workflow" }],
-        },
+        // {
+        //   type: "image",
+        //   data: [{ src: "/reframe/f-n.webp", alt: "Design Engineering Workflow" }],
+        // },
         { type: "divider" },
       ],
     },

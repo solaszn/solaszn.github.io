@@ -32,7 +32,7 @@ let topArtists = [
           src={artist.image}
           alt={`${artist.name.toUpperCase}`}
           loading="eager"
-          class:list={["shrink-0 rounded-full border-2 size-10 transition-any smooth", index === 0 ? "border-white" : "border-black"]}
+          class:list={["shrink-0 rounded-full border-2 size-10 transition-any smooth loader", index === 0 ? "border-white" : "border-black"]}
           style={`z-index: ${50 - index * 10}`}
         />
       ))
@@ -89,7 +89,7 @@ let topArtists = [
           .map(
             (artist: any, index: number) => `
               <div class="flex -space-x-3 lg:hover:space-x-0.5 transition-any">
-                  <Image width="40" height="40" loading="lazy" src="${artist.image}" alt="${artist.name}" class="shrink-0 rounded-full border-2 size-10 transition-all ${index === 0 ? "border-white" : "border-black"}" style="z-index: ${50 - index * 10}" />
+                  <Image width="40" height="40" loading="lazy" src="${artist.image}" alt="${artist.name}" class="shrink-0 rounded-full border-2 size-10 transition-all loader ${index === 0 ? "border-white" : "border-black"}" style="z-index: ${50 - index * 10}" />
               </div>
             `
           )

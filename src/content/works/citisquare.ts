@@ -9,7 +9,7 @@ export const citisquare = {
   // case study content
   sections: [
     {
-      id: "overview",
+      id: "background",
       header: "Overview",
       content: [
         {
@@ -18,38 +18,119 @@ export const citisquare = {
         },
         {
           type: "text",
-          data: "Loans are as old as banks. They are risky but come in handy a lot of the time. They help support the average business during bad months and help individuals to overcome dire situations. In today’s world, quick instant loans are the go-to as more people turn to digital solutions for their financial needs and with Accredit, we are taking a new approach to elevate the consumer lending experience.",
+          data: "As people build wealth, they often invest in real estate or spend on travel and vacation experiences. Citisquare Africa operates at this intersection, offering premium property opportunities and curated vacation packages in high-demand cities like Lagos and Abuja. I was commissioned to redesign the landing page and improve the e-commerce experience to drive stronger engagement and increase conversions.",
         },
         {
           type: "info-grid",
           data: [
-            { label: "ROLE", value: "Design Lead" },
-            { label: "DURATION", value: "6 weeks" },
-            { label: "WHAT I DID", value: ["Branding", "Product Strategy", "Mobile Application Design", "Usability Testing"] },
+            { label: "ROLE", value: "Design Contractor" },
+            { label: "DURATION", value: "4 weeks" },
+            { label: "WHAT I DID", value: ["User Research", "Heuristic Evaluation", "Web Design", "Component Library", "Usability Testing"] },
           ],
         },
-        { type: "divider" },
-      ],
-    },
-    {
-      id: "evaluation-and-research",
-      header: "Evaluation and Research",
-      content: [
         {
+          type: "image",
+          data: [{ src: "/citisquare/f-1.webp", alt: "Leading showcase", loading: "eager" }],
+        },
+         {
           type: "heading",
-          data: "The challenge",
+          data: "The Problem",
         },
         {
           type: "text",
-          data: "There has been a significant shift in the ease of getting loans thanks to private lenders however this of course came with its problems. Several loan apps use unethical practices, impose exorbitant interest rates and are not self-serviceable.",
+          data: "Citisquare already had a customer-facing website used to promote exclusive deals on real estate and vacation packages. However, conversion rate from visitors to new signups was as low as 6% and dropoff rates were high. SEO ranking also was a huge concern as the messaging lacked clarity and content did not align well with user intent, which affected discoverability and relevance.",
+        },
+        {
+          type: "quote",
+          data: "\“What are the root causes of user friction and low conversion?\”",
         },
         { type: "divider" },
       ],
     },
     {
-      id: "design-and-iteration",
-      header: "Design and Iteration",
+      id: "research",
+      header: "Research",
       content: [
+        {
+          type: "text",
+          data: "To understand why the current site performed poorly, I reviewed customer complaints and conducted interviews with a dozen uninformed users, alongside product owners. Feedback from two key stakeholders closely connected to customers were also included.",
+        },
+        {
+          type: "stat-grid",
+          data: [
+            { label: "user interviews", value: "4" },
+            { label: "live chat complaints", value: "6" },
+            { label: "survey responses", value: "20" },
+            { label: "stakeholder feedback", value: "2+" },
+          ]
+        },
+        {
+          type: "text",
+          data: "Patterns quickly emerged. Users struggled with clarity, trust signals, and navigation. Many of the friction points were tied directly to experience gaps rather than the offerings themselves. These findings confirmed that a strong UX overhaul could significantly improve outcomes.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/citisquare/f-2.webp", alt: "Feedback on stickies" }],
+        },
+        {
+          type: "heading",
+          data: "Heuristic Evaluation",
+        },
+        {
+          type: "text",
+          data: "Going through the site myself, I was able to identify some loose ends and multiple usability issues that could impact user satisfaction. These ranged from unclear calls-to-action and inconsistent navigation to weak error handling and visual inconsistencies.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/citisquare/f-3.webp", alt: "Design Audit Findings" }],
+        },
+        {
+          type: "text",
+          data: "To strengthen the case, I mapped these findings against Jakob Nielsen’s usability heuristics. This helped connect user frustrations to recognized usability principles and demonstrated how these gaps directly impacted conversions. Presenting this structured analysis created alignment with stakeholders and clarified the path forward.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/citisquare/f-4.webp", alt: "Usability Heuristics Graph" }],
+        },
+        {
+          type: "heading",
+          data: "Persona",
+        },
+        {
+          type: "text",
+          data: "To stay grounded needs of in real users, I developed a persona based on our ideal customer profile. This included their motivations, frustrations, expectations, and goals; be it searching for investment property or planning a vacation. This framework ensured that every design decision supported user intent and improved overall satisfaction.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/citisquare/f-5.webp", alt: "User Persona" }],
+        },
+        { type: "divider" },
+      ],
+    },
+    {
+      id: "interaction-design",
+      header: "Interaction Design",
+      content: [
+        {
+          type: "text",
+          data: "The existing information architecture was largely functional, so I focused on improving the shopping flow and redesigning the landing experience. Stakeholders preferred to retain the current hero section style, so I redesigned components using the existing design tokens while refining interactions to include hover, active, and error states. I built a structured component library to ensure consistency and scalable design implementation.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/citisquare/f-11.webp", alt: "Feedback on stickies" }],
+        },
+        {
+          type: "heading",
+          data: "Heuristic Evaluation",
+        },
+        {
+          type: "text",
+          data: "Patterns quickly emerged.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/citisquare/f-11.webp", alt: "Feedback on stickies" }],
+        },
         { type: "heading", data: "Planning" },
         {
           type: "text",

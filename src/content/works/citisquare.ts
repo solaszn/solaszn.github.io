@@ -117,39 +117,72 @@ export const citisquare = {
         },
         {
           type: "image",
-          data: [{ src: "/citisquare/f-11.webp", alt: "Feedback on stickies" }],
+          data: [{ src: "/citisquare/f-6.webp", alt: "Component Design" }],
         },
         {
           type: "heading",
-          data: "Heuristic Evaluation",
+          data: "Landing Page",
         },
         {
           type: "text",
-          data: "Patterns quickly emerged.",
+          data: "The landing page serves as the storefront and first impression. It needed to communicate value instantly and guide visitors clearly toward action. I restructured sections to ensure each block had a clear purpose. Subtle motion and refined interactions were introduced to enhance clarity without distraction. After multiple iterations, the final layout improved hierarchy, storytelling, and user flow.",
+        },
+        {
+          type: "video",
+          data: [{ src: "/citisquare/f-7.mp4", alt: "Landing Page Prototype" }],
+        },
+        {
+          type: "heading",
+          data: "Product Details Page",
+        },
+        {
+          type: "text",
+          data: "Each property or vacation package needed a focused, persuasive experience. The previous product page lacked obvious action cues and clear hierarchy. I redesigned the product page using a familiar e-commerce pattern, placing primary calls-to-action prominently on the right to align with common mental models. Within the first week of launch, this page recorded a 67% engagement rate. I also provided post-launch guidelines covering image quality, resolution standards, and content structure to maintain consistency.",
+        },
+        {
+          type: "video",
+          data: [{ src: "/citisquare/f-8.mp4", alt: "Product Details Page Prototype" }],
+        },
+        {
+          type: "heading",
+          data: "Usability Testing",
+        },
+        {
+          type: "text",
+          data: "Using Maze and Microsoft Clarity, I ran A/B tests on the account-creation splash modal. I conducted unmoderated testing with session recordings and tested three variations across different user groups. The results revealed a clear preference for discount-driven messaging. These insights informed the final implementation and strengthened conversion performance.",
         },
         {
           type: "image",
-          data: [{ src: "/citisquare/f-11.webp", alt: "Feedback on stickies" }],
+          data: [{ src: "/citisquare/f-9.webp", alt: "A/B Testing for Conversion" }],
         },
-        { type: "heading", data: "Planning" },
-        {
-          type: "text",
-          data: "Moving forward, I outlined the end-to-end structure of the product by organizing pages, features, and functionalities logically in a workflow. This ensures newbies like Jamal will be able to navigate the app seamlessly and without confusion. The result of this process was a view of the application that was not only holistic but also meticulous in detail.",
-        },
-        { type: "divider" },
-      ],
-    },
-    {
-      id: "final-solution",
-      header: "Final Solution",
-      content: [
         {
           type: "heading",
-          data: "Solution",
+          data: "Development Handoff",
         },
         {
           type: "text",
-          data: "The design process embraces a human-centered approach, this means intensive research, conducting usability testing and iterating on feedback to ensure a pleasant experience every time users come on the app. This all contributed to a product with a user-friendly interface, strong visual appeal, and seamless functionality that resonates with borrowers.",
+          data: "After handoff, I conducted a design audit during development and identified several inconsistencies in implementation, particularly with mobile responsiveness. Issues ranged from card layouts and image sizing to overflow handling and spacing inconsistencies. I worked closely with the engineer, adding annotations and detailed specifications within the design file to ensure accurate, pixel-precise execution.",
+        },
+        {
+          type: "image",
+          data: [{ src: "/citisquare/f-10.webp", alt: "Annotated Handoff" }],
+        },
+        {
+          type: "heading",
+          data: "Result and Impact",
+        },
+        {
+          type: "text",
+          data: "Within 2 weeks of launching the site redesign, the impact on our customers was evident with better  engagement rates and backlinks from popular social media apps due to increase usage of quick link sharing. The site ranked top in name search and first page in related search for SEO showing clear alignment between content and user intent.",
+        },
+        {
+          type: "stat-grid",
+          data: [
+            { label: "engagement rate", value: "78%" },
+            { label: "scroll depth", value: "90%" },
+            { label: "avg. time spent", value: ">2mins" },
+            { label: "organic social", value: "66.7%" },
+          ]
         },
         { type: "divider" },
       ],
@@ -164,7 +197,15 @@ export const citisquare = {
         },
         {
           type: "text",
-          data: "This project came with its challenges but thorough research and testing informed the design process and ensured a product that meets the users needs. The branding and design system establishes trust and recognition. Together with the user experience and focus on error handling, Accredit is set on a path for sustainable growth in the market.",
+          data: "Although this was a short engagement, it reinforced several important lessons:",
+        },
+        {
+          type: "list",
+          data: [
+            { label: "Applying Usability Principles", value: "Evaluating design decisions and measuring against golden standard to visualize and better understand the impact of poor usability on site performance." },
+            { label: "Stakeholder Collaboration", value: "Collaboration with in-house teams in a way that carries everyone along, considering the product history, finding common ground and ensuring product is maintained as intended." },
+            { label: "Creating Lasting Impact", value: "Contributing to a company's design culture in a scalable way despite shorter engagement periods. Ensuring adoption of better practices for better designs." },
+          ]
         },
       ],
     },

@@ -1,36 +1,32 @@
 ---
 import HeaderLink from "./headerlink.astro";
 import ThemeToggle from "./themeToggle.astro";
+import MobileMenuToggle from "./mobileMenuToggle.astro";
+import MobileMenuOverlay from "./mobileMenuOverlay.astro";
 import { Icon } from "astro-icon/components";
-
-const linksCase = "relative flex items-center h-11 dark:md:bg-black/50 md:bg-white/25 md:backdrop-blur rounded";
-const pageLinks = ""
-
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-// const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
-<div class="fixed z-[100] top-4 w-full">
-  <header class="w-full mx-auto">
-    <nav class="flex w-full items-center px-2 gap-2 md:justify-between overflow-hidden rounded dark:bg-black/50 bg-white/25 md:!bg-transparent backdrop-blur md:backdrop-blur-none">
-      <a href={"/"} aria-label="Go to Home page" class=`home-logo relative ${linksCase} md:px-2 group gap-1.5` transition:persist>
-        <div class="rounded-full w-5 p-1 mt-0.5 group-hover:rotate-180 transition-any delay-200 slow">
-          <Icon name="asterisk" class="w-3.5 h-3.5 mb-[1px]" />
-        </div>
-        <div class="hidden md:block font-semibold text-lg">feyisola</div>
+<div class="fixed z-[100] top-0 w-full">
+  <header id="site-header" class="w-full px-6 py-4 transition-any">
+    <nav class="flex items-center justify-between gap-2 max-w-[1600px] mx-auto">
+      <a href={"/"} aria-label="Go to Home page" class="home-logo group flex items-center justify-center size-10 rounded-md bg-tertiary transition-any" transition:persist>
+        <Icon name="szn" class="w-5 h-5 text-primary group-hover:rotate-180 transition-any delay-200 slow" />
       </a>
-      <div class="md:hidden w-1 h-5 ml-1 border-l border-black/20 dark:border-white/40"></div>
-      <div class={`w-full md:w-fit md:px-2 ${linksCase}`}>
-        <div class="flex gap-3 md:gap-6 items-center overflow-hidden">
-          <HeaderLink href="/about" data="About" class:list={pageLinks}/>
-          <HeaderLink href="/contact" data="Contact" class:list={pageLinks}/>
-          <HeaderLink href="/posts" data="Writing" class:list={pageLinks}/>
-          <div class="toggle-theme absolute right-0 md:relative pr-2 md:pr-0">
-            <ThemeToggle/>
-          </div>
-        </div>
-      </div> 
+
+      <div class="hidden min-[769px]:flex items-center gap-1 bg-surface rounded-md h-10 px-1.5">
+        <HeaderLink href="/" data="Home" />
+        <HeaderLink href="/about" data="About" />
+        <HeaderLink href="/playground" data="Playground" />
+        <HeaderLink href="/posts" data="Writing" />
+        <HeaderLink href="/contact" data="Contact" />
+        <div class="w-px h-[15px] bg-secondary/30 mx-1"></div>
+        <ThemeToggle />
+      </div>
+
+      <MobileMenuToggle />
     </nav>
   </header>
+
+  <!-- Sibling of <header>, not nested inside it - see mobileMenuOverlay.astro for why. -->
+  <MobileMenuOverlay />
 </div>

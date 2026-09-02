@@ -1,0 +1,148 @@
+---
+import ThemeSegmentedControl from "./themeSegmentedControl.astro";
+
+const navItems = [
+  { href: "/", data: "Home" },
+  { href: "/about", data: "About" },
+  { href: "/playground", data: "Playground" },
+  { href: "/posts", data: "Writing" },
+  { href: "/contact", data: "Contact" },
+];
+
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
+const subpath = pathname.match(/[^\/]+/g);
+---
+
+<!--
+  This has to live outside <header> (as a sibling, not a descendant) rather than inside it
+  alongside the toggle button. Backdrop-filter on a descendant of an element that itself
+  toggles a backdrop-filter/tinted-background class (the header does, see mobileMenuToggle's
+  script below) samples the wrong compositing layer and silently renders no blur at all -
+  confirmed by moving this element around the DOM until the blur came back. Being a sibling
+  of <header> is enough; it doesn't need to leave the fixed z-[100] wrapper entirely.
+
+  Color per spec: dark theme -> #bfbfbf @ 8%, all other themes -> #fbfbfb @ 40%. Implemented
+  with Tailwind's `dark:` variant since `.dark` is still toggled on <html> alongside
+  `data-theme` (see theme.ts) specifically so this kind of binary override keeps working.
+  `w-screen h-dvh` (on top of `inset-0`) makes sure it's always the full screen, including on
+  mobile browsers where the address bar changes the "real" viewport height.
+-->
+<div
+  id="mobile-menu-overlay"
+  data-menu-overlay
+  class="min-[769px]:hidden fixed inset-0 w-screen h-dvh z-[90] opacity-0 invisible pointer-events-none transition-opacity duration-300 backdrop-blur-[12px] bg-[rgba(251,251,251,0.4)] dark:bg-[rgba(191,191,191,0.08)]"
+>
+  <!--
+    Menu surface. `origin-top-right` anchors the scale animation to (roughly) where the
+    toggle button sits, so the card visually grows out of / shrinks back into the button.
+    Adjust `duration-300` here to change the open/close speed - the nav-link click handler
+    below waits for this same duration before navigating, so keep them in sync.
+    Positioned with left/right (not left-1/2 + translate-x) so it stretches to fill the
+    screen width minus a fixed 12px margin on each side, rather than a capped/static width.
+  -->
+  <div
+    id="mobile-menu-surface"
+    data-menu-surface
+    class="absolute left-[12px] right-[12px] top-3.5 origin-top-right scale-0 opacity-0 transition-all duration-300 ease-out bg-surface border border-tertiary rounded-[10px] shadow-[0px_4px_44px_8px_rgba(0,0,0,0.12)] overflow-hidden"
+  >
+    <nav class="flex flex-col items-center gap-3 pt-16 pb-8 px-6">
+      {navItems.map((item) => {
+        const isActive = item.href === pathname || item.href === "/" + (subpath?.[0] || "");
+        return (
+          <a
+            href={item.href}
+            aria-label={`Link to ${item.data} Page`}
+            class:list={[
+              "w-full max-w-[200px] text-center px-5 py-2.5 rounded-md text-base font-medium transition-any",
+              isActive ? "bg-tertiary text-primary font-semibold" : "text-secondary hover:text-primary",
+            ]}
+          >
+            {item.data}
+          </a>
+        );
+      })}
+    </nav>
+
+    <div class="flex justify-center pb-6">
+      <ThemeSegmentedControl />
+    </div>
+  </div>
+</div>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  const CLOSE_MS = 300; // matches #mobile-menu-surface's `duration-300`
+
+  function initializeMobileMenu() {
+    const toggle = document.getElementById("mobile-menu-toggle");
+    const overlay = document.getElementById("mobile-menu-overlay");
+    const surface = document.getElementById("mobile-menu-surface");
+    const header = document.getElementById("site-header");
+    if (!toggle || !overlay || !surface) return;
+
+    const bars = {
+      top: toggle.querySelector<HTMLElement>('[data-bar="top"]'),
+      mid: toggle.querySelector<HTMLElement>('[data-bar="mid"]'),
+      bottom: toggle.querySelector<HTMLElement>('[data-bar="bottom"]'),
+    };
+
+    let isOpen = false;
+
+    const setOpen = (open: boolean) => {
+      isOpen = open;
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+
+      // Hamburger -> X morph: rotate the top/bottom bars into an X, fade the middle bar out.
+      bars.top?.classList.toggle("translate-y-[4px]", open);
+      bars.top?.classList.toggle("rotate-45", open);
+      bars.bottom?.classList.toggle("-translate-y-[5px]", open);
+      bars.bottom?.classList.toggle("-rotate-45", open);
+      bars.mid?.classList.toggle("opacity-0", open);
+
+      overlay.classList.toggle("opacity-0", !open);
+      overlay.classList.toggle("invisible", !open);
+      overlay.classList.toggle("pointer-events-none", !open);
+
+      surface.classList.toggle("scale-0", !open);
+      surface.classList.toggle("opacity-0", !open);
+
+      // Header tint is otherwise off - only show it while the menu is open. Note: no
+      // backdrop-blur here (see the comment atop this file for why that broke the overlay's
+      // own blur) - a plain tint is enough to keep the toggle button legible.
+      header?.classList.toggle("bg-surface/70", open);
+
+      document.documentElement.classList.toggle("overflow-hidden", open);
+    };
+
+    toggle.addEventListener("click", () => setOpen(!isOpen));
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) setOpen(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen) setOpen(false);
+    });
+    overlay.querySelectorAll<HTMLAnchorElement>("nav a").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let modified clicks behave natively
+        const href = link.getAttribute("href");
+        if (!href) return;
+        e.preventDefault();
+        setOpen(false);
+        // Play the same close animation as everywhere else, then navigate once it's done -
+        // this is what keeps the exit as smooth as the entry instead of cutting it off.
+        setTimeout(() => navigate(href), CLOSE_MS);
+      });
+    });
+
+    // Close automatically if the viewport grows past small-tablet size (desktop nav takes over above 768px)
+    const desktopQuery = window.matchMedia("(min-width: 769px)");
+    desktopQuery.addEventListener("change", (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initializeMobileMenu);
+  document.addEventListener("astro:after-swap", initializeMobileMenu);
+</script>

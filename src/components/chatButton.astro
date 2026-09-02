@@ -1,54 +1,19 @@
 ---
 // chatButton.astro
-import { Icon } from "astro-icon/components";
+import Button from "./button.astro";
 
 const meetButtons = "hover:bg-offwhite dark:hover:bg-neutral-700";
 ---
 
-<div class="dropdown">
-  <button class="dropdown-btn flex justify-center items-center gap-4 lg:gap-2 font-medium bg-neutral-800 dark:bg-white text-white dark:text-black px-4 py-2 lg:p-2 rounded transition-any smooth">
-    <div>Let's talk</div>
-    <Icon name="chevron-down" class="icon w-4 h-4 transition-any" />
-  </button>
+<div class="dropdown relative">
+  <Button as="button" icon="chevron-down" class="dropdown-btn !bg-tertiary !text-primary">
+    Let's chat
+  </Button>
   <div class="dropdown-content font-medium bg-neutral-100 dark:bg-neutral-800 border border-black/5 dark:border-white/10 shadow-lg">
     <a aria-label="Quick call with Feyisola" href="https://cal.com/solaszn/quick-call?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2`>Brief call (15m)</a>
     <a aria-label="Deep dive call with Feyisola" href="https://cal.com/solaszn/secret?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2`>Deep dive (45m)</a>
   </div>
 </div>
-
-<style>
-  .dropdown {
-    position: relative;
-  }
-
-  .dropdown-content {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 20;
-    margin-top: 8px;
-    padding: 8px;
-    min-width: 160px;
-
-    transform: translateY(-10px);
-    opacity: 0;
-    visibility: hidden;
-
-    /* Spring-like transition */
-    transition:
-      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-      opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-      visibility 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .dropdown-content.show {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
-
-
-</style>
 
 <script>
   function initializeDropdowns() {

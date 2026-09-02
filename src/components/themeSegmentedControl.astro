@@ -1,0 +1,79 @@
+---
+import { Icon } from "astro-icon/components";
+
+const themes = ["light", "dark", "clear", "bloom"] as const;
+---
+
+<div class="relative inline-flex items-center p-1 bg-surface border border-tertiary rounded-md" id="theme-segmented" data-theme-segmented>
+  <!--
+    Sliding active-tile indicator.
+    TWEAK THE ANIMATION HERE: adjust `duration-300 ease-out` below (Tailwind transition
+    utilities) to change how the indicator glides between tiles. The actual position is
+    set at runtime via `transform: translateX(...)` in the script below.
+  -->
+  <div
+    id="theme-segmented-indicator"
+    class="absolute top-1 bottom-1 left-1 rounded bg-tertiary transition-transform duration-300 ease-out pointer-events-none"
+    data-theme-indicator
+  >
+  </div>
+
+  {themes.map((theme) => (
+    <button
+      type="button"
+      data-theme-option={theme}
+      class="relative z-10 flex items-center justify-center px-4 py-1.5 rounded text-primary transition-any"
+      aria-label={`Switch to ${theme} theme`}
+      title={theme}
+    >
+      <Icon name={theme} class="w-5 h-5" />
+    </button>
+  ))}
+</div>
+
+<script>
+  import { THEMES, getStoredTheme, applyTheme } from "../scripts/theme";
+
+  function initializeThemeSegmentedControl() {
+    const root = document.getElementById("theme-segmented");
+    const clone = root?.cloneNode(true) as HTMLElement | undefined;
+    if (clone && root?.parentNode) {
+      root.parentNode.replaceChild(clone, root);
+    }
+    if (!clone) return;
+
+    const indicator = clone.querySelector<HTMLElement>("[data-theme-indicator]");
+    const options = Array.from(clone.querySelectorAll<HTMLButtonElement>("[data-theme-option]"));
+
+    const moveIndicatorTo = (theme: string) => {
+      const index = options.findIndex((opt) => opt.dataset.themeOption === theme);
+      const target = options[index];
+      if (!indicator || !target) return;
+      // Position/size the indicator to exactly match the active tile's box, then let the
+      // `transition-transform` class above animate the move between tiles.
+      indicator.style.width = `${target.offsetWidth}px`;
+      indicator.style.height = `${target.offsetHeight}px`;
+      indicator.style.transform = `translateX(${target.offsetLeft - target.parentElement!.clientLeft - 4}px)`;
+    };
+
+    const syncUI = (theme: string) => moveIndicatorTo((THEMES as readonly string[]).includes(theme) ? theme : "dark");
+
+    // Set initial position without animating in from 0
+    indicator?.classList.add("!duration-0");
+    syncUI(getStoredTheme());
+    requestAnimationFrame(() => indicator?.classList.remove("!duration-0"));
+
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        const theme = option.dataset.themeOption as (typeof THEMES)[number];
+        applyTheme(theme);
+      });
+    });
+
+    window.addEventListener("themechange", ((e: CustomEvent) => syncUI(e.detail.theme)) as EventListener);
+    window.addEventListener("resize", () => syncUI(document.documentElement.dataset.theme || "dark"));
+  }
+
+  document.addEventListener("DOMContentLoaded", initializeThemeSegmentedControl);
+  document.addEventListener("astro:after-swap", initializeThemeSegmentedControl);
+</script>

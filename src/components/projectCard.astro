@@ -16,7 +16,7 @@ interface Props extends HTMLAttributes<"a"> {
 const { name, href, class: className, tags, description, images, isAboveFold = false, ...props } = Astro.props;
 ---
 
-<a href={href} class:list={[className, "group relative flex flex-col justify-between min-h-[520px] text-black w-full scroll-snap-center"]} {...props}>
+<a href={href} class:list={[className, "group relative flex flex-col min-h-[280px] justify-between text-black w-full rounded-md overflow-hidden scroll-snap-center"]} {...props}>
   <!-- Progress Bar -->
   <div class="progress-bar flex gap-3 px-6 pt-5 z-10">
     {

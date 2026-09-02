@@ -9,9 +9,14 @@ export default {
 			colors: {
 				black: "#0A0A0A",
 				offwhite: "#ECECEC",
+				surface: "var(--bg-surface)",
+				primary: "var(--fg-primary)",
+				secondary: "var(--fg-secondary)",
+				tertiary: "var(--fg-tertiary)",
 			},
 			fontFamily: {
-        sans: ["Plus Jakarta Sans", ...defaultTheme.fontFamily.sans],
+        sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        display: ["Bowlby One", ...defaultTheme.fontFamily.serif],
       },
 		},
 	},

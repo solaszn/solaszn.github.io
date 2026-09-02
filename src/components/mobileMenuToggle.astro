@@ -1,0 +1,15 @@
+<!-- Hamburger / close toggle button. Morphs via the three bars below, no icon-swap needed. -->
+<button
+  id="mobile-menu-toggle"
+  data-mobile-menu-toggle
+  class="relative z-[95] min-[769px]:hidden flex items-center justify-center size-10 rounded-md bg-tertiary transition-any"
+  aria-label="Open menu"
+  aria-expanded="false"
+  aria-controls="mobile-menu-overlay"
+>
+  <div class="relative flex flex-col justify-between w-4 h-3" data-hamburger>
+    <span class="block h-[2px] w-full bg-primary rounded-full transition-any" data-bar="top"></span>
+    <span class="block h-[2px] w-full bg-primary rounded-full transition-any" data-bar="mid"></span>
+    <span class="block h-[2px] w-full bg-primary rounded-full transition-any" data-bar="bottom"></span>
+  </div>
+</button>

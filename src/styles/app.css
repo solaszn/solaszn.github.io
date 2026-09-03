@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  /* Theme tokens (default: dark) */
-  --bg-surface: #1b1a19;
-  --fg-primary: #fbfbfb;
-  --fg-secondary: #bfbfbf;
-  --fg-tertiary: #2b2b2b;
+  /* Theme tokens (default: light) */
+  --bg-surface: #fbfbfb;
+  --fg-primary: #1b1a19;
+  --fg-secondary: #444444;
+  --fg-tertiary: #ebebeb;
 }
 
 :root[data-theme="dark"] {

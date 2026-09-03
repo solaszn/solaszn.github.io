@@ -3,7 +3,7 @@ export type Theme = (typeof THEMES)[number];
 
 export function getStoredTheme(): Theme {
   const stored = localStorage.getItem("theme");
-  return (THEMES as readonly string[]).includes(stored ?? "") ? (stored as Theme) : "dark";
+  return (THEMES as readonly string[]).includes(stored ?? "") ? (stored as Theme) : "light";
 }
 
 export function applyTheme(theme: Theme) {

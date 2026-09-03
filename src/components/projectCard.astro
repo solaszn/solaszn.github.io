@@ -17,7 +17,7 @@ interface Props extends HTMLAttributes<"a"> {
 const { name, href, class: className, tags, description, images, isAboveFold = false, hasCaseStudy = true, ...props } = Astro.props;
 ---
 
-<a href={href} data-has-case-study={hasCaseStudy} class:list={[className, "group relative flex flex-col min-h-[280px] justify-between text-black w-full rounded-md overflow-hidden scroll-snap-center"]} {...props}>
+<a href={href} data-has-case-study={hasCaseStudy} class:list={[className, "group relative flex flex-col min-h-[520px] lg:min-h-[280px] justify-between text-black w-full rounded-md overflow-hidden scroll-snap-center"]} {...props}>
   {!hasCaseStudy && (
     <div data-case-study-tooltip class="fixed top-0 left-0 z-50 flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-black/85 text-white text-xs font-medium whitespace-nowrap pointer-events-none opacity-0 -translate-y-1/2 transition-opacity duration-150">
       <span>🔒</span>

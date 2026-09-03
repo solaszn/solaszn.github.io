@@ -13,7 +13,7 @@ const cardAspect = "aspect-[3/2] lg:aspect-[581/360] xl:aspect-auto xl:h-full";
 ---
 
 <Layout footer={false}>
-  <main class="!max-w-none !mx-0 pt-24 px-6 pb-6 xl:h-screen xl:overflow-hidden xl:max-h-[1200px]">
+  <main class="!max-w-none !mx-0 pt-24 px-5 lg:px-6 pb-6 xl:h-screen xl:overflow-hidden xl:max-h-[1200px]">
     <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[375px_1fr] gap-5 xl:h-full xl:max-h-[calc(100vh-96px)]">
       <!-- Bio: sticky only in the 1024-1279px gap, where it would otherwise scroll away under
            the taller (stacked, single-column) project grid. Explicitly reverted at xl+, where
@@ -22,7 +22,7 @@ const cardAspect = "aspect-[3/2] lg:aspect-[581/360] xl:aspect-auto xl:h-full";
            where the grid naturally sits. -->
       <div class="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start xl:static xl:top-auto xl:self-auto">
         <div class="size-[120px] rounded overflow-hidden shrink-0">
-          <Image src={avatar} width={120} height={120} alt="Feyisola Olawuyi" class="object-cover w-full h-full" loading="eager" />
+          <Image src={avatar} width={120} height={120} densities={[1, 2, 3]} alt="Feyisola Olawuyi" class="object-cover w-full h-full" loading="eager" />
         </div>
 
         <h1 class="font-display leading-[1.1] text-[42px] sm:text-[60px] text-primary">FEYISOLA<br />OLAWUYI</h1>

@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
+
+interface Props extends HTMLAttributes<"a" | "button"> {
+  as?: "a" | "button";
+  href?: string;
+  icon?: string;
+}
+
+const { as = "a", href, icon = "arrow-right", class: className, ...props } = Astro.props;
+const Tag = as;
+---
+
+<Tag
+  href={as === "a" ? href : undefined}
+  class:list={[
+    "inline-flex items-center gap-3 h-11 px-5 py-2 rounded bg-[#050505] text-white font-medium hover:opacity-90 transition-any",
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+  <Icon name={icon} class="icon size-4 transition-any" />
+</Tag>

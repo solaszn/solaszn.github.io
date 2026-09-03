@@ -2,7 +2,7 @@ export const accredit = {
   // Metadata
   name: "Accredit",
   href: "/work/accredit",
-  tags: ["Finance", "Mobile App"],
+  tags: ["Finance", "Concept App"],
   description: "Designing the brand and product experience of a mobile loan and credit application",
   images: ["/accredit/cover.webp", "/accredit/mockup-1.webp", "/accredit/mockup-2.webp"],
 

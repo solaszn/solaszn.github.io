@@ -1,18 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  --background: #FFFFFF;
-  --text: #0A0A0A;
-  --selectiontext: #FFFFFF;
-  --accent: #262626;
+  /* Theme tokens (default: light) */
+  --bg-surface: #fbfbfb;
+  --fg-primary: #1b1a19;
+  --fg-secondary: #444444;
+  --fg-tertiary: #ebebeb;
 }
 
-:root.dark {
-  /* Dark mode variables */
-  --background: #0A0A0A;
-  --text: #FFFFFF;
-  --selectiontext: #0A0A0A;
-  --accent: #ECECEC;
+:root[data-theme="dark"] {
+  --bg-surface: #1b1a19;
+  --fg-primary: #fbfbfb;
+  --fg-secondary: #bfbfbf;
+  --fg-tertiary: #2b2b2b;
+}
+
+:root[data-theme="light"] {
+  --bg-surface: #fbfbfb;
+  --fg-primary: #1b1a19;
+  --fg-secondary: #444444;
+  --fg-tertiary: #ebebeb;
+}
+
+:root[data-theme="clear"] {
+  --bg-surface: #eff6ff;
+  --fg-primary: #0d3198;
+  --fg-secondary: #294aa8;
+  --fg-tertiary: #d7e1ff;
+}
+
+:root[data-theme="bloom"] {
+  --bg-surface: #f4ffef;
+  --fg-primary: #1a4a05;
+  --fg-secondary: #2b6d0d;
+  --fg-tertiary: #d7efcc;
 }
 
 html {
@@ -24,6 +45,16 @@ html.dark {
   color-scheme: dark;
 }
 
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-theme="light"],
+html[data-theme="clear"],
+html[data-theme="bloom"] {
+  color-scheme: light;
+}
+
 body {
   transition: background-color 0.3s ease;
 }
@@ -33,19 +64,20 @@ html, body {
   width: 100vw;
   height: 100vh;
   font-size: 15px;
+  font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
-  background: var(--background);
-  color: var(--text);
+  background: var(--bg-surface);
+  color: var(--fg-primary);
   cursor: url("/custom-cursor.ico"), default;
   @apply antialiased;
 }
 
 main, header, footer {
-  max-width: 1600px;
+  max-width: 1648px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 24px;
 }
 
 @media (max-width: 640px) {
@@ -55,8 +87,8 @@ main, header, footer {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--selectiontext);
+  background: var(--fg-tertiary);
+  color: var(--fg-primary);
 }
 
 svg, path {
@@ -120,4 +152,86 @@ svg, path {
 
 .lineWave2 {
   animation: lineWave2 infinite alternate;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  margin-top: 8px;
+  padding: 8px;
+  min-width: 160px;
+
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    visibility 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dropdown-content.show {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+/*
+  Theme toggle dial (desktop only - see themeToggle.astro). 4 icons sit evenly spaced on an
+  invisible circle around a hub; the button itself clips overflow, so only whichever icon is
+  currently at the "top" of that circle - dead center of the button - is ever visible. The
+  other 3 sit far enough out on the circle to fall completely outside the button's bounds.
+
+  Each slot's position is driven by the classic "place upright on a circle" transform:
+  rotate(angle) translate(0, -radius) rotate(-angle), where `angle` is that slot's fixed
+  compass position (--slot-angle, one of 0/90/180/270) PLUS the ring's live rotation
+  (--dial-angle, set on .theme-dial and inherited here). Advancing the theme increases
+  --dial-angle by 90deg, sweeping the next slot in from one side and out the other - which is
+  also why the anchor point (`top` below) sits --dial-radius *below* the button's true center:
+  translateY(-radius) at angle 0 needs to land back on that center for the active icon.
+  TWEAK THE ROTATION SPEED/EASING/RADIUS here.
+*/
+.theme-dial {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  --dial-radius: 22px;
+}
+
+.theme-dial-slot {
+  position: absolute;
+  top: calc(50% + var(--dial-radius));
+  left: 50%;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: var(--fg-secondary);
+  opacity: 0.55;
+  transform:
+    rotate(calc(var(--slot-angle) + var(--dial-angle, 0deg)))
+    translateY(calc(-1 * var(--dial-radius)))
+    rotate(calc(-1 * var(--slot-angle) - var(--dial-angle, 0deg)));
+  transition:
+    opacity 200ms ease,
+    color 200ms ease,
+    background-color 300ms ease,
+    transform 500ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.theme-dial-slot[data-dial-slot="0"] { --slot-angle: 0deg; }
+.theme-dial-slot[data-dial-slot="1"] { --slot-angle: 90deg; }
+.theme-dial-slot[data-dial-slot="2"] { --slot-angle: 180deg; }
+.theme-dial-slot[data-dial-slot="3"] { --slot-angle: 270deg; }
+
+.theme-dial-slot[data-active] {
+  color: var(--fg-primary);
+  background-color: var(--fg-tertiary);
+  opacity: 1;
 }

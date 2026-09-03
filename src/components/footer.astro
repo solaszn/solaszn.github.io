@@ -1,24 +1,25 @@
 ---
 import { Icon } from "astro-icon/components"
-import { siteConfig } from "../../site";
 
-const contactLink = "p-2.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-any"
-const resourceLink = "text-black dark:text-white font-semibold"
+const iconLink = "flex items-center justify-center size-8 bg-tertiary text-primary p-1 hover:opacity-80 transition-any"
+const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, "");
+const isHome = pathname === "" || pathname === "/";
 ---
 
-<footer class="mt-16 pb-12">
-  <div class="grid md:grid-cols-2 justify-between">
-    <div class="font-medium max-w-[480px]">
-      <div class="flex gap-4">
-        <a target="_blank" href="https://x.com/solaszn" class={contactLink} aria-label="Feyisola Olawuyi on Twitter/X"><Icon name="twitter-x" class="w-5 h-5"/></a>
-        <a target="_blank" href="https://github.com/solaxzn?tab=overview&from=2024-12-01&to=2024-12-31" class={contactLink} aria-label="Feyisola Olawuyi on Github"><Icon name="github" class="w-5 h-5"/></a>
-        <a target="_blank" href="https://linkedin.com/in/solaszn" class={contactLink} aria-label="Feyisola Olawuyi on Linkedin"><Icon name="linkedin" class="w-5 h-5"/></a>
-        <a target="_blank" href="https://substack.com/@solaszn" class={contactLink} aria-label="Feyisola Olawuyi's Notes"><Icon name="substack" class="w-5 h-5"/></a>
+<div class="lg:m-0 lg:fixed lg:inset-x-0 lg:bottom-0 lg:z-40 lg:pointer-events-none">
+  <div class:list={[isHome ? "mt-6" : "mx-5 py-5 lg:mx-0 lg:py-0", "lg:max-w-[1600px] lg:mx-auto lg:relative"]}>
+    <footer class="!max-w-none !mx-0 !p-0 flex flex-col gap-5 w-fit lg:pointer-events-auto lg:absolute lg:bottom-6 lg:left-6">
+      <div class="flex flex-col gap-1.5 text-sm text-secondary leading-relaxed">
+        <p>&copy;{new Date().getFullYear()}</p>
+        <p>Built with Astro, deployed on Github.</p>
       </div>
 
-      <div class="mt-5 mb-2.5">&copy; {new Date().getFullYear()}  •  {siteConfig.author}</div>
-
-      <div class="font-normal text-black/80 dark:text-white/80">Designed and built by yours truly ✌️. Built with <a href="https://astro.build" class=`${resourceLink}`>Astro</a>, <a href="https://tailwindcss.com/" class=`${resourceLink}`>Tailwind CSS</a>, deployed on <span class={resourceLink}>Github</span>. Typeface is <a href="https://tokotype.github.io/plusjakarta-sans/" class=`${resourceLink}`>Plus Jakarta Sans</a> by Tokotype</div>
-    </div>
+      <div class="flex gap-3.5 items-center">
+        <a target="_blank" href="https://x.com/solaszn" class={iconLink} aria-label="Feyisola Olawuyi on Twitter/X"><Icon name="twitter-x" class="w-5 h-5"/></a>
+        <a target="_blank" href="https://github.com/solaxzn?tab=overview&from=2024-12-01&to=2024-12-31" class={iconLink} aria-label="Feyisola Olawuyi on Github"><Icon name="github" class="w-5 h-5"/></a>
+        <a target="_blank" href="https://linkedin.com/in/solaszn" class={iconLink} aria-label="Feyisola Olawuyi on Linkedin"><Icon name="linkedin" class="w-5 h-5"/></a>
+        <a target="_blank" href="https://substack.com/@solaszn" class={iconLink} aria-label="Feyisola Olawuyi's Notes"><Icon name="substack" class="w-5 h-5"/></a>
+      </div>
+    </footer>
   </div>
-</footer>
+</div>

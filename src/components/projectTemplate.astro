@@ -4,6 +4,7 @@ import Image from "astro/components/Image.astro";
 import SectionLayout from "./sectionLayout.astro";
 import ChatButton from "./chatButton.astro";
 import BackToTop from "./backToTop.astro";
+import Footer from "./footer.astro";
 
 interface Props {
   name: string;
@@ -16,7 +17,7 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
 ---
 
 <main class="!px-0">
-  <div class=`cover-image w-full overflow-hidden pt-16 md:pt-0 h-[300px] md:h-full md:max-h-[280px] ${accent}` transition:name=`${name} Image`>
+  <!-- <div class=`cover-image w-full overflow-hidden pt-28 md:pt-0 h-[340px] md:h-full md:max-h-[280px] ${accent}` transition:name=`${name} Image`>
     <Image
       width="180"
       height="180"
@@ -27,14 +28,14 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
       alt=`Logo anatomy for ${name}`
       transition:persist
     />
-  </div>
+  </div> -->
 
-  <div class="px-6 sm:px-10 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
+  <div class="px-5 lg:px-6 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
     <!-- Content Anchor && Quick Scroll -->
-    <div class="hidden sm:block sm:col-span-2 lg:col-span-3 space-y-5 sticky top-[80px] max-h-screen overflow-y-auto">
-      <div class="uppercase text-2xl font-semibold">{name}</div>
+    <div class="hidden sm:flex sm:col-span-2 lg:col-span-3 flex-col gap-5 sticky top-[80px] max-h-[calc(100vh-100px)] overflow-y-auto">
+      <div class="font-display text-2xl text-primary">{name}</div>
       <SectionLayout sections={sections} />
-      <div class="">This looks like what you need?</div>
+      <div class="text-primary">This looks like what you need?</div>
       <ChatButton />
     </div>
 
@@ -107,6 +108,11 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
       <!-- <div class="h-[500px] w-full"></div> -->
     </div>
   </div>
+
+  <div class="px-6 sm:px-10">
+    <Footer />
+  </div>
+
   <BackToTop />
 </main>
 

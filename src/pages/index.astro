@@ -1,75 +1,85 @@
 ---
-import { referrals } from "../../site";
-import { reframe } from "../content/works/reframe";
 import { accredit } from "../content/works/accredit";
+import { reframe } from "../content/works/reframe";
 import { citisquare } from "../content/works/citisquare";
+import { kuda } from "../content/works/kuda";
 import Card from "../components/projectCard.astro";
+import Footer from "../components/footer.astro";
 import Layout from "../layouts/defaultLayout.astro";
-import ChatButton from "../components/chatButton.astro";
+import { Image } from "astro:assets";
+import avatar from "../../public/avatar.jpg";
+
+const cardAspect = "aspect-[3/2] lg:aspect-[581/360] xl:aspect-auto xl:h-full";
 ---
 
-<Layout>
-  <main class="pt-28">
-    <div class="grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth" style="scroll-snap-type: y mandatory;">
-      <!-- Testimonials & CTA -->
-      <div class="lg:col-span-6 hidden lg:block mt-3">
-        <div class="flex gap-5 mb-10 w-11/12">
-          <div class="w-0.5 h-full min-h-20 bg-black dark:bg-white"></div>
-          <div class="opacity-90">
-            <div class="">"{referrals.reframe.referral}"</div>
-            <div class="mt-1">- {referrals.reframe.author}</div>
-          </div>
+<Layout footer={false}>
+  <main class="!max-w-none !mx-0 pt-24 px-5 lg:px-6 pb-6 xl:h-screen xl:overflow-hidden xl:max-h-[1200px]">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[375px_1fr] gap-5 xl:h-full xl:max-h-[calc(100vh-96px)]">
+      <!-- Bio: sticky only in the 1024-1279px gap, where it would otherwise scroll away under
+           the taller (stacked, single-column) project grid. Explicitly reverted at xl+, where
+           both columns are height-matched and the page doesn't scroll - sticky's `top` offset
+           there would otherwise stack on top of <main>'s own padding and push this down past
+           where the grid naturally sits. -->
+      <div class="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start xl:static xl:top-auto xl:self-auto">
+        <div class="size-[120px] rounded overflow-hidden shrink-0">
+          <Image src={avatar} width={120} height={120} densities={[1, 2, 3]} alt="Feyisola Olawuyi" class="object-cover w-full h-full" loading="eager" />
         </div>
-        <ChatButton />
-      </div>
 
-      <!-- Intro -->
-      <div class="col-span-full md:col-span-6 lg:mb-6">
-        <div class="w-full">
-          <div class="text-[26px] md:text-[32px] font-semibold leading-relaxed">Hey, I'm Feyisola. <br /> A product designer who builds his ideas</div>
-          <div class="mt-5 opacity-90">
-            I obsess about little details that show up on a screen via the interwebs. I design interactions to be intuitive and accessible often bringing them to life in production-quality code. I
-            currently work at Kuda.
-          </div>
+        <h1 class="font-display leading-[1.1] text-[42px] sm:text-[60px] text-primary">FEYISOLA<br />OLAWUYI</h1>
+
+        <div class="text-secondary leading-relaxed space-y-4">
+          <p>I like to obsess, tinker and go down rabbit holes – If only to know why things work the way they do. From everyday things, to especially software. Building trust and soul into screens.</p>
+          <p>Currently doing cool stuff at <span class="text-primary font-medium">Kuda Business</span></p>
         </div>
       </div>
 
-      <!-- Chat button on smaller screens -->
-       <div class="col-span-full lg:hidden mb-6">
-          <ChatButton />
-       </div>
-
-      <!-- Case Studies -->
-      <Card
-        class="sm:col-span-4 bg-green-50"
-        name={accredit.name}
-        href={accredit.href}
-        tags={accredit.tags}
-        description={accredit.description}
-        images={accredit.images}
-        isAboveFold={true}
-        transition:name=`${accredit.name} Image`
-      />
-      <Card
-        class="sm:col-span-4 bg-violet-50"
-        name={reframe.name}
-        href={reframe.href}
-        tags={reframe.tags}
-        description={reframe.description}
-        images={reframe.images}
-        isAboveFold={true}
-        transition:name=`${reframe.name} Image`
-      />
-      <Card
-        class="sm:col-span-4 bg-blue-50"
-        name={citisquare.name}
-        href={citisquare.href}
-        tags={citisquare.tags}
-        description={citisquare.description}
-        images={citisquare.images}
-        isAboveFold={true}
-        transition:name=`${citisquare.name} Image`
-      />
+      <!-- Project grid (border border-red-600 xl:h-[calc(100vh-110px)] xl:overflow-hidden xl:scrollbar-none) -->
+      <div class="grid grid-cols-1 xl:grid-cols-2 xl:grid-rows-2 gap-[30px] ">
+        <Card
+          class={`bg-amber-50 ${cardAspect}`}
+          name={kuda.name}
+          href={kuda.href}
+          tags={kuda.tags}
+          description={kuda.description}
+          images={kuda.images}
+          isAboveFold={true}
+          hasCaseStudy={false}
+          target="_blank"
+          rel="noopener noreferrer"
+        />
+        <Card
+          class={`bg-green-50 ${cardAspect}`}
+          name={accredit.name}
+          href={accredit.href}
+          tags={accredit.tags}
+          description={accredit.description}
+          images={accredit.images}
+          isAboveFold={true}
+          transition:name=`${accredit.name} Image`
+        />
+        <Card
+          class={`bg-violet-50 ${cardAspect}`}
+          name={reframe.name}
+          href={reframe.href}
+          tags={reframe.tags}
+          description={reframe.description}
+          images={reframe.images}
+          isAboveFold={true}
+          transition:name=`${reframe.name} Image`
+        />
+        <Card
+          class={`bg-blue-50 ${cardAspect}`}
+          name={citisquare.name}
+          href={citisquare.href}
+          tags={citisquare.tags}
+          description={citisquare.description}
+          images={citisquare.images}
+          isAboveFold={true}
+          transition:name=`${citisquare.name} Image`
+        />
+      </div>
     </div>
+
+    <Footer />
   </main>
 </Layout>

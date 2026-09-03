@@ -1,5 +1,4 @@
 ---
-import "@fontsource/plus-jakarta-sans"
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
@@ -16,7 +15,7 @@ const { title, description, image = "/opengraph-image.png" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.jpg">
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Feyisola Olawuyi" />
     <title>{title}</title>
@@ -44,12 +43,17 @@ const { title, description, image = "/opengraph-image.png" } = Astro.props;
     <meta name="astro-view-transitions-fallback" content="animate" />
 
     <script is:inline>
-      const theme = localStorage.getItem('theme') ?? 'dark';
-      if (theme === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
-        document.documentElement.classList.add('dark');
+      function applyStoredTheme() {
+        const validThemes = ['dark', 'light', 'clear', 'bloom'];
+        const stored = localStorage.getItem('theme');
+        const theme = validThemes.includes(stored) ? stored : 'light';
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.classList.toggle('dark', theme === 'dark');
       }
+      applyStoredTheme();
+      // Astro's view-transition swap resets <html>'s attributes to match the newly fetched
+      // page (which has no data-theme in its raw source), so re-apply after each swap too.
+      document.addEventListener('astro:after-swap', applyStoredTheme);
     </script>
 
     <script is:inline type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-JBDQB45Z15"></script>

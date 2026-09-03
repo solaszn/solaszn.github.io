@@ -5,8 +5,8 @@ export const siteConfig = {
   url: "https://solaszn.github.io",
   domain: "solaszn.github.io",
   title: "Feyisola Olawuyi's Portfolio",
-  description: "A product designer who builds his ideas.",
-  image: "/opengraph-image.png",
+  description: "Software Designer, Tinkerer",
+  image: "/opengraph-image.jpg",
   favicon: "/favicon.svg",
   manifest: "manifest.json"
 }

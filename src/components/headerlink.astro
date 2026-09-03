@@ -1,10 +1,19 @@
 ---
-import AnimateButton from './animateButton.astro';
-
 const { data, href, class: className, ...props } = Astro.props;
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
-<AnimateButton data={data} href={href} direction="bottom" aria-label={`Link to ${data} Page`} class:list={[className, {'opacity-60 cursor-not-allowed' : isActive, 'hover:opacity-85' : !isActive }, ' p-2 font-medium tracking-tight transition-any']} {...props}/>
+<a
+  href={href}
+  aria-label={`Link to ${data} Page`}
+  class:list={[
+    className,
+    "px-3 py-1 rounded text-base font-medium transition-any",
+    isActive ? "bg-tertiary text-primary font-semibold" : "text-secondary hover:text-primary",
+  ]}
+  {...props}
+>
+  {data}
+</a>

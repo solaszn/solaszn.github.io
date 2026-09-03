@@ -2,6 +2,7 @@
 import { accredit } from "../content/works/accredit";
 import { reframe } from "../content/works/reframe";
 import { citisquare } from "../content/works/citisquare";
+import { kuda } from "../content/works/kuda";
 import Card from "../components/projectCard.astro";
 import Footer from "../components/footer.astro";
 import Layout from "../layouts/defaultLayout.astro";
@@ -12,7 +13,7 @@ const cardAspect = "aspect-[3/2] lg:aspect-[581/360] xl:aspect-auto xl:h-full";
 ---
 
 <Layout footer={false}>
-  <main class="!max-w-none !mx-0 pt-36 sm:pt-24 px-6 pb-6 xl:h-screen xl:overflow-hidden">
+  <main class="!max-w-none !mx-0 pt-24 px-6 pb-6 xl:h-screen xl:overflow-hidden xl:max-h-[1200px]">
     <div class="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[375px_1fr] gap-5 xl:h-full xl:max-h-[calc(100vh-96px)]">
       <!-- Bio: sticky only in the 1024-1279px gap, where it would otherwise scroll away under
            the taller (stacked, single-column) project grid. Explicitly reverted at xl+, where
@@ -34,6 +35,18 @@ const cardAspect = "aspect-[3/2] lg:aspect-[581/360] xl:aspect-auto xl:h-full";
 
       <!-- Project grid (border border-red-600 xl:h-[calc(100vh-110px)] xl:overflow-hidden xl:scrollbar-none) -->
       <div class="grid grid-cols-1 xl:grid-cols-2 xl:grid-rows-2 gap-[30px] ">
+        <Card
+          class={`bg-amber-50 ${cardAspect}`}
+          name={kuda.name}
+          href={kuda.href}
+          tags={kuda.tags}
+          description={kuda.description}
+          images={kuda.images}
+          isAboveFold={true}
+          hasCaseStudy={false}
+          target="_blank"
+          rel="noopener noreferrer"
+        />
         <Card
           class={`bg-green-50 ${cardAspect}`}
           name={accredit.name}

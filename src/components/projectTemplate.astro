@@ -17,7 +17,7 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
 ---
 
 <main class="!px-0">
-  <div class=`cover-image w-full overflow-hidden pt-28 md:pt-0 h-[340px] md:h-full md:max-h-[280px] ${accent}` transition:name=`${name} Image`>
+  <!-- <div class=`cover-image w-full overflow-hidden pt-28 md:pt-0 h-[340px] md:h-full md:max-h-[280px] ${accent}` transition:name=`${name} Image`>
     <Image
       width="180"
       height="180"
@@ -28,9 +28,9 @@ const { name, accent = "bg-neutral-100", images, sections } = Astro.props;
       alt=`Logo anatomy for ${name}`
       transition:persist
     />
-  </div>
+  </div> -->
 
-  <div class="px-6 sm:px-10 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
+  <div class="px-6 pt-20 grid grid-cols-1 sm:grid-cols-8 lg:grid-cols-12 gap-x-8 gap-y-10 transition-any smooth">
     <!-- Content Anchor && Quick Scroll -->
     <div class="hidden sm:flex sm:col-span-2 lg:col-span-3 flex-col gap-5 sticky top-[80px] max-h-[calc(100vh-100px)] overflow-y-auto">
       <div class="font-display text-2xl text-primary">{name}</div>

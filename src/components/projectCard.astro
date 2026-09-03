@@ -11,22 +11,33 @@ interface Props extends HTMLAttributes<"a"> {
   description: string;
   images: string[];
   isAboveFold?: boolean;
+  hasCaseStudy?: boolean;
 }
 
-const { name, href, class: className, tags, description, images, isAboveFold = false, ...props } = Astro.props;
+const { name, href, class: className, tags, description, images, isAboveFold = false, hasCaseStudy = true, ...props } = Astro.props;
 ---
 
-<a href={href} class:list={[className, "group relative flex flex-col min-h-[280px] justify-between text-black w-full rounded-md overflow-hidden scroll-snap-center"]} {...props}>
-  <!-- Progress Bar -->
-  <div class="progress-bar flex gap-3 px-6 pt-5 z-10">
-    {
-      images.map((_, index) => (
-        <div class="h-[5px] w-full rounded-full bg-neutral-600/20 overflow-hidden relative">
-          <div class="animated-bar absolute h-full rounded-full w-0 bg-neutral-600 transition-any duration-[5s] ease-linear" />
-        </div>
-      ))
-    }
-  </div>
+<a href={href} data-has-case-study={hasCaseStudy} class:list={[className, "group relative flex flex-col min-h-[280px] justify-between text-black w-full rounded-md overflow-hidden scroll-snap-center"]} {...props}>
+  {!hasCaseStudy && (
+    <div data-case-study-tooltip class="fixed top-0 left-0 z-50 flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-black/85 text-white text-xs font-medium whitespace-nowrap pointer-events-none opacity-0 -translate-y-1/2 transition-opacity duration-150">
+      <span>🔒</span>
+      <span>No Case Study</span>
+    </div>
+  )}
+  <!-- Progress Bar: only meaningful with more than one image to cycle through, and only ever
+       visible on whichever single card is actively animating (hover on desktop, in-view on
+       mobile) - hidden by default, faded in by the animation script below. -->
+  {images.length > 1 && (
+    <div class="progress-bar flex gap-3 px-6 pt-5 z-10 opacity-0 transition-opacity duration-300">
+      {
+        images.map((_, index) => (
+          <div class="h-[4px] w-full rounded-full bg-neutral-600/20 overflow-hidden relative">
+            <div class="animated-bar absolute h-full rounded-full w-0 bg-neutral-600 transition-any ease-linear" />
+          </div>
+        ))
+      }
+    </div>
+  )}
 
   <!-- Image Panel -->
   <div class="image-panel absolute h-full w-full overflow-hidden">
@@ -46,8 +57,10 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
     }
   </div>
 
-  <!-- Card Content -->
-  <div class="relative px-6 pb-6">
+  <!-- Card Content: pinned to the bottom via mt-auto (rather than justify-between on the outer
+       flex container) so it stays put whether or not the progress-bar above exists to space
+       against - single-image cards render no progress-bar at all. -->
+  <div class="relative px-6 pb-6 mt-auto">
     <div class="flex w-full relative h-[80px]">
       <div class="w-[calc(100%-40px)] absolute bottom-0 flex flex-col justify-start max-h-[60px] overflow-hidden group-hover:max-h-[160px] delay-300 transition-any space-y-2">
         <div class="uppercase font-semibold">{name}</div>
@@ -89,12 +102,14 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
         const images = card.querySelectorAll(".image-panel img");
         const progressBars = card.querySelectorAll(".animated-bar");
 
+        card.querySelector(".progress-bar")?.style.setProperty("opacity", "1");
+
         let currentIndex = parseInt(card.dataset.currentIndex || "0", 10);
 
         function animate() {
           console.log("👀 Index (currentIndex: ", currentIndex)
           resetAnimations(card);
-          progressBars[currentIndex].style.transition = "width 4s linear";
+          progressBars[currentIndex].style.transition = "width 2.4s linear";
           progressBars[currentIndex].style.width = "100%";
 
           images.forEach((img: { style: { transform: string } }, index: number) => {
@@ -106,7 +121,7 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
         }
 
         animate();
-        return setInterval(animate, 4000);
+        return setInterval(animate, 2400);
       }
 
       function handleIntersection(entries: any[]) {
@@ -115,6 +130,7 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
             if (currentAnimatingCard && currentAnimatingCard !== entry.target) {
               clearInterval(currentAnimatingCard.animationInterval);
               resetAnimations(currentAnimatingCard);
+              currentAnimatingCard.querySelector(".progress-bar")?.style.setProperty("opacity", "0");
             }
 
             currentAnimatingCard = entry.target;
@@ -123,6 +139,7 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
           } else if (entry.target === currentAnimatingCard) {
             clearInterval(currentAnimatingCard.animationInterval);
             resetAnimations(currentAnimatingCard);
+            currentAnimatingCard.querySelector(".progress-bar")?.style.setProperty("opacity", "0");
             currentAnimatingCard = null;
           }
         });
@@ -152,6 +169,7 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
         card.parentNode?.replaceChild(clone, card);
 
         // Type assertions for querySelectorAll
+        const progressBarContainer = (clone as Element).querySelector<HTMLElement>(".progress-bar");
         const images = (clone as Element).querySelectorAll(".image-panel img") as NodeListOf<HTMLImageElement>;
         const progressBars = (clone as Element).querySelectorAll(".animated-bar") as NodeListOf<HTMLDivElement>;
 
@@ -167,9 +185,10 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
 
         function startAnimation() {
           console.log("Animation Started");
+          if (progressBarContainer) progressBarContainer.style.opacity = "1";
           resetProgressBars();
 
-          progressBars[currentIndex].style.transition = "width 4s linear";
+          progressBars[currentIndex].style.transition = "width 2.4s linear";
           progressBars[currentIndex].style.width = "100%";
 
           images.forEach((img, index) => {
@@ -184,17 +203,18 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
               bar.style.width = "0";
             });
 
-            progressBars[currentIndex].style.transition = "width 4s linear";
+            progressBars[currentIndex].style.transition = "width 2.4s linear";
             progressBars[currentIndex].style.width = "100%";
 
             images.forEach((img, index) => {
               img.style.transform = index === currentIndex ? "translateX(0)" : index < currentIndex ? "translateX(-100%)" : "translateX(100%)";
             });
-          }, 4000);
+          }, 2400);
         }
 
         function stopAnimation() {
           clearInterval(interval);
+          if (progressBarContainer) progressBarContainer.style.opacity = "0";
           resetProgressBars();
           images.forEach((img, index) => {
             img.style.transform = index === 0 ? "translateX(0)" : "translateX(100%)";
@@ -213,6 +233,33 @@ const { name, href, class: className, tags, description, images, isAboveFold = f
 
   // Initialize on subsequent navigation
   document.addEventListener("astro:after-swap", initializeCardAnimations);
+</script>
+
+<script>
+  // Cursor-following "No Case Study" tooltip - only shown for cards without one. Delegated on
+  // `document` (rather than bound per-card) so it keeps working regardless of load order versus
+  // initializeCardAnimations() above, which clones and replaces every `.group` card on desktop -
+  // a direct per-card listener attached before that swap would be attached to an already-discarded
+  // node. Delegation also means this needs no re-init on astro:after-swap: `document` itself is
+  // never replaced by a page swap, only its content, and `closest()` re-resolves against
+  // whatever's live in the DOM on each event.
+  let activeCaseStudyCard: Element | null = null;
+
+  document.addEventListener("mousemove", (e) => {
+    const card = (e.target as Element).closest('.group[data-has-case-study="false"]');
+
+    if (card !== activeCaseStudyCard) {
+      (activeCaseStudyCard?.querySelector("[data-case-study-tooltip]") as HTMLElement | null)?.style.setProperty("opacity", "0");
+      activeCaseStudyCard = card;
+    }
+
+    const tooltip = card?.querySelector<HTMLElement>("[data-case-study-tooltip]");
+    if (tooltip) {
+      tooltip.style.left = `${e.clientX + 16}px`;
+      tooltip.style.top = `${e.clientY}px`;
+      tooltip.style.opacity = "1";
+    }
+  });
 </script>
 
 <style>

@@ -75,9 +75,9 @@ html, body {
 }
 
 main, header, footer {
-  max-width: 1600px;
+  max-width: 1648px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 24px;
 }
 
 @media (max-width: 640px) {

@@ -2,16 +2,16 @@
 // chatButton.astro
 import Button from "./button.astro";
 
-const meetButtons = "hover:bg-offwhite dark:hover:bg-neutral-700";
+const meetButtons = "text-primary hover:bg-tertiary transition-any";
 ---
 
 <div class="dropdown relative">
   <Button as="button" icon="chevron-down" class="dropdown-btn !bg-tertiary !text-primary">
     Let's chat
   </Button>
-  <div class="dropdown-content font-medium bg-neutral-100 dark:bg-neutral-800 border border-black/5 dark:border-white/10 shadow-lg">
-    <a aria-label="Quick call with Feyisola" href="https://cal.com/solaszn/quick-call?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2`>Brief call (15m)</a>
-    <a aria-label="Deep dive call with Feyisola" href="https://cal.com/solaszn/secret?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2`>Deep dive (45m)</a>
+  <div class="dropdown-content font-medium bg-surface border border-tertiary shadow-lg">
+    <a aria-label="Quick call with Feyisola" href="https://cal.com/solaszn/quick-call?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2 rounded`>Brief call (15m)</a>
+    <a aria-label="Deep dive call with Feyisola" href="https://cal.com/solaszn/secret?nxtPuser=solaszn" target="_blank" class=`${meetButtons} block p-2 rounded`>Deep dive (45m)</a>
   </div>
 </div>
 
